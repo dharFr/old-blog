@@ -13,7 +13,7 @@ type: post
 status: publish
 ---
 
-{% img right http://www.dhar.fr/wp-content/uploads/qrcode.png 150 150 'Decode me if you can' 'Sample QR Code' %}
+{% img right /assets/dhar/qrcode.png 150 150 'Decode me if you can' 'Sample QR Code' %}
 
 ### Pour les plus pressés, ça se passe ici:
 
