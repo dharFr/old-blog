@@ -4,11 +4,10 @@ title: Plugin jQuery - Aide contextuelle Javascript
 published: true
 meta: 
   _edit_last: "2"
-tags: 
-- "Developpement"
-- "Developpement Web"
+categories:
 - Javascript
 - jQuery
+- jQuery plugin
 type: post
 status: publish
 ---

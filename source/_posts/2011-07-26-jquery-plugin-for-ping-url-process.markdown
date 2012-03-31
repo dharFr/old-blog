@@ -4,10 +4,10 @@ title: jQuery plugin for ping-URL process
 published: true
 meta: 
   _edit_last: "2"
-tags: 
-- "Developpement Web"
+categories:
 - Javascript
 - jQuery
+- jQuery plugin
 type: post
 status: publish
 ---

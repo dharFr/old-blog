@@ -4,9 +4,7 @@ title: "UIScrollView: Extention du protocole associé au delegate"
 published: true
 meta: 
   _edit_last: "2"
-tags: 
-- "Developpement"
-- "Developpement iPhone"
+categories:
 - iPhone
 - Objective-C
 type: post

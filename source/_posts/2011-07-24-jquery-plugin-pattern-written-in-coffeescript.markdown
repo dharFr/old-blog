@@ -4,11 +4,11 @@ title: jQuery plugin pattern written in Coffeescript
 published: true
 meta: 
   _edit_last: "2"
-tags: 
+categories:
 - CoffeeScript
-- "Developpement Web"
 - Javascript
 - jQuery
+- jQuery plugin
 type: post
 status: publish
 ---

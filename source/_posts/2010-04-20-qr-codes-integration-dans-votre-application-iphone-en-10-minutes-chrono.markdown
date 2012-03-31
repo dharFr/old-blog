@@ -4,11 +4,10 @@ title: "QR Codes: intégration dans votre application iPhone en 10 minutes chron
 published: true
 meta: 
   _edit_last: "2"
-tags: 
+categories:
 - iPhone
 - Objective-C
 - QRCode
-- tutoriels
 type: post
 status: publish
 ---
