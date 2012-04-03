@@ -20,7 +20,7 @@ You probably already know that all jQuery's ajax methods implement [Promise](htt
 
 Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using [splats](http://jashkenas.github.com/coffee-script/#splats) (`...`) to write the `$.when(deferredObjs...)` part on line 34. Speaking about code readability, it's such an improvement compared to the `$.when.apply($, deferredObjs)` Javascript counterpart.
 
-You can find a [working sample](http://jsfiddle.net/wA6K8/) on jsFiddle.
+You can find a [working sample](http://jsfiddle.net/wA6K8/1/) on jsFiddle.
 
 {% gist 2244946 jquery.queue.coffee %}
 
