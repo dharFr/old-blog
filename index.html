@@ -9,8 +9,7 @@
   <meta name="author" content="Olivier Audard">
 
   
-  <meta name="description" content="I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217; &hellip;">
+  <meta name="description" content="In this post, I&#8217;ll continue to work on the code started in the first article on Feature Detection and File Upload Forms, so you&#8217;d better &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +76,65 @@ Using jQuery&#8217; &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-07T17:48:00+02:00" pubdate data-updated="true">Apr 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In this post, I&#8217;ll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&#8217;d better read it before going further.</p>
+
+<p>Last time, we created a Javascript component used to upload a file asynchronously on the server.
+It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&#8217;t support those APIs.</p>
+
+<p>This time, I&#8217;ll explain how to handle the thumbnail associated to the file input field.
+It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
+
+<p>As mentioned in the previous post, you can find the source code on Github: <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a>.</p>
+
+<h3>Loosely Coupled Modules</h3>
+
+<p>If you never hear about loosely coupled module, I highly recommended you to read/watch the following:</p>
+
+<ul>
+<li>Nicholas Zakas&#8217; talk on <a href="http://www.youtube.com/watch?v=vXjVFPosQHw">Scalable JavaScript Application Architecture</a> [YouTube]</li>
+<li>Addy Osmani&#8217;s <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -537,6 +595,10 @@ J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la faç
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">Queued ajax requests with jQuery and Coffescript</a>
       </li>
     
@@ -550,10 +612,6 @@ J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la faç
     
       <li class="post">
         <a href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/">jQuery plugin pattern written in Coffeescript</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/">Plugin jQuery - Aide contextuelle Javascript</a>
       </li>
     
   </ul>
