@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Progressive Enhancement | dhar's Blog]]></title>
+  <link href="http://www.dhar.fr/blog/categories/progressive-enhancement/atom.xml" rel="self"/>
+  <link href="http://www.dhar.fr/"/>
+  <updated>2012-07-22T13:47:39+02:00</updated>
+  <id>http://www.dhar.fr/</id>
+  <author>
+    <name><![CDATA[Olivier Audard]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[File Upload Form - Part 1: Feature Detection]]></title>
+    <link href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/"/>
+    <updated>2012-03-24T16:55:00+01:00</updated>
+    <id>http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection</id>
+    <content type="html"><![CDATA[<p>Last Thursday, I gave a talk at <a href="http://www.twitter.com/jssophia">@JSSophia</a>, the local Javascript User Group I co-founded with <a href="http://www.twitter.com/FredGuillaume">@FredGuillaume</a>.
+The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn't come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
+
+<p>I choose <em>File Upload Form</em> example because it's standalone, frequently used and it can be improved by many ways with HTML5 APIs.
+It's a good example to introduce some very important Javascript concepts:</p>
+
+<ol>
+<li>Using <strong>feature detection</strong> for <strong>progressive enhancement</strong></li>
+<li>Using <strong>loosely coupled modules</strong> to architecture web applications.</li>
+</ol>
+
+
+<p>This post focus on the first part of the talk.
+It presents the <em>feature detection</em> technique.
+I'll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
+
+<p>If you're in a hurry, or simply don't want to read the whole post, you'll find the slides embedded below and everything else on Github:</p>
+
+<ul>
+<li>The final <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a> source code.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/step-by-step-demo">step by step demo</a> I used during the talk.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/slides">slides</a>.</li>
+</ul>
+
+
+<p>The talk was in French so the slides are also written in French, even if it uses a lot of English keywords.</p>
+
+<div class="dhar-style-embedder">
+    <style>
+        .clearfix { clear:both; }
+        div.keep-aspect-ratio { max-width:600px;margin:0 auto; }
+        div.keep-aspect-ratio > div { border:0;padding:0;margin:0;position:relative; }
+        div.keep-aspect-ratio > div > img { border:0;padding:0;margin:0;z-index:-1000;position:relative;top:0;bottom:0;left:0;width:100%;display:block; }
+        div.keep-aspect-ratio > div > div { border:0;padding:0;margin:0;position:absolute;top:0;bottom:0;left:0;width:100%;overflow:auto;}
+    </style>
+    <div class="keep-aspect-ratio">
+    <div><img src="http://www.dhar.fr/assets/dhar/aspect-ratio-4-3.png" /><div>
+    <iframe src="http://www.dhar.fr/assets/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
+    </div></div><div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h3>Initial Markup</h3>
+
+<p>The main idea in progressive enhancement is to provide an application that work in any context.
+A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application's user experience in modern browsers.</p>
+
+<p>Talking about <em>file upload form</em>, our starting point is a simple HTML markup.</p>
+
+<p>``` html Initial Markup https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs Source</p>
+
+<pre><code>&lt;form id="upload-form" action="" method="post" enctype="multipart/form-data"&gt;
+
+    &lt;label for="upload"&gt;Go Upload Something&lt;/label&gt;&lt;br&gt;
+
+    &lt;input type="hidden" name="fileId" value="12345"&gt;
+    &lt;input type="file" name="upload" id="upload" accept="image/*"&gt;
+    &lt;input type="submit" value="Upload"&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>It's simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
+On the other hand, it requires a full page reload so the first thing to do to bring some <em>hype</em> in this is to allow uploading the file with an asynchronous request.</p>
+
+<h3>Feature detection</h3>
+
+<p>Uploading a file trough an asynchronous request isn't that easy.
+The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it's not well supported across all browsers (IE, I'm looking at you... See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
+
+<p>Remember that our main concern is to provide the best user experience on each browser.
+So how do we upload a file <em>asynchronously</em> in a browser that don't support <code>FormData</code> API?
+Answer is by using an <code>iframe</code>.</p>
+
+<h4>iframe file upload</h4>
+
+<p>Please note that I started by creating a jQuery plugin to make the code more easily reusable.
+I also hid the submit button and the bound event 'onchange' on the input field to submit the form.
+The following code snippets come from <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js">step1/upload.js</a> file.</p>
+
+<p>First, we have to listen to the <code>submit</code> event to prepare the form:</p>
+
+<p>``` javascript form submit event listener https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31 Source</p>
+
+<pre><code>this.$form.on('submit.uploader', $.proxy(function(){
+
+    // old-school iframe method
+    this.prepareIframeUpload();
+    return true; // submit the form
+}, this));
+</code></pre>
+
+<p>```</p>
+
+<p>Next, let's append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
+Once done, the form can be submitted as usual, the server's answer will be loaded into the <code>iframe</code>.</p>
+
+<p>However, due to security concerns, we won't be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
+This way, the server script will be aware that we are using an <code>iframe</code> and will be able to generate the appropriate response.</p>
+
+<p>``` javascript iframe upload https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80 Source
+prepareIframeUpload: function() {</p>
+
+<pre><code>var id, cb, iframe, url;
+
+// Generating a random id to identify
+// both the iframe and the callback function
+this.id = Math.floor(Math.random() * 1000);
+id = "uploader-frame-" + this.id;
+cb = "uploader-cb-" + this.id;
+
+// creating iframe and callback
+iframe = $('&lt;iframe id="'+id+'" name="'+id+'" style="display:none;"&gt;');
+url = this.$form.attr('action');
+
+this.$form
+    .attr('target', id)
+    .append(iframe)
+    .attr('action', url + '?iframe=' + cb);
+
+// defining callback
+window[cb] = $.proxy(function(data) {
+    console.log('received callback:', data);
+
+    // removing iframe
+    iframe.remove();
+    this.$form.removeAttr('target');
+
+    // removing callback
+    this.$form.attr('action', url);
+    window[cb] = undefined;
+
+    this.onUploadDone(data);
+}, this);
+</code></pre>
+
+<p>},
+<code>``
+Knowing that the server response will be loaded as</code>iframe<code>content, the server script has to generate this small piece of HTML.
+It includes a</code>script<code>tag, witch calls the</code>callback<code>function on the parent window. The json</code>result` is send as a parameter of that function.</p>
+
+<p>``` html server response https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs Source</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+window.top.window['&lt;%- callback %&gt;'](&lt;%- result %&gt;);
+&lt;/script&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>Here we are.
+Our script can send files asynchronously, without reloading the whole page, and it even works with old browsers.
+Of course, we could decide to stop there, but we won't because of the following:</p>
+
+<ul>
+<li>No Error handling: if something goes wrong while sending the file, or if the server don't render the good response, the callback function will never be called, and we can't handle the error.
+You probably want to add a timeout to the script above to avoid waiting for an answer that would never come.</li>
+<li>It's not AJAX.
+You probably already notice this point.
+We are faking it.
+The form is still sent as HTML form, we only changed his target.
+The file is uploaded asynchronously, but without any XmlHttpRequest involved.</li>
+<li>It's dirty.
+I'm OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
+</ul>
+
+
+<h4>FormData file upload</h4>
+
+<p>Time to do things the right way? OK. Let's start by editing the submit event listener as following:</p>
+
+<p>``` javascript updated submit event listener https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46 Source</p>
+
+<pre><code>this.$form.on('submit.uploader', $.proxy(function(){
+
+    var file = false
+    if (this.$upload[0].files) file = this.$upload[0].files[0];
+
+    this.beforeUpload(file);
+
+    if (window.FormData &amp;&amp; file ) {
+
+        console.log('FormData supported and file is:', file);
+        this.upload(file);
+        return false;
+    }
+    // fallback to old-school iframe method
+    else {
+        console.log('FormData is not supported or file is undefined:', file);
+        this.prepareIframeUpload();
+        return true; // submit the form
+    }
+
+}, this));
+</code></pre>
+
+<p>```</p>
+
+<p>The <code>this.$upload</code> variable represents a jQuery object containing the <code>input[type=file]</code> DOM node (see the complete <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js">step2/upload.js</a> file for more details).
+Here we have to check if the browser supports both <code>File</code> and <code>FormData</code> APIs.
+If these two conditions are satisfied, we can go with the <em>"HTML5"</em> file upload.
+Otherwise, we just fall-back to the <code>iframe</code> hack... Simple isn't it?</p>
+
+<p>This is <strong>Feature Dectection</strong> and it's one of the <strong>key concepts of modern web development</strong>.
+It's the only way we have to use the latest HTML5 features without breaking old browser's support.</p>
+
+<p>Now, we're sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
+As you can read, it's way simpler and less hacky compared to the <code>iframe</code> method.
+Server response and errors are handled the same way than with any other ajax request.</p>
+
+<p>``` javascript FormData upload https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80 Source</p>
+
+<pre><code>upload: function(file) {
+
+    var formdata = new FormData(this.$form[0]);
+
+    if (formdata) {
+        var jqXhr = $.ajax({
+            url: this.$form.attr('action'),
+            type: this.$form.attr('method'),
+            data: formdata,
+            // tells jQuery not to prepare data before sending the request
+            processData: false, 
+            contentType: false
+        });
+
+        jqXhr
+            .done($.proxy(this.onUploadDone, this))
+            .fail(function(){
+                console.log("upload error:", arguments);
+            });
+    }
+},
+</code></pre>
+
+<p>```</p>
+
+<p>We're done for part 1.
+Our upload form is fully functional for both modern and old browsers, and even with Javascript disabled.
+In the 2nd part, I explain how to handle the thumbnail associated to the file input field.
+It's a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
+<a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a></p>
+
+<h3>References:</h3>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en/Browser_detection_using_the_user_agent">Browser detection using the user agent</a> on MDC</li>
+<li><a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API</li>
+<li><a href="https://developer.mozilla.org/en/DOM/FileList">FileList</a> API</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

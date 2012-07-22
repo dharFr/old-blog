@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[dhar's Blog]]></title>
+  <link href="http://www.dhar.fr/atom.xml" rel="self"/>
+  <link href="http://www.dhar.fr/"/>
+  <updated>2012-07-22T13:47:39+02:00</updated>
+  <id>http://www.dhar.fr/</id>
+  <author>
+    <name><![CDATA[Olivier Audard]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Queued ajax requests with jQuery and Coffescript]]></title>
+    <link href="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/"/>
+    <updated>2012-03-31T21:46:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript</id>
+    <content type="html"><![CDATA[<p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
+Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
+
+<!--more-->
+
+
+<p>You probably already know that all jQuery&#8217;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&#8217;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries&#8217; progress.</p>
+
+<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&#8217;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
+
+<p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
+
+<div><script src='https://gist.github.com/2244946.js?file=jquery.queue.coffee'></script>
+<noscript><pre><code>###*
+ * jQuery queue plugin v0.1
+ * ==========================
+ *
+ * Used to queue $.Deferred's Promise objects
+ * author @_dhar
+###
+
+(($) -&gt;
+
+  class $.Queueable
+
+    constructor: (@builder, @args, @validator = -&gt; yes) -&gt;
+
+    promise: -&gt; @builder(@args...).promise()
+    expose:  -&gt; @args
+    isValid: -&gt; @validator(@args...)
+
+  $.queuedWhen = (queueables) -&gt;
+    
+    d = $.Deferred();
+
+    prev = null
+    deferredObjs = ((
+      do (q) -&gt;
+        if not q instanceof $.Queueable 
+          d.reject &quot;#{q} is not a $.Queueable object&quot;, q
+        else
+          prev = if prev then prev.pipe -&gt; q.promise() else q.promise()
+          prev.done -&gt; d.notify q.expose()
+          prev.fail -&gt; d.reject q.expose()
+    ) for q in queueables when q.isValid() )
+
+    $.when(deferredObjs...).then -&gt; d.resolve()
+
+    return d.promise()
+)(jQuery)</code></pre></noscript></div>
+
+
+<h3>References</h3>
+
+<ul>
+<li>jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
+<li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
+<li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[File Upload Form - Part 1: Feature Detection]]></title>
+    <link href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/"/>
+    <updated>2012-03-24T16:55:00+01:00</updated>
+    <id>http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection</id>
+    <content type="html"><![CDATA[<p>Last Thursday, I gave a talk at <a href="http://www.twitter.com/jssophia">@JSSophia</a>, the local Javascript User Group I co-founded with <a href="http://www.twitter.com/FredGuillaume">@FredGuillaume</a>.
+The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn&#8217;t come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
+
+<p>I choose <em>File Upload Form</em> example because it&#8217;s standalone, frequently used and it can be improved by many ways with HTML5 APIs.
+It&#8217;s a good example to introduce some very important Javascript concepts:</p>
+
+<ol>
+<li>Using <strong>feature detection</strong> for <strong>progressive enhancement</strong></li>
+<li>Using <strong>loosely coupled modules</strong> to architecture web applications.</li>
+</ol>
+
+
+<p>This post focus on the first part of the talk.
+It presents the <em>feature detection</em> technique.
+I&#8217;ll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
+
+<p>If you&#8217;re in a hurry, or simply don&#8217;t want to read the whole post, you&#8217;ll find the slides embedded below and everything else on Github:</p>
+
+<ul>
+<li>The final <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a> source code.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/step-by-step-demo">step by step demo</a> I used during the talk.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/slides">slides</a>.</li>
+</ul>
+
+
+<p>The talk was in French so the slides are also written in French, even if it uses a lot of English keywords.</p>
+
+<div class="dhar-style-embedder">
+    <style>
+        .clearfix { clear:both; }
+        div.keep-aspect-ratio { max-width:600px;margin:0 auto; }
+        div.keep-aspect-ratio > div { border:0;padding:0;margin:0;position:relative; }
+        div.keep-aspect-ratio > div > img { border:0;padding:0;margin:0;z-index:-1000;position:relative;top:0;bottom:0;left:0;width:100%;display:block; }
+        div.keep-aspect-ratio > div > div { border:0;padding:0;margin:0;position:absolute;top:0;bottom:0;left:0;width:100%;overflow:auto;}
+    </style>
+    <div class="keep-aspect-ratio">
+    <div><img src="http://www.dhar.fr/assets/dhar/aspect-ratio-4-3.png" /><div>
+    <iframe src="http://www.dhar.fr/assets/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
+    </div></div><div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h3>Initial Markup</h3>
+
+<p>The main idea in progressive enhancement is to provide an application that work in any context.
+A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application&#8217;s user experience in modern browsers.</p>
+
+<p>Talking about <em>file upload form</em>, our starting point is a simple HTML markup.</p>
+
+<figure class='code'><figcaption><span>Initial Markup </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;upload-form&quot;</span> <span class="na">action=</span><span class="s">&quot;&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;upload&quot;</span><span class="nt">&gt;</span>Go Upload Something<span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;fileId&quot;</span> <span class="na">value=</span><span class="s">&quot;12345&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span> <span class="na">name=</span><span class="s">&quot;upload&quot;</span> <span class="na">id=</span><span class="s">&quot;upload&quot;</span> <span class="na">accept=</span><span class="s">&quot;image/*&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Upload&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&#8217;s simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
+On the other hand, it requires a full page reload so the first thing to do to bring some <em>hype</em> in this is to allow uploading the file with an asynchronous request.</p>
+
+<h3>Feature detection</h3>
+
+<p>Uploading a file trough an asynchronous request isn&#8217;t that easy.
+The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it&#8217;s not well supported across all browsers (IE, I&#8217;m looking at you&#8230; See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
+
+<p>Remember that our main concern is to provide the best user experience on each browser.
+So how do we upload a file <em>asynchronously</em> in a browser that don&#8217;t support <code>FormData</code> API?
+Answer is by using an <code>iframe</code>.</p>
+
+<h4>iframe file upload</h4>
+
+<p>Please note that I started by creating a jQuery plugin to make the code more easily reusable.
+I also hid the submit button and the bound event &#8216;onchange&#8217; on the input field to submit the form.
+The following code snippets come from <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js">step1/upload.js</a> file.</p>
+
+<p>First, we have to listen to the <code>submit</code> event to prepare the form:</p>
+
+<figure class='code'><figcaption><span>form submit event listener </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit.uploader&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// old-school iframe method</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">prepareIframeUpload</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// submit the form</span>
+</span><span class='line'><span class="p">},</span> <span class="k">this</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, let&#8217;s append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
+Once done, the form can be submitted as usual, the server&#8217;s answer will be loaded into the <code>iframe</code>.</p>
+
+<p>However, due to security concerns, we won&#8217;t be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
+This way, the server script will be aware that we are using an <code>iframe</code> and will be able to generate the appropriate response.</p>
+
+<figure class='code'><figcaption><span>iframe upload </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">prepareIframeUpload</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">cb</span><span class="p">,</span> <span class="nx">iframe</span><span class="p">,</span> <span class="nx">url</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Generating a random id to identify</span>
+</span><span class='line'>  <span class="c1">// both the iframe and the callback function</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;uploader-frame-&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">cb</span> <span class="o">=</span> <span class="s2">&quot;uploader-cb-&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// creating iframe and callback</span>
+</span><span class='line'>  <span class="nx">iframe</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;iframe id=&quot;&#39;</span><span class="o">+</span><span class="nx">id</span><span class="o">+</span><span class="s1">&#39;&quot; name=&quot;&#39;</span><span class="o">+</span><span class="nx">id</span><span class="o">+</span><span class="s1">&#39;&quot; style=&quot;display:none;&quot;&gt;&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">$form</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">iframe</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">&#39;?iframe=&#39;</span> <span class="o">+</span> <span class="nx">cb</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// defining callback</span>
+</span><span class='line'>  <span class="nb">window</span><span class="p">[</span><span class="nx">cb</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;received callback:&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// removing iframe</span>
+</span><span class='line'>      <span class="nx">iframe</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// removing callback</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+</span><span class='line'>      <span class="nb">window</span><span class="p">[</span><span class="nx">cb</span><span class="p">]</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">onUploadDone</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Knowing that the server response will be loaded as <code>iframe</code> content, the server script has to generate this small piece of HTML.
+It includes a <code>script</code> tag, witch calls the <code>callback</code> function on the parent window. The json <code>result</code> is send as a parameter of that function.</p>
+
+<figure class='code'><figcaption><span>server response </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">top</span><span class="p">.</span><span class="nb">window</span><span class="p">[</span><span class="s1">&#39;&lt;%- callback %&gt;&#39;</span><span class="p">](</span><span class="o">&lt;%-</span> <span class="nx">result</span> <span class="o">%&gt;</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here we are.
+Our script can send files asynchronously, without reloading the whole page, and it even works with old browsers.
+Of course, we could decide to stop there, but we won&#8217;t because of the following:</p>
+
+<ul>
+<li>No Error handling: if something goes wrong while sending the file, or if the server don&#8217;t render the good response, the callback function will never be called, and we can&#8217;t handle the error.
+You probably want to add a timeout to the script above to avoid waiting for an answer that would never come.</li>
+<li>It&#8217;s not AJAX.
+You probably already notice this point.
+We are faking it.
+The form is still sent as HTML form, we only changed his target.
+The file is uploaded asynchronously, but without any XmlHttpRequest involved.</li>
+<li>It&#8217;s dirty.
+I&#8217;m OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
+</ul>
+
+
+<h4>FormData file upload</h4>
+
+<p>Time to do things the right way? OK. Let&#8217;s start by editing the submit event listener as following:</p>
+
+<figure class='code'><figcaption><span>updated submit event listener </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit.uploader&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="kc">false</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$upload</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">files</span><span class="p">)</span> <span class="nx">file</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$upload</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">beforeUpload</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">FormData</span> <span class="o">&amp;&amp;</span> <span class="nx">file</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;FormData supported and file is:&#39;</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">upload</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">// fallback to old-school iframe method</span>
+</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;FormData is not supported or file is undefined:&#39;</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">prepareIframeUpload</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// submit the form</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">},</span> <span class="k">this</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>this.$upload</code> variable represents a jQuery object containing the <code>input[type=file]</code> DOM node (see the complete <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js">step2/upload.js</a> file for more details).
+Here we have to check if the browser supports both <code>File</code> and <code>FormData</code> APIs.
+If these two conditions are satisfied, we can go with the <em>&#8220;HTML5&#8221;</em> file upload.
+Otherwise, we just fall-back to the <code>iframe</code> hack&#8230; Simple isn&#8217;t it?</p>
+
+<p>This is <strong>Feature Dectection</strong> and it&#8217;s one of the <strong>key concepts of modern web development</strong>.
+It&#8217;s the only way we have to use the latest HTML5 features without breaking old browser&#8217;s support.</p>
+
+<p>Now, we&#8217;re sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
+As you can read, it&#8217;s way simpler and less hacky compared to the <code>iframe</code> method.
+Server response and errors are handled the same way than with any other ajax request.</p>
+
+<figure class='code'><figcaption><span>FormData upload </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">upload</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">formdata</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">formdata</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">jqXhr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span><span class='line'>          <span class="nx">url</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">type</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">data</span><span class="o">:</span> <span class="nx">formdata</span><span class="p">,</span>
+</span><span class='line'>          <span class="c1">// tells jQuery not to prepare data before sending the request</span>
+</span><span class='line'>          <span class="nx">processData</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>          <span class="nx">contentType</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">jqXhr</span>
+</span><span class='line'>          <span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onUploadDone</span><span class="p">,</span> <span class="k">this</span><span class="p">))</span>
+</span><span class='line'>          <span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;upload error:&quot;</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&#8217;re done for part 1.
+Our upload form is fully functional for both modern and old browsers, and even with Javascript disabled.
+In the 2nd part, I explain how to handle the thumbnail associated to the file input field.
+It&#8217;s a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
+<a href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a></p>
+
+<h3>References:</h3>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en/Browser_detection_using_the_user_agent">Browser detection using the user agent</a> on MDC</li>
+<li><a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API</li>
+<li><a href="https://developer.mozilla.org/en/DOM/FileList">FileList</a> API</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery plugin for ping-URL process]]></title>
+    <link href="http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process/"/>
+    <updated>2011-07-26T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process</id>
+    <content type="html"><![CDATA[<p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &#8220;ping URL&#8221; process and provides some options.</p>
+
+<!--more-->
+
+
+<p>The pinger will ask the given URL every &#8216;interval&#8217; minutes if it detects
+some activity by listening to the events listed in &#8216;listen&#8217; parameter.</p>
+
+<p>Have a look to the &#8216;defaults&#8217; variable below for further details about available parameters and default values.</p>
+
+<div><script src='https://gist.github.com/1107059.js?file='></script>
+<noscript><pre><code>/**
+ * $.pinger
+ * 
+ * If your page runs into an iframe hosted by another domain, you may want to keep the session open.
+ * This plugin automates the &quot;ping URL&quot; process and provides some options.
+ * 
+ * The pinger will ask the given URL every 'interval' minutes if it detects
+ * some activity by listening to the events listed in 'listen' parameter.
+ * 
+ * Have a look to the 'defaults' variable below for further details about available parameters and default values.
+ * 
+ * Example:
+ * Ping Google Logo every 5 minutes and launch the first ping right now:
+ *  $.pinger({
+ *      interval: 5
+ *      url: &quot;http://www.google.co.uk/images/logos/ps_logo2.png&quot;,
+ *      pingNow: true
+ *  });
+ * 
+ * Initialize pinger without listening to events. Update activity on demand.
+ *  $.pinger({
+ *      url: &quot;http://www.google.co.uk/images/logos/ps_logo2.png&quot;,
+ *      listen: null
+ *  });
+ *  ...
+ *  $.pinger.now('manual ping');
+ */
+(function($){
+
+    var defaults = {
+        interval: 10,                   // pings the given URL every 'interval' MINUTES. Set to 0 for manual ping only
+        url: null,                      // the URL to ping
+        listen: [&quot;click&quot;, &quot;keydown&quot;],   // events to listen for updating activity
+        pingNow: false,                 // If true, sends a ping request just after init
+        beforeSend: null,               // Callback function, called before ping (should return true. false will cancels ping query)
+        callback: false                 // Callback function, called after ping query callback received
+    };
+    
+    var options = {};
+    var lastUpdate, checkInterval, iTime, pingImg, _pingerLogs = true;
+    
+    /* Public methods */
+    var methods = {
+        init: function( settings ) {
+            options = $.extend(true, defaults, settings);
+
+            if (!options.url) {
+                $.error( 'jQuery.pinger: url parameter is mandatory');
+                return;
+            }
+            
+            log(&quot;$.pinger.init:&quot;, options);
+            if ( options.interval &gt; 0 ) {
+                
+                lastUpdate = 0;
+                iTime = (options.interval * 60 * 1000);
+                
+                checkInterval = setInterval( function(){
+
+                    log(&quot;$.pinger: Should I ping? (&quot;, ((new Date()).getTime() - lastUpdate), &quot;&gt;&quot;, iTime, &quot;?)&quot;);
+                    if ( ( (new Date()).getTime() - lastUpdate) &gt; iTime ) {
+                        stop('timeout');
+                    }
+                    else {
+                        ping('interval');
+                    }
+                }, iTime);
+                
+                if (options.listen &amp;&amp; $.isArray(options.listen) &amp;&amp; options.listen.length &gt; 0) {
+
+                    $(document).bind(options.listen.join('.pinger '), function(event) {
+                        update(event.type);
+                    }); 
+                }
+                
+                if (options.pingNow) {
+                    ping('init');
+                }
+            }
+        },
+        /*
+         * $.pinger.now(param)
+         * Manual activity update
+         * param : some message to log
+         */
+        now: function (param) {
+            ( options.interval &amp;&amp; options.interval &gt; 0 ) ? update(param) : ping(param);
+        },
+        /*
+         * $.pinger.destroy();
+         * destroy pinger
+         */
+        destroy: function() {
+
+            stop('destroy');
+        }
+    };
+
+    /* Private Methods */
+    function update(param) {
+        log(&quot;$.pinger: activity update -&quot;,param);
+        lastUpdate = (new Date()).getTime();
+    }
+    
+    function ping(param) {
+        log(&quot;$.pinger: Ping to&quot;, options.url, &quot;(&quot;, param, &quot;)&quot;);
+        if (!options.beforeSend || options.beforeSend.apply(this, arguments)) {
+            
+            if (!pingImg) {
+                // In FF or Chrome, we could use a GET xhr but IE blocks due to cross-domain policy
+                // Image object looks fine for that ping job
+                pingImg = new Image();
+                pingImg.onload = function() {
+                    //Success callback
+                    log(&quot;$.pinger: Ping callback&quot;, arguments);
+                    if (options.callback) {
+                        options.callback.apply(this, arguments);
+                    }
+                }
+            }
+            pingImg.src = options.url + &quot;?&quot; + (new Date().getTime());
+        }
+    }
+    
+    function stop(param) {
+        log(&quot;$.pinger: Stopped -&quot;,param);
+        if (options.listen &amp;&amp; $.isArray(options.listen) &amp;&amp; options.listen.length &gt; 0) {
+            $(document).unbind(options.listen.join('.pinger '));
+        }
+        clearInterval(checkInterval);
+    }
+    
+    function log() {
+        if (_pingerLogs &amp;&amp; console &amp;&amp; console.log) {
+            if (console.log.apply) {
+                console.log.apply(console, arguments);
+            }
+            else {
+                // console.log doesn't seem to be a &quot;real&quot; function in IE so apply can't be used 
+                console.log((Array.prototype.slice.call(arguments)).join(&quot; &quot;));
+            }
+        }
+    }
+
+    /* Plugin entry point */
+    $.pinger = function( method ) {
+        // Method calling logic
+        if ( methods[method] ) {
+            return methods[ method ].apply( this, Array.prototype.slice.call(arguments, 1));
+        } else if ( typeof method === 'object' || !method ) {
+            return methods.init.apply(this, arguments );
+        } else {
+            $.error( 'Method ' + method + ' does not exist on jQuery.pinger');
+            return this;
+        }
+    };
+})(jQuery);</code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery plugin pattern written in Coffeescript]]></title>
+    <link href="http://www.dhar.fr/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/"/>
+    <updated>2011-07-24T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript</id>
+    <content type="html"><![CDATA[<p>Once your <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> environment is up and running, you may want to write some awesome new jQuery plugin with CoffeeScript.</p>
+
+<p>The code bellow is a starting point, it&#8217;s clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
+
+<div><script src='https://gist.github.com/1101485.js?file='></script>
+<noscript><pre><code>###*
+ * jQuery pluginName plugin v0.1
+ * ==========================
+ * see http://docs.jquery.com/Plugins/Authoring
+ *
+ * plugin description goes here
+ * author your.name@email.com
+###
+
+(($) -&gt;
+    # Private functions 
+    privateFunc = () -&gt;
+        console.log &quot;private&quot;
+    
+    # Public Functions
+    methods = 
+        init: () -&gt;
+            console.log 'init'
+            @each -&gt;
+                $this = $(@)
+                data = $this.data 'pluginName'
+                if not data
+                    ### Do more stuff here ###
+                    $(@).data 'pluginName' 
+                        target: $this
+                return
+        
+        destroy: () -&gt;
+            @each -&gt;
+                $this = $(@)
+                data = $this.data 'pluginName'
+                
+                data.pluginName.remove()
+                $this.removeData 'pluginName'
+                return
+
+    $.fn.pluginName = (method) -&gt;
+        
+        # Method calling logic
+        if methods[method]
+            methods[method].apply this, Array.prototype.slice.call arguments, 1 
+        else if typeof method is 'object' or !method 
+            methods.init.apply this, arguments
+        else
+            $.error &quot;jQuery.pluginName: Method #{ method } does not exist on jQuery.pluginName&quot;
+    return
+)(jQuery)
+</code></pre></noscript></div>
+
+
+<p>Links Summary:</p>
+
+<ul>
+<li><a href="https://gist.github.com/1101485#file_jquery.plugin_name.coffee">jquery.plugin_name.coffee</a> source code</li>
+<li><a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a></li>
+<li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Plugin jQuery - Aide contextuelle Javascript]]></title>
+    <link href="http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/"/>
+    <updated>2010-09-05T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript</id>
+    <content type="html"><![CDATA[<p>Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&#8230; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt le temps qui manque un peu quand il s&#8217;agit de présenter tout ça de façon correcte.</p>
+
+<p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd&#8217;hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c&#8217;est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d&#8217;un autre. J&#8217;ai appelé ce plugin &#8216;helpBox&#8217; car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
+
+<p>Voici le <strong> <a href="https://gist.github.com/1101480">code source</a></strong>.</p>
+
+<!--more-->
+
+
+<p>Rien de bien compliqué ici si l&#8217;on connais déjà la structure d&#8217;un plugin jQuery.
+On commence par définir quelques paramètres&#8230;</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">helpContent</span><span class="o">:</span><span class="s1">&#39;&lt;p&gt;help content&lt;/p&gt;&#39;</span><span class="p">,</span>  <span class="c1">// jQuery Selector or plain text HTML.</span>
+</span><span class='line'>    <span class="nx">contentCls</span><span class="o">:</span><span class="s1">&#39;help-content&#39;</span><span class="p">,</span>          <span class="c1">// CSS Class applied to the help box.</span>
+</span><span class='line'>    <span class="nx">buttonCls</span><span class="o">:</span><span class="s1">&#39;help-button&#39;</span><span class="p">,</span>            <span class="c1">// CSS Class applied to the help button.</span>
+</span><span class='line'>    <span class="nx">buttonText</span><span class="o">:</span><span class="s1">&#39;Help&#39;</span>                   <span class="c1">// Help Button text</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ensuite, le plugin &#8216;helpBox&#8217; se contente de recherche le code HTML du contenu de l&#8217;aide pour l&#8217;ajouter au document avec le bouton associé.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">options</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Gets help content</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">).</span><span class="nx">size</span><span class="p">()</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">0</span> <span class="p">)</span> <span class="o">?</span> <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">).</span><span class="nx">html</span><span class="p">()</span> <span class="o">:</span> <span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Appends help box and help button</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&amp;lt;div class=&#39;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s2">&quot;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="nx">content</span> <span class="o">+</span> <span class="s2">&quot;&amp;lt;/div&gt;&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&amp;lt;div class=&#39;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+</span><span class="s2">&quot;&#39;&gt;&amp;lt;a href=&#39;#&#39;&gt;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonText</span><span class="o">+</span><span class="s2">&quot;&amp;lt;/a&gt;&amp;lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// [...]</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ensuite, il ajoute deux gestionnaires d’événement au bouton: un &#8216;mouseover&#8217; pour ouvrir le dialogue d&#8217;aide et un &#8216;click&#8217; pour fermer ce dernier.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Open the box on button mouseover, close it on click</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+</span><span class="s1">&#39; a&#39;</span><span class="p">).</span><span class="nx">mouseover</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s1">&#39;:hidden&#39;</span><span class="p">).</span><span class="nx">slideDown</span><span class="p">();</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">click</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s1">&#39;:visible&#39;</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Voilà tout. Facile non?</p>
+
+<ul>
+<li>Le code complet est ici: <strong> <a href="https://gist.github.com/1101480">jquery.helpbox.js</a> </strong></li></li>
+</ul>
+
+
+<p>Quelques ressources utiles pour finir:</p>
+
+<ul>
+<li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Plugin Authoring</a></li>
+<li><a href="http://www.learningjquery.com/2007/10/a-plugin-development-pattern">Les bases du développement de plugin jQuery</a> sur learningjquery.com</li>
+</ul>
+
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[QR Codes: intégration dans votre application iPhone en 10 minutes chrono!]]></title>
+    <link href="http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/"/>
+    <updated>2010-04-20T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://www.dhar.fr/assets/dhar/qrcode.png" width="150" height="150" title="Decode me if you can" alt="Sample QR Code"></p>
+
+<h3>Pour les plus pressés, ça se passe ici:</h3>
+
+<p><a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a></p>
+
+<h3>Pour les autres, voilà un peu plus de détails:</h3>
+
+<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d&#8217;un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés &#8220;magiques&#8221;.<!--more--></p>
+
+<p>Si tel est votre cas, sachez que la tâche sera des plus simples grâce à l&#8217;excellent projet <a href="http://zbar.sourceforge.net/">ZBar bar code reader</a>. L&#8217;intégration du wrapper Objective-C de cette librairie m&#8217;a pris en tout en pour tout 10 minutes. De plus, le scan des codes est effectué à la volée (comprenez sans que l&#8217;utilisateur ait besoin de presser le bouton de l&#8217;appareil photo, dès que le code est dans le cadre). La documentation limpide fournie sur le wiki du projet transformera votre application en un lecteur de codes à rendre jaloux le caissier de l&#8217;hyper en bas de chez vous.</p>
+
+<p>La doc est là:<a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a>. Dépêchez-vous, plus que 9&#8217;30&#8230;</p>
+
+<h4>Décoder des codes QR:</h4>
+
+<ul>
+<li><a href="http://itunes.apple.com/us/app/zbar-barcode-reader/id344957305?mt=8">L&#8217;application ZBar sur l&#8217;AppStore</a></li>
+<li><a href="http://code.google.com/p/zxing/">ZXing</a> (prononcer &#8220;Zebra_Crossing&#8221;)</li>
+</ul>
+
+
+<h4>Générer des QR Codes en ligne:</h4>
+
+<ul>
+<li><a href="http://qrcode.kaywa.com">Générateur de QR Code</a></li>
+<li><a href="http://zxing.appspot.com/generator/">QR Code Generator</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[UIScrollView: Extention du protocole associé au delegate]]></title>
+    <link href="http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/"/>
+    <updated>2010-04-15T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://www.dhar.fr/assets/dhar/ImageViewer1-161x300.png" width="161" height="300" title="UIScrollView dans un ImageViewer" alt="ImageViewer"></p>
+
+<p>Après le grand ménage sur le blog, plein d&#8217;enthousiasme, j&#8217;ai entrepris de rédiger un tutoriel  détaillé  à propos du développement d&#8217;un ImageViewer pour iPhone, avec une interface la plus proche possible de l&#8217;application <code>Photos</code>. Au cours de l&#8217;écriture de ce billet, j&#8217;ai constaté 2 choses:</p>
+
+<ul>
+<li>Tout d&#8217;abord, ça fait un billet sacrément long, à l&#8217;écriture comme à la lecture.</li>
+<li>Ensuite et surtout, j&#8217;ai constaté que l&#8217;intérêt était assez limité car l&#8217;exercice s&#8217;est révélé relativement simple.</li>
+</ul>
+
+
+<p>En revanche, lors du développement de mon ImageViewer, il y a un aspect qui a attiré mon attention: l&#8217;extension d&#8217;un protocole. Ce point précis peut présenter une certaine difficulté pour peu qu&#8217;on n&#8217;y ai jamais été confronté et il m&#8217;a été assez difficile de trouver des exemples clair sur le web.
+J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la façon de dériver la classe <code>UIScrollView</code> tout en étendant le protocole <code>UIScrollViewDelegate</code> associé.</p>
+
+<!--more-->
+
+
+<p>Si vous souhaitez, comme moi, reproduire l&#8217;interface de l&#8217;application <code>Photos</code> de votre iPhone, vous allez sans doute créer un <code>UIScrollView</code> afin de permettre à l&#8217;utilisateur de naviguer d&#8217;une image à l&#8217;autre. Pour ce faire, le projet &#8221;<a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a>&#8221; fourni en exemple dans la documentation d’Apple constitue un bon point de départ. La logique du scroll est contenue dans  les méthodes <code>viewDidLoad</code> et <code>layoutScrollImages</code> du fichier <code>MyViewController.m</code> mais il vous faudra l’adapter un peu à votre cas d’utilisation.</p>
+
+<p>En revanche, j&#8217;ai constaté que les événements de <code>Touch</code> n&#8217;étaient pas transmis par la <code>UIScrollView</code>. Gênant lorsque l&#8217;on veut ajouter des interactions en plus du scroll.</p>
+
+<p>Pour capturer ces événements, qui ne sont pas transmis par la <code>UIScrollView</code>, la logique voudrait que l&#8217;on créé une classe qui étends la scrollView.</p>
+
+<p>En surchargeant la méthode qui transmet les événements, on obtient ce qui suit:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">TapScrollView</span> : <span class="nc">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">// TapScrollView.m</span>
+</span><span class='line'><span class="cp">#import &quot;TapScrollView.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">@</span><span class="n">implementation</span> <span class="n">TapScrollView</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">*</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>À ce stade, il faut ajouter la méthode <code>tap</code> au protocole qui défini le <code>delegate</code> de notre <code>TapScrollView</code>. On procède en ajoutant la définition d&#8217;un nouveau protocole dans le fichier <code>TapScrollView.h</code>.</p>
+
+<p>Ce protocole va étendre <code>UIScrollViewDelegate</code> afin que l&#8217;on puisse encore recevoir les événements de touch, comme suit:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@protocol</span> <span class="nc">TapScrollViewDelegate</span> <span class="o">&lt;</span><span class="n">UIScrollViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">tap</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">TapScrollView</span> : <span class="nc">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Si on en reste là, la propriété <code>delegate</code> reste celle défini par <code>UIScrollView</code> car nous ne l&#8217;avons pas surchargée. On peut donc supposer que celle-ci répond au protocole <code>UIScrollViewDelegate</code>, et non pas <code>TapScrollViewDelegate</code> comme on l&#8217;aurai souhaité. Dans ce cas, il suffit de surcharger la propriété <code>delegate</code> dans <code>TapScrollView</code>.
+Voilà le code obtenu:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@protocol</span> <span class="nc">TapScrollViewDelegate</span> <span class="o">&lt;</span><span class="n">UIScrollViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">tap</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">TapScrollView</span> : <span class="nc">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, on approche du but. <code>TapScrollView</code> réponds bien au protocole et la méthode <code>tap</code> sera correctement appelée elle-aussi. En revanche, les méthodes du protocole <code>UIScrollViewDelegate</code> ne sont plus appelés&#8230;
+On tourne en rond.
+J&#8217;ai mis pas mal de temps à trouver la solution. L&#8217;astuce consiste à surcharger aussi les accès à la propriété <code>delegate</code>, de façon à transmettre les appels dans les deux sens (<code>UIScrollView</code> vers <code>TapScrollView</code> et vice-versa).
+Voilà le code final:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">// TapScrollView.m</span>
+</span><span class='line'><span class="cp">#import &quot;TapScrollView.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">TapScrollView</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="nv">touches</span> <span class="nf">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">*</span><span class="p">)</span><span class="nv">event</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span> <span class="nf">delegate</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span><span class="n">super</span><span class="p">.</span><span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setDelegate</span> <span class="o">:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">aDelegate</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">super</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">aDelegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vous voilà donc avec une <code>ScrollView</code> qui, en plus de capturer les événements relatifs au scroll, va transmettre les actions de votre choix. Ici, un simple <code>tap</code>, mais le principe reste valable pour des actions plus complexes.</p>
+
+<p>Quelques liens utilies pour finir:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a> : un sample project de la documentation Apple</li>
+<li><a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIScrollViewDelegate_Protocol/Reference/UIScrollViewDelegate.html">UIScrollViewDelegate Protocol Reference</a>: tout ce que fait le protocole associé aux UIScrollView (et ce qu&#8217;il ne fait pas)</li>
+<li><a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Conceptual/ObjectiveC/Articles/ocProtocols.html#//apple_ref/doc/uid/TP30001163-CH15">Protocols</a>: la documentation iPhone sur les protocoles</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

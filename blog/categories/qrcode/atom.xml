@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: QRCode | dhar's Blog]]></title>
+  <link href="http://www.dhar.fr/blog/categories/qrcode/atom.xml" rel="self"/>
+  <link href="http://www.dhar.fr/"/>
+  <updated>2012-07-22T13:47:39+02:00</updated>
+  <id>http://www.dhar.fr/</id>
+  <author>
+    <name><![CDATA[Olivier Audard]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[QR Codes: intégration dans votre application iPhone en 10 minutes chrono!]]></title>
+    <link href="http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/"/>
+    <updated>2010-04-20T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/assets/dhar/qrcode.png" width="150" height="150" title="Decode me if you can" alt="Sample QR Code"></p>
+
+<h3>Pour les plus pressés, ça se passe ici:</h3>
+
+<p><a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a></p>
+
+<h3>Pour les autres, voilà un peu plus de détails:</h3>
+
+<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d'un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés "magiques".<!--more--></p>
+
+<p>Si tel est votre cas, sachez que la tâche sera des plus simples grâce à l'excellent projet <a href="http://zbar.sourceforge.net/">ZBar bar code reader</a>. L'intégration du wrapper Objective-C de cette librairie m'a pris en tout en pour tout 10 minutes. De plus, le scan des codes est effectué à la volée (comprenez sans que l'utilisateur ait besoin de presser le bouton de l'appareil photo, dès que le code est dans le cadre). La documentation limpide fournie sur le wiki du projet transformera votre application en un lecteur de codes à rendre jaloux le caissier de l'hyper en bas de chez vous.</p>
+
+<p>La doc est là:<a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a>. Dépêchez-vous, plus que 9'30...</p>
+
+<h4>Décoder des codes QR:</h4>
+
+<ul>
+<li><a href="http://itunes.apple.com/us/app/zbar-barcode-reader/id344957305?mt=8">L'application ZBar sur l'AppStore</a></li>
+<li><a href="http://code.google.com/p/zxing/">ZXing</a> (prononcer "Zebra_Crossing")</li>
+</ul>
+
+
+<h4>Générer des QR Codes en ligne:</h4>
+
+<ul>
+<li><a href="http://qrcode.kaywa.com">Générateur de QR Code</a></li>
+<li><a href="http://zxing.appspot.com/generator/">QR Code Generator</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

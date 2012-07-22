@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Plugin jQuery - Aide contextuelle Javascript - dhar's Blog</title>
+  <meta name="author" content="Olivier Audard">
+
+  
+  <meta name="description" content="Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&#8230; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1823374-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">dhar's Blog</a></h1>
+  
+    <h2>My personnal blog. Mostly Web Dev stuff...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.dhar.fr" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Plugin jQuery - Aide Contextuelle Javascript</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-05T00:00:00+02:00" pubdate data-updated="true">Sep 5<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&#8230; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt le temps qui manque un peu quand il s&#8217;agit de présenter tout ça de façon correcte.</p>
+
+<p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd&#8217;hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c&#8217;est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d&#8217;un autre. J&#8217;ai appelé ce plugin &#8216;helpBox&#8217; car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
+
+<p>Voici le <strong> <a href="https://gist.github.com/1101480">code source</a></strong>.</p>
+
+<!--more-->
+
+
+<p>Rien de bien compliqué ici si l&#8217;on connais déjà la structure d&#8217;un plugin jQuery.
+On commence par définir quelques paramètres&#8230;</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">helpContent</span><span class="o">:</span><span class="s1">&#39;&lt;p&gt;help content&lt;/p&gt;&#39;</span><span class="p">,</span>  <span class="c1">// jQuery Selector or plain text HTML.</span>
+</span><span class='line'>    <span class="nx">contentCls</span><span class="o">:</span><span class="s1">&#39;help-content&#39;</span><span class="p">,</span>          <span class="c1">// CSS Class applied to the help box.</span>
+</span><span class='line'>    <span class="nx">buttonCls</span><span class="o">:</span><span class="s1">&#39;help-button&#39;</span><span class="p">,</span>            <span class="c1">// CSS Class applied to the help button.</span>
+</span><span class='line'>    <span class="nx">buttonText</span><span class="o">:</span><span class="s1">&#39;Help&#39;</span>                   <span class="c1">// Help Button text</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ensuite, le plugin &#8216;helpBox&#8217; se contente de recherche le code HTML du contenu de l&#8217;aide pour l&#8217;ajouter au document avec le bouton associé.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">options</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Gets help content</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">).</span><span class="nx">size</span><span class="p">()</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">0</span> <span class="p">)</span> <span class="o">?</span> <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">).</span><span class="nx">html</span><span class="p">()</span> <span class="o">:</span> <span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Appends help box and help button</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&amp;lt;div class=&#39;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s2">&quot;&#39;&gt;&quot;</span> <span class="o">+</span> <span class="nx">content</span> <span class="o">+</span> <span class="s2">&quot;&amp;lt;/div&gt;&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&amp;lt;div class=&#39;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+</span><span class="s2">&quot;&#39;&gt;&amp;lt;a href=&#39;#&#39;&gt;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonText</span><span class="o">+</span><span class="s2">&quot;&amp;lt;/a&gt;&amp;lt;/div&gt;&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// [...]</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ensuite, il ajoute deux gestionnaires d’événement au bouton: un &#8216;mouseover&#8217; pour ouvrir le dialogue d&#8217;aide et un &#8216;click&#8217; pour fermer ce dernier.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Open the box on button mouseover, close it on click</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+</span><span class="s1">&#39; a&#39;</span><span class="p">).</span><span class="nx">mouseover</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s1">&#39;:hidden&#39;</span><span class="p">).</span><span class="nx">slideDown</span><span class="p">();</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">click</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s1">&#39;:visible&#39;</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">();</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Voilà tout. Facile non?</p>
+
+<ul>
+<li>Le code complet est ici: <strong> <a href="https://gist.github.com/1101480">jquery.helpbox.js</a> </strong></li></li>
+</ul>
+
+
+<p>Quelques ressources utiles pour finir:</p>
+
+<ul>
+<li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Plugin Authoring</a></li>
+<li><a href="http://www.learningjquery.com/2007/10/a-plugin-development-pattern">Les bases du développement de plugin jQuery</a> sur learningjquery.com</li>
+</ul>
+
+
+<p>Enjoy!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Olivier Audard</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-05T00:00:00+02:00" pubdate data-updated="true">Sep 5<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/jquery-plugin/'>jQuery plugin</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/" title="Previous Post: QR Codes: intégration dans votre application iPhone en 10 minutes chrono!">&laquo; QR Codes: intégration dans votre application iPhone en 10 minutes chrono!</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/" title="Next Post: jQuery plugin pattern written in Coffeescript">jQuery plugin pattern written in Coffeescript &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>About Me</h1>
+  <div id="twitter-profile" style="margin-top:0.5em;">
+    <strong><p>Olivier Audard</p></strong>
+    <p></p>
+  </div>
+  <script type="text/javascript">
+    $.domReady(function(){
+        var container = $('#twitter-profile'),
+            user = "_dhar";
+            
+        $.ajax({
+            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
+          , type: 'jsonp'
+          , error: function (err) { $('#twitter-profile').addClass('error');  }
+          , success: function(data) {
+              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong><br/>('+data.location+')</p><p>'+data.description+'</p>');
+            }
+        })
+      });
+  </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">Queued ajax requests with jQuery and Coffescript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">File Upload Form - Part 1: Feature Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">jQuery plugin for ping-URL process</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/">jQuery plugin pattern written in Coffeescript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/">Plugin jQuery - Aide contextuelle Javascript</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/dharFr">@dharFr</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'dharFr',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_dhar", 5, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_dhar" class="twitter-follow-button" data-show-count="false">Follow @_dhar</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Olivier Audard -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'dhar';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

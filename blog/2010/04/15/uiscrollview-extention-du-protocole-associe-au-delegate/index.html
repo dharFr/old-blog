@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>UIScrollView: Extention du protocole associé au delegate - dhar's Blog</title>
+  <meta name="author" content="Olivier Audard">
+
+  
+  <meta name="description" content="Après le grand ménage sur le blog, plein d&#8217;enthousiasme, j&#8217;ai entrepris de rédiger un tutoriel détaillé à propos du développement d&# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1823374-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">dhar's Blog</a></h1>
+  
+    <h2>My personnal blog. Mostly Web Dev stuff...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.dhar.fr" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">UIScrollView: Extention Du Protocole Associé Au Delegate</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-15T00:00:00+02:00" pubdate data-updated="true">Apr 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="right" src="/assets/dhar/ImageViewer1-161x300.png" width="161" height="300" title="UIScrollView dans un ImageViewer" alt="ImageViewer"></p>
+
+<p>Après le grand ménage sur le blog, plein d&#8217;enthousiasme, j&#8217;ai entrepris de rédiger un tutoriel  détaillé  à propos du développement d&#8217;un ImageViewer pour iPhone, avec une interface la plus proche possible de l&#8217;application <code>Photos</code>. Au cours de l&#8217;écriture de ce billet, j&#8217;ai constaté 2 choses:</p>
+
+<ul>
+<li>Tout d&#8217;abord, ça fait un billet sacrément long, à l&#8217;écriture comme à la lecture.</li>
+<li>Ensuite et surtout, j&#8217;ai constaté que l&#8217;intérêt était assez limité car l&#8217;exercice s&#8217;est révélé relativement simple.</li>
+</ul>
+
+
+<p>En revanche, lors du développement de mon ImageViewer, il y a un aspect qui a attiré mon attention: l&#8217;extension d&#8217;un protocole. Ce point précis peut présenter une certaine difficulté pour peu qu&#8217;on n&#8217;y ai jamais été confronté et il m&#8217;a été assez difficile de trouver des exemples clair sur le web.
+J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la façon de dériver la classe <code>UIScrollView</code> tout en étendant le protocole <code>UIScrollViewDelegate</code> associé.</p>
+
+<!--more-->
+
+
+<p>Si vous souhaitez, comme moi, reproduire l&#8217;interface de l&#8217;application <code>Photos</code> de votre iPhone, vous allez sans doute créer un <code>UIScrollView</code> afin de permettre à l&#8217;utilisateur de naviguer d&#8217;une image à l&#8217;autre. Pour ce faire, le projet &#8221;<a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a>&#8221; fourni en exemple dans la documentation d’Apple constitue un bon point de départ. La logique du scroll est contenue dans  les méthodes <code>viewDidLoad</code> et <code>layoutScrollImages</code> du fichier <code>MyViewController.m</code> mais il vous faudra l’adapter un peu à votre cas d’utilisation.</p>
+
+<p>En revanche, j&#8217;ai constaté que les événements de <code>Touch</code> n&#8217;étaient pas transmis par la <code>UIScrollView</code>. Gênant lorsque l&#8217;on veut ajouter des interactions en plus du scroll.</p>
+
+<p>Pour capturer ces événements, qui ne sont pas transmis par la <code>UIScrollView</code>, la logique voudrait que l&#8217;on créé une classe qui étends la scrollView.</p>
+
+<p>En surchargeant la méthode qui transmet les événements, on obtient ce qui suit:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">TapScrollView</span> : <span class="nc">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">// TapScrollView.m</span>
+</span><span class='line'><span class="cp">#import &quot;TapScrollView.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">@</span><span class="n">implementation</span> <span class="n">TapScrollView</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">*</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>À ce stade, il faut ajouter la méthode <code>tap</code> au protocole qui défini le <code>delegate</code> de notre <code>TapScrollView</code>. On procède en ajoutant la définition d&#8217;un nouveau protocole dans le fichier <code>TapScrollView.h</code>.</p>
+
+<p>Ce protocole va étendre <code>UIScrollViewDelegate</code> afin que l&#8217;on puisse encore recevoir les événements de touch, comme suit:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@protocol</span> <span class="nc">TapScrollViewDelegate</span> <span class="o">&lt;</span><span class="n">UIScrollViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">tap</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">TapScrollView</span> : <span class="nc">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Si on en reste là, la propriété <code>delegate</code> reste celle défini par <code>UIScrollView</code> car nous ne l&#8217;avons pas surchargée. On peut donc supposer que celle-ci répond au protocole <code>UIScrollViewDelegate</code>, et non pas <code>TapScrollViewDelegate</code> comme on l&#8217;aurai souhaité. Dans ce cas, il suffit de surcharger la propriété <code>delegate</code> dans <code>TapScrollView</code>.
+Voilà le code obtenu:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@protocol</span> <span class="nc">TapScrollViewDelegate</span> <span class="o">&lt;</span><span class="n">UIScrollViewDelegate</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">tap</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">TapScrollView</span> : <span class="nc">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ok, on approche du but. <code>TapScrollView</code> réponds bien au protocole et la méthode <code>tap</code> sera correctement appelée elle-aussi. En revanche, les méthodes du protocole <code>UIScrollViewDelegate</code> ne sont plus appelés&#8230;
+On tourne en rond.
+J&#8217;ai mis pas mal de temps à trouver la solution. L&#8217;astuce consiste à surcharger aussi les accès à la propriété <code>delegate</code>, de façon à transmettre les appels dans les deux sens (<code>UIScrollView</code> vers <code>TapScrollView</code> et vice-versa).
+Voilà le code final:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">// TapScrollView.m</span>
+</span><span class='line'><span class="cp">#import &quot;TapScrollView.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">TapScrollView</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="nv">touches</span> <span class="nf">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">*</span><span class="p">)</span><span class="nv">event</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span> <span class="nf">delegate</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span><span class="n">super</span><span class="p">.</span><span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">setDelegate</span> <span class="o">:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">aDelegate</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">super</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">aDelegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vous voilà donc avec une <code>ScrollView</code> qui, en plus de capturer les événements relatifs au scroll, va transmettre les actions de votre choix. Ici, un simple <code>tap</code>, mais le principe reste valable pour des actions plus complexes.</p>
+
+<p>Quelques liens utilies pour finir:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a> : un sample project de la documentation Apple</li>
+<li><a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIScrollViewDelegate_Protocol/Reference/UIScrollViewDelegate.html">UIScrollViewDelegate Protocol Reference</a>: tout ce que fait le protocole associé aux UIScrollView (et ce qu&#8217;il ne fait pas)</li>
+<li><a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Conceptual/ObjectiveC/Articles/ocProtocols.html#//apple_ref/doc/uid/TP30001163-CH15">Protocols</a>: la documentation iPhone sur les protocoles</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Olivier Audard</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-15T00:00:00+02:00" pubdate data-updated="true">Apr 15<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/" title="Next Post: QR Codes: intégration dans votre application iPhone en 10 minutes chrono!">QR Codes: intégration dans votre application iPhone en 10 minutes chrono! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>About Me</h1>
+  <div id="twitter-profile" style="margin-top:0.5em;">
+    <strong><p>Olivier Audard</p></strong>
+    <p></p>
+  </div>
+  <script type="text/javascript">
+    $.domReady(function(){
+        var container = $('#twitter-profile'),
+            user = "_dhar";
+            
+        $.ajax({
+            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
+          , type: 'jsonp'
+          , error: function (err) { $('#twitter-profile').addClass('error');  }
+          , success: function(data) {
+              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong><br/>('+data.location+')</p><p>'+data.description+'</p>');
+            }
+        })
+      });
+  </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">Queued ajax requests with jQuery and Coffescript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">File Upload Form - Part 1: Feature Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">jQuery plugin for ping-URL process</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/">jQuery plugin pattern written in Coffeescript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/">Plugin jQuery - Aide contextuelle Javascript</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/dharFr">@dharFr</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'dharFr',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_dhar", 5, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_dhar" class="twitter-follow-button" data-show-count="false">Follow @_dhar</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Olivier Audard -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'dhar';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

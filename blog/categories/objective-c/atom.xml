@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Objective-C | dhar's Blog]]></title>
+  <link href="http://www.dhar.fr/blog/categories/objective-c/atom.xml" rel="self"/>
+  <link href="http://www.dhar.fr/"/>
+  <updated>2012-07-22T13:47:39+02:00</updated>
+  <id>http://www.dhar.fr/</id>
+  <author>
+    <name><![CDATA[Olivier Audard]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[QR Codes: intégration dans votre application iPhone en 10 minutes chrono!]]></title>
+    <link href="http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/"/>
+    <updated>2010-04-20T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/assets/dhar/qrcode.png" width="150" height="150" title="Decode me if you can" alt="Sample QR Code"></p>
+
+<h3>Pour les plus pressés, ça se passe ici:</h3>
+
+<p><a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a></p>
+
+<h3>Pour les autres, voilà un peu plus de détails:</h3>
+
+<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d'un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés "magiques".<!--more--></p>
+
+<p>Si tel est votre cas, sachez que la tâche sera des plus simples grâce à l'excellent projet <a href="http://zbar.sourceforge.net/">ZBar bar code reader</a>. L'intégration du wrapper Objective-C de cette librairie m'a pris en tout en pour tout 10 minutes. De plus, le scan des codes est effectué à la volée (comprenez sans que l'utilisateur ait besoin de presser le bouton de l'appareil photo, dès que le code est dans le cadre). La documentation limpide fournie sur le wiki du projet transformera votre application en un lecteur de codes à rendre jaloux le caissier de l'hyper en bas de chez vous.</p>
+
+<p>La doc est là:<a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a>. Dépêchez-vous, plus que 9'30...</p>
+
+<h4>Décoder des codes QR:</h4>
+
+<ul>
+<li><a href="http://itunes.apple.com/us/app/zbar-barcode-reader/id344957305?mt=8">L'application ZBar sur l'AppStore</a></li>
+<li><a href="http://code.google.com/p/zxing/">ZXing</a> (prononcer "Zebra_Crossing")</li>
+</ul>
+
+
+<h4>Générer des QR Codes en ligne:</h4>
+
+<ul>
+<li><a href="http://qrcode.kaywa.com">Générateur de QR Code</a></li>
+<li><a href="http://zxing.appspot.com/generator/">QR Code Generator</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[UIScrollView: Extention du protocole associé au delegate]]></title>
+    <link href="http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/"/>
+    <updated>2010-04-15T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/assets/dhar/ImageViewer1-161x300.png" width="161" height="300" title="UIScrollView dans un ImageViewer" alt="ImageViewer"></p>
+
+<p>Après le grand ménage sur le blog, plein d'enthousiasme, j'ai entrepris de rédiger un tutoriel  détaillé  à propos du développement d'un ImageViewer pour iPhone, avec une interface la plus proche possible de l'application <code>Photos</code>. Au cours de l'écriture de ce billet, j'ai constaté 2 choses:</p>
+
+<ul>
+<li>Tout d'abord, ça fait un billet sacrément long, à l'écriture comme à la lecture.</li>
+<li>Ensuite et surtout, j'ai constaté que l'intérêt était assez limité car l'exercice s'est révélé relativement simple.</li>
+</ul>
+
+
+<p>En revanche, lors du développement de mon ImageViewer, il y a un aspect qui a attiré mon attention: l'extension d'un protocole. Ce point précis peut présenter une certaine difficulté pour peu qu'on n'y ai jamais été confronté et il m'a été assez difficile de trouver des exemples clair sur le web.
+J'ai donc décidé de rédiger un billet plus court, qui détaille la façon de dériver la classe <code>UIScrollView</code> tout en étendant le protocole <code>UIScrollViewDelegate</code> associé.</p>
+
+<!--more-->
+
+
+<p>Si vous souhaitez, comme moi, reproduire l'interface de l'application <code>Photos</code> de votre iPhone, vous allez sans doute créer un <code>UIScrollView</code> afin de permettre à l'utilisateur de naviguer d'une image à l'autre. Pour ce faire, le projet "<a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a>" fourni en exemple dans la documentation d’Apple constitue un bon point de départ. La logique du scroll est contenue dans  les méthodes <code>viewDidLoad</code> et <code>layoutScrollImages</code> du fichier <code>MyViewController.m</code> mais il vous faudra l’adapter un peu à votre cas d’utilisation.</p>
+
+<p>En revanche, j'ai constaté que les événements de <code>Touch</code> n'étaient pas transmis par la <code>UIScrollView</code>. Gênant lorsque l'on veut ajouter des interactions en plus du scroll.</p>
+
+<p>Pour capturer ces événements, qui ne sont pas transmis par la <code>UIScrollView</code>, la logique voudrait que l'on créé une classe qui étends la scrollView.</p>
+
+<p>En surchargeant la méthode qui transmet les événements, on obtient ce qui suit:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@interface</span> <span class="nc">TapScrollView</span> : <span class="nc">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// TapScrollView.m&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="s">&quot;TapScrollView.h&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">implementation</span> <span class="n">TapScrollView</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>À ce stade, il faut ajouter la méthode <code>tap</code> au protocole qui défini le <code>delegate</code> de notre <code>TapScrollView</code>. On procède en ajoutant la définition d'un nouveau protocole dans le fichier <code>TapScrollView.h</code>.</p>
+
+<p>Ce protocole va étendre <code>UIScrollViewDelegate</code> afin que l'on puisse encore recevoir les événements de touch, comme suit:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@protocol</span> <span class="nc">TapScrollViewDelegate</span> <span class="o">&lt;</span><span class="n">UIScrollViewDelegate</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">tap</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">TapScrollView</span> <span class="o">:</span> <span class="n">UIScrollView</span> <span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Si on en reste là, la propriété <code>delegate</code> reste celle défini par <code>UIScrollView</code> car nous ne l'avons pas surchargée. On peut donc supposer que celle-ci répond au protocole <code>UIScrollViewDelegate</code>, et non pas <code>TapScrollViewDelegate</code> comme on l'aurai souhaité. Dans ce cas, il suffit de surcharger la propriété <code>delegate</code> dans <code>TapScrollView</code>.
+Voilà le code obtenu:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.h</span>
+</span><span class='line'><span class="k">@protocol</span> <span class="nc">TapScrollViewDelegate</span> <span class="o">&lt;</span><span class="n">UIScrollViewDelegate</span><span class="o">&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">tap</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">interface</span> <span class="n">TapScrollView</span> <span class="o">:</span> <span class="n">UIScrollView</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="kt">id</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">TapScrollViewDelegate</span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">)</span> <span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span> <span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Ok, on approche du but. <code>TapScrollView</code> réponds bien au protocole et la méthode <code>tap</code> sera correctement appelée elle-aussi. En revanche, les méthodes du protocole <code>UIScrollViewDelegate</code> ne sont plus appelés...
+On tourne en rond.
+J'ai mis pas mal de temps à trouver la solution. L'astuce consiste à surcharger aussi les accès à la propriété <code>delegate</code>, de façon à transmettre les appels dans les deux sens (<code>UIScrollView</code> vers <code>TapScrollView</code> et vice-versa).
+Voilà le code final:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.m&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="s">&quot;TapScrollView.h&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">implementation</span> <span class="n">TapScrollView</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">delegate</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span><span class="n">super</span><span class="p">.</span><span class="n">delegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="n">setDelegate</span> <span class="o">:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">aDelegate</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">super</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">aDelegate</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></li>
+</ul>
+
+
+<p>Vous voilà donc avec une <code>ScrollView</code> qui, en plus de capturer les événements relatifs au scroll, va transmettre les actions de votre choix. Ici, un simple <code>tap</code>, mais le principe reste valable pour des actions plus complexes.</p>
+
+<p>Quelques liens utilies pour finir:</p>
+
+<ul>
+<li><a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a> : un sample project de la documentation Apple</li>
+<li><a href="http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIScrollViewDelegate_Protocol/Reference/UIScrollViewDelegate.html">UIScrollViewDelegate Protocol Reference</a>: tout ce que fait le protocole associé aux UIScrollView (et ce qu'il ne fait pas)</li>
+<li><a href="http://developer.apple.com/iphone/library/documentation/Cocoa/Conceptual/ObjectiveC/Articles/ocProtocols.html#//apple_ref/doc/uid/TP30001163-CH15">Protocols</a>: la documentation iPhone sur les protocoles</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

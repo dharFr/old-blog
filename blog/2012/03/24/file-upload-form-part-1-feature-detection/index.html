@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>File Upload Form - Part 1: Feature Detection - dhar's Blog</title>
+  <meta name="author" content="Olivier Audard">
+
+  
+  <meta name="description" content="Last Thursday, I gave a talk at @JSSophia, the local Javascript User Group I co-founded with @FredGuillaume.
+The group is just starting (2nd meeting &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1823374-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">dhar's Blog</a></h1>
+  
+    <h2>My personnal blog. Mostly Web Dev stuff...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.dhar.fr" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">File Upload Form - Part 1: Feature Detection</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-24T16:55:00+01:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Last Thursday, I gave a talk at <a href="http://www.twitter.com/jssophia">@JSSophia</a>, the local Javascript User Group I co-founded with <a href="http://www.twitter.com/FredGuillaume">@FredGuillaume</a>.
+The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn&#8217;t come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
+
+<p>I choose <em>File Upload Form</em> example because it&#8217;s standalone, frequently used and it can be improved by many ways with HTML5 APIs.
+It&#8217;s a good example to introduce some very important Javascript concepts:</p>
+
+<ol>
+<li>Using <strong>feature detection</strong> for <strong>progressive enhancement</strong></li>
+<li>Using <strong>loosely coupled modules</strong> to architecture web applications.</li>
+</ol>
+
+
+<p>This post focus on the first part of the talk.
+It presents the <em>feature detection</em> technique.
+I&#8217;ll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
+
+<p>If you&#8217;re in a hurry, or simply don&#8217;t want to read the whole post, you&#8217;ll find the slides embedded below and everything else on Github:</p>
+
+<ul>
+<li>The final <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a> source code.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/step-by-step-demo">step by step demo</a> I used during the talk.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/slides">slides</a>.</li>
+</ul>
+
+
+<p>The talk was in French so the slides are also written in French, even if it uses a lot of English keywords.</p>
+
+<div class="dhar-style-embedder">
+    <style>
+        .clearfix { clear:both; }
+        div.keep-aspect-ratio { max-width:600px;margin:0 auto; }
+        div.keep-aspect-ratio > div { border:0;padding:0;margin:0;position:relative; }
+        div.keep-aspect-ratio > div > img { border:0;padding:0;margin:0;z-index:-1000;position:relative;top:0;bottom:0;left:0;width:100%;display:block; }
+        div.keep-aspect-ratio > div > div { border:0;padding:0;margin:0;position:absolute;top:0;bottom:0;left:0;width:100%;overflow:auto;}
+    </style>
+    <div class="keep-aspect-ratio">
+    <div><img src="/assets/dhar/aspect-ratio-4-3.png" /><div>
+    <iframe src="/assets/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
+    </div></div><div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h3>Initial Markup</h3>
+
+<p>The main idea in progressive enhancement is to provide an application that work in any context.
+A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application&#8217;s user experience in modern browsers.</p>
+
+<p>Talking about <em>file upload form</em>, our starting point is a simple HTML markup.</p>
+
+<figure class='code'><figcaption><span>Initial Markup </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;upload-form&quot;</span> <span class="na">action=</span><span class="s">&quot;&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;upload&quot;</span><span class="nt">&gt;</span>Go Upload Something<span class="nt">&lt;/label&gt;&lt;br&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;fileId&quot;</span> <span class="na">value=</span><span class="s">&quot;12345&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span> <span class="na">name=</span><span class="s">&quot;upload&quot;</span> <span class="na">id=</span><span class="s">&quot;upload&quot;</span> <span class="na">accept=</span><span class="s">&quot;image/*&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;Upload&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&#8217;s simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
+On the other hand, it requires a full page reload so the first thing to do to bring some <em>hype</em> in this is to allow uploading the file with an asynchronous request.</p>
+
+<h3>Feature detection</h3>
+
+<p>Uploading a file trough an asynchronous request isn&#8217;t that easy.
+The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it&#8217;s not well supported across all browsers (IE, I&#8217;m looking at you&#8230; See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
+
+<p>Remember that our main concern is to provide the best user experience on each browser.
+So how do we upload a file <em>asynchronously</em> in a browser that don&#8217;t support <code>FormData</code> API?
+Answer is by using an <code>iframe</code>.</p>
+
+<h4>iframe file upload</h4>
+
+<p>Please note that I started by creating a jQuery plugin to make the code more easily reusable.
+I also hid the submit button and the bound event &#8216;onchange&#8217; on the input field to submit the form.
+The following code snippets come from <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js">step1/upload.js</a> file.</p>
+
+<p>First, we have to listen to the <code>submit</code> event to prepare the form:</p>
+
+<figure class='code'><figcaption><span>form submit event listener </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit.uploader&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// old-school iframe method</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">prepareIframeUpload</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// submit the form</span>
+</span><span class='line'><span class="p">},</span> <span class="k">this</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, let&#8217;s append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
+Once done, the form can be submitted as usual, the server&#8217;s answer will be loaded into the <code>iframe</code>.</p>
+
+<p>However, due to security concerns, we won&#8217;t be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
+This way, the server script will be aware that we are using an <code>iframe</code> and will be able to generate the appropriate response.</p>
+
+<figure class='code'><figcaption><span>iframe upload </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">prepareIframeUpload</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">cb</span><span class="p">,</span> <span class="nx">iframe</span><span class="p">,</span> <span class="nx">url</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Generating a random id to identify</span>
+</span><span class='line'>  <span class="c1">// both the iframe and the callback function</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;uploader-frame-&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">cb</span> <span class="o">=</span> <span class="s2">&quot;uploader-cb-&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// creating iframe and callback</span>
+</span><span class='line'>  <span class="nx">iframe</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;iframe id=&quot;&#39;</span><span class="o">+</span><span class="nx">id</span><span class="o">+</span><span class="s1">&#39;&quot; name=&quot;&#39;</span><span class="o">+</span><span class="nx">id</span><span class="o">+</span><span class="s1">&#39;&quot; style=&quot;display:none;&quot;&gt;&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">url</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">$form</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">iframe</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">&#39;?iframe=&#39;</span> <span class="o">+</span> <span class="nx">cb</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// defining callback</span>
+</span><span class='line'>  <span class="nb">window</span><span class="p">[</span><span class="nx">cb</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;received callback:&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// removing iframe</span>
+</span><span class='line'>      <span class="nx">iframe</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// removing callback</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+</span><span class='line'>      <span class="nb">window</span><span class="p">[</span><span class="nx">cb</span><span class="p">]</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">onUploadDone</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Knowing that the server response will be loaded as <code>iframe</code> content, the server script has to generate this small piece of HTML.
+It includes a <code>script</code> tag, witch calls the <code>callback</code> function on the parent window. The json <code>result</code> is send as a parameter of that function.</p>
+
+<figure class='code'><figcaption><span>server response </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nb">window</span><span class="p">.</span><span class="nx">top</span><span class="p">.</span><span class="nb">window</span><span class="p">[</span><span class="s1">&#39;&lt;%- callback %&gt;&#39;</span><span class="p">](</span><span class="o">&lt;%-</span> <span class="nx">result</span> <span class="o">%&gt;</span><span class="p">);</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here we are.
+Our script can send files asynchronously, without reloading the whole page, and it even works with old browsers.
+Of course, we could decide to stop there, but we won&#8217;t because of the following:</p>
+
+<ul>
+<li>No Error handling: if something goes wrong while sending the file, or if the server don&#8217;t render the good response, the callback function will never be called, and we can&#8217;t handle the error.
+You probably want to add a timeout to the script above to avoid waiting for an answer that would never come.</li>
+<li>It&#8217;s not AJAX.
+You probably already notice this point.
+We are faking it.
+The form is still sent as HTML form, we only changed his target.
+The file is uploaded asynchronously, but without any XmlHttpRequest involved.</li>
+<li>It&#8217;s dirty.
+I&#8217;m OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
+</ul>
+
+
+<h4>FormData file upload</h4>
+
+<p>Time to do things the right way? OK. Let&#8217;s start by editing the submit event listener as following:</p>
+
+<figure class='code'><figcaption><span>updated submit event listener </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit.uploader&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="kc">false</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$upload</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">files</span><span class="p">)</span> <span class="nx">file</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$upload</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">beforeUpload</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">FormData</span> <span class="o">&amp;&amp;</span> <span class="nx">file</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;FormData supported and file is:&#39;</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">upload</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="c1">// fallback to old-school iframe method</span>
+</span><span class='line'>  <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;FormData is not supported or file is undefined:&#39;</span><span class="p">,</span> <span class="nx">file</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">prepareIframeUpload</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// submit the form</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">},</span> <span class="k">this</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>this.$upload</code> variable represents a jQuery object containing the <code>input[type=file]</code> DOM node (see the complete <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js">step2/upload.js</a> file for more details).
+Here we have to check if the browser supports both <code>File</code> and <code>FormData</code> APIs.
+If these two conditions are satisfied, we can go with the <em>&#8220;HTML5&#8221;</em> file upload.
+Otherwise, we just fall-back to the <code>iframe</code> hack&#8230; Simple isn&#8217;t it?</p>
+
+<p>This is <strong>Feature Dectection</strong> and it&#8217;s one of the <strong>key concepts of modern web development</strong>.
+It&#8217;s the only way we have to use the latest HTML5 features without breaking old browser&#8217;s support.</p>
+
+<p>Now, we&#8217;re sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
+As you can read, it&#8217;s way simpler and less hacky compared to the <code>iframe</code> method.
+Server response and errors are handled the same way than with any other ajax request.</p>
+
+<figure class='code'><figcaption><span>FormData upload </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">upload</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">formdata</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">formdata</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">jqXhr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span><span class='line'>          <span class="nx">url</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">type</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">$form</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">data</span><span class="o">:</span> <span class="nx">formdata</span><span class="p">,</span>
+</span><span class='line'>          <span class="c1">// tells jQuery not to prepare data before sending the request</span>
+</span><span class='line'>          <span class="nx">processData</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span><span class='line'>          <span class="nx">contentType</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">jqXhr</span>
+</span><span class='line'>          <span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onUploadDone</span><span class="p">,</span> <span class="k">this</span><span class="p">))</span>
+</span><span class='line'>          <span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;upload error:&quot;</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">});</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&#8217;re done for part 1.
+Our upload form is fully functional for both modern and old browsers, and even with Javascript disabled.
+In the 2nd part, I explain how to handle the thumbnail associated to the file input field.
+It&#8217;s a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
+<a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a></p>
+
+<h3>References:</h3>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en/Browser_detection_using_the_user_agent">Browser detection using the user agent</a> on MDC</li>
+<li><a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API</li>
+<li><a href="https://developer.mozilla.org/en/DOM/FileList">FileList</a> API</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Olivier Audard</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-24T16:55:00+01:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/feature-detection/'>Feature Detection</a>, <a class='category' href='/blog/categories/forms/'>Forms</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/progressive-enhancement/'>Progressive Enhancement</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/" title="Previous Post: jQuery plugin for ping-URL process">&laquo; jQuery plugin for ping-URL process</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" title="Next Post: Queued ajax requests with jQuery and Coffescript">Queued ajax requests with jQuery and Coffescript &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>About Me</h1>
+  <div id="twitter-profile" style="margin-top:0.5em;">
+    <strong><p>Olivier Audard</p></strong>
+    <p></p>
+  </div>
+  <script type="text/javascript">
+    $.domReady(function(){
+        var container = $('#twitter-profile'),
+            user = "_dhar";
+            
+        $.ajax({
+            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
+          , type: 'jsonp'
+          , error: function (err) { $('#twitter-profile').addClass('error');  }
+          , success: function(data) {
+              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong><br/>('+data.location+')</p><p>'+data.description+'</p>');
+            }
+        })
+      });
+  </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">Queued ajax requests with jQuery and Coffescript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">File Upload Form - Part 1: Feature Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">jQuery plugin for ping-URL process</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/">jQuery plugin pattern written in Coffeescript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/">Plugin jQuery - Aide contextuelle Javascript</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/dharFr">@dharFr</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'dharFr',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_dhar", 5, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/_dhar" class="twitter-follow-button" data-show-count="false">Follow @_dhar</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Olivier Audard -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'dhar';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/';
+        var disqus_url = 'http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | dhar's Blog]]></title>
+  <link href="http://www.dhar.fr/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://www.dhar.fr/"/>
+  <updated>2012-07-22T13:47:39+02:00</updated>
+  <id>http://www.dhar.fr/</id>
+  <author>
+    <name><![CDATA[Olivier Audard]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Queued ajax requests with jQuery and Coffescript]]></title>
+    <link href="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/"/>
+    <updated>2012-03-31T21:46:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript</id>
+    <content type="html"><![CDATA[<p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
+Using jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
+
+<!--more-->
+
+
+<p>You probably already know that all jQuery's ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That's why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries' progress.</p>
+
+<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it's such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
+
+<p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
+
+<p><div><script src='https://gist.github.com/2244946.js?file=jquery.queue.coffee'></script>
+<noscript><pre><code>###*
+ * jQuery queue plugin v0.1
+ * ==========================
+ *
+ * Used to queue $.Deferred's Promise objects
+ * author @_dhar
+###
+
+(($) -&gt;
+
+  class $.Queueable
+
+    constructor: (@builder, @args, @validator = -&gt; yes) -&gt;
+
+    promise: -&gt; @builder(@args...).promise()
+    expose:  -&gt; @args
+    isValid: -&gt; @validator(@args...)
+
+  $.queuedWhen = (queueables) -&gt;
+    
+    d = $.Deferred();
+
+    prev = null
+    deferredObjs = ((
+      do (q) -&gt;
+        if not q instanceof $.Queueable 
+          d.reject &quot;#{q} is not a $.Queueable object&quot;, q
+        else
+          prev = if prev then prev.pipe -&gt; q.promise() else q.promise()
+          prev.done -&gt; d.notify q.expose()
+          prev.fail -&gt; d.reject q.expose()
+    ) for q in queueables when q.isValid() )
+
+    $.when(deferredObjs...).then -&gt; d.resolve()
+
+    return d.promise()
+)(jQuery)</code></pre></noscript></div>
+</p>
+
+<h3>References</h3>
+
+<ul>
+<li>jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
+<li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
+<li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[File Upload Form - Part 1: Feature Detection]]></title>
+    <link href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/"/>
+    <updated>2012-03-24T16:55:00+01:00</updated>
+    <id>http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection</id>
+    <content type="html"><![CDATA[<p>Last Thursday, I gave a talk at <a href="http://www.twitter.com/jssophia">@JSSophia</a>, the local Javascript User Group I co-founded with <a href="http://www.twitter.com/FredGuillaume">@FredGuillaume</a>.
+The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn't come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
+
+<p>I choose <em>File Upload Form</em> example because it's standalone, frequently used and it can be improved by many ways with HTML5 APIs.
+It's a good example to introduce some very important Javascript concepts:</p>
+
+<ol>
+<li>Using <strong>feature detection</strong> for <strong>progressive enhancement</strong></li>
+<li>Using <strong>loosely coupled modules</strong> to architecture web applications.</li>
+</ol>
+
+
+<p>This post focus on the first part of the talk.
+It presents the <em>feature detection</em> technique.
+I'll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
+
+<p>If you're in a hurry, or simply don't want to read the whole post, you'll find the slides embedded below and everything else on Github:</p>
+
+<ul>
+<li>The final <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a> source code.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/step-by-step-demo">step by step demo</a> I used during the talk.</li>
+<li>The <a href="https://github.com/dharFr/uploader-thumbnail/tree/slides">slides</a>.</li>
+</ul>
+
+
+<p>The talk was in French so the slides are also written in French, even if it uses a lot of English keywords.</p>
+
+<div class="dhar-style-embedder">
+    <style>
+        .clearfix { clear:both; }
+        div.keep-aspect-ratio { max-width:600px;margin:0 auto; }
+        div.keep-aspect-ratio > div { border:0;padding:0;margin:0;position:relative; }
+        div.keep-aspect-ratio > div > img { border:0;padding:0;margin:0;z-index:-1000;position:relative;top:0;bottom:0;left:0;width:100%;display:block; }
+        div.keep-aspect-ratio > div > div { border:0;padding:0;margin:0;position:absolute;top:0;bottom:0;left:0;width:100%;overflow:auto;}
+    </style>
+    <div class="keep-aspect-ratio">
+    <div><img src="http://www.dhar.fr/assets/dhar/aspect-ratio-4-3.png" /><div>
+    <iframe src="http://www.dhar.fr/assets/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
+    </div></div><div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h3>Initial Markup</h3>
+
+<p>The main idea in progressive enhancement is to provide an application that work in any context.
+A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application's user experience in modern browsers.</p>
+
+<p>Talking about <em>file upload form</em>, our starting point is a simple HTML markup.</p>
+
+<p>``` html Initial Markup https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs Source</p>
+
+<pre><code>&lt;form id="upload-form" action="" method="post" enctype="multipart/form-data"&gt;
+
+    &lt;label for="upload"&gt;Go Upload Something&lt;/label&gt;&lt;br&gt;
+
+    &lt;input type="hidden" name="fileId" value="12345"&gt;
+    &lt;input type="file" name="upload" id="upload" accept="image/*"&gt;
+    &lt;input type="submit" value="Upload"&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>It's simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
+On the other hand, it requires a full page reload so the first thing to do to bring some <em>hype</em> in this is to allow uploading the file with an asynchronous request.</p>
+
+<h3>Feature detection</h3>
+
+<p>Uploading a file trough an asynchronous request isn't that easy.
+The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it's not well supported across all browsers (IE, I'm looking at you... See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
+
+<p>Remember that our main concern is to provide the best user experience on each browser.
+So how do we upload a file <em>asynchronously</em> in a browser that don't support <code>FormData</code> API?
+Answer is by using an <code>iframe</code>.</p>
+
+<h4>iframe file upload</h4>
+
+<p>Please note that I started by creating a jQuery plugin to make the code more easily reusable.
+I also hid the submit button and the bound event 'onchange' on the input field to submit the form.
+The following code snippets come from <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js">step1/upload.js</a> file.</p>
+
+<p>First, we have to listen to the <code>submit</code> event to prepare the form:</p>
+
+<p>``` javascript form submit event listener https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31 Source</p>
+
+<pre><code>this.$form.on('submit.uploader', $.proxy(function(){
+
+    // old-school iframe method
+    this.prepareIframeUpload();
+    return true; // submit the form
+}, this));
+</code></pre>
+
+<p>```</p>
+
+<p>Next, let's append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
+Once done, the form can be submitted as usual, the server's answer will be loaded into the <code>iframe</code>.</p>
+
+<p>However, due to security concerns, we won't be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
+This way, the server script will be aware that we are using an <code>iframe</code> and will be able to generate the appropriate response.</p>
+
+<p>``` javascript iframe upload https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80 Source
+prepareIframeUpload: function() {</p>
+
+<pre><code>var id, cb, iframe, url;
+
+// Generating a random id to identify
+// both the iframe and the callback function
+this.id = Math.floor(Math.random() * 1000);
+id = "uploader-frame-" + this.id;
+cb = "uploader-cb-" + this.id;
+
+// creating iframe and callback
+iframe = $('&lt;iframe id="'+id+'" name="'+id+'" style="display:none;"&gt;');
+url = this.$form.attr('action');
+
+this.$form
+    .attr('target', id)
+    .append(iframe)
+    .attr('action', url + '?iframe=' + cb);
+
+// defining callback
+window[cb] = $.proxy(function(data) {
+    console.log('received callback:', data);
+
+    // removing iframe
+    iframe.remove();
+    this.$form.removeAttr('target');
+
+    // removing callback
+    this.$form.attr('action', url);
+    window[cb] = undefined;
+
+    this.onUploadDone(data);
+}, this);
+</code></pre>
+
+<p>},
+<code>``
+Knowing that the server response will be loaded as</code>iframe<code>content, the server script has to generate this small piece of HTML.
+It includes a</code>script<code>tag, witch calls the</code>callback<code>function on the parent window. The json</code>result` is send as a parameter of that function.</p>
+
+<p>``` html server response https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs Source</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+window.top.window['&lt;%- callback %&gt;'](&lt;%- result %&gt;);
+&lt;/script&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>Here we are.
+Our script can send files asynchronously, without reloading the whole page, and it even works with old browsers.
+Of course, we could decide to stop there, but we won't because of the following:</p>
+
+<ul>
+<li>No Error handling: if something goes wrong while sending the file, or if the server don't render the good response, the callback function will never be called, and we can't handle the error.
+You probably want to add a timeout to the script above to avoid waiting for an answer that would never come.</li>
+<li>It's not AJAX.
+You probably already notice this point.
+We are faking it.
+The form is still sent as HTML form, we only changed his target.
+The file is uploaded asynchronously, but without any XmlHttpRequest involved.</li>
+<li>It's dirty.
+I'm OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
+</ul>
+
+
+<h4>FormData file upload</h4>
+
+<p>Time to do things the right way? OK. Let's start by editing the submit event listener as following:</p>
+
+<p>``` javascript updated submit event listener https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46 Source</p>
+
+<pre><code>this.$form.on('submit.uploader', $.proxy(function(){
+
+    var file = false
+    if (this.$upload[0].files) file = this.$upload[0].files[0];
+
+    this.beforeUpload(file);
+
+    if (window.FormData &amp;&amp; file ) {
+
+        console.log('FormData supported and file is:', file);
+        this.upload(file);
+        return false;
+    }
+    // fallback to old-school iframe method
+    else {
+        console.log('FormData is not supported or file is undefined:', file);
+        this.prepareIframeUpload();
+        return true; // submit the form
+    }
+
+}, this));
+</code></pre>
+
+<p>```</p>
+
+<p>The <code>this.$upload</code> variable represents a jQuery object containing the <code>input[type=file]</code> DOM node (see the complete <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js">step2/upload.js</a> file for more details).
+Here we have to check if the browser supports both <code>File</code> and <code>FormData</code> APIs.
+If these two conditions are satisfied, we can go with the <em>"HTML5"</em> file upload.
+Otherwise, we just fall-back to the <code>iframe</code> hack... Simple isn't it?</p>
+
+<p>This is <strong>Feature Dectection</strong> and it's one of the <strong>key concepts of modern web development</strong>.
+It's the only way we have to use the latest HTML5 features without breaking old browser's support.</p>
+
+<p>Now, we're sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
+As you can read, it's way simpler and less hacky compared to the <code>iframe</code> method.
+Server response and errors are handled the same way than with any other ajax request.</p>
+
+<p>``` javascript FormData upload https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80 Source</p>
+
+<pre><code>upload: function(file) {
+
+    var formdata = new FormData(this.$form[0]);
+
+    if (formdata) {
+        var jqXhr = $.ajax({
+            url: this.$form.attr('action'),
+            type: this.$form.attr('method'),
+            data: formdata,
+            // tells jQuery not to prepare data before sending the request
+            processData: false, 
+            contentType: false
+        });
+
+        jqXhr
+            .done($.proxy(this.onUploadDone, this))
+            .fail(function(){
+                console.log("upload error:", arguments);
+            });
+    }
+},
+</code></pre>
+
+<p>```</p>
+
+<p>We're done for part 1.
+Our upload form is fully functional for both modern and old browsers, and even with Javascript disabled.
+In the 2nd part, I explain how to handle the thumbnail associated to the file input field.
+It's a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
+<a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a></p>
+
+<h3>References:</h3>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en/Browser_detection_using_the_user_agent">Browser detection using the user agent</a> on MDC</li>
+<li><a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API</li>
+<li><a href="https://developer.mozilla.org/en/DOM/FileList">FileList</a> API</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery plugin for ping-URL process]]></title>
+    <link href="http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process/"/>
+    <updated>2011-07-26T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process</id>
+    <content type="html"><![CDATA[<p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the "ping URL" process and provides some options.</p>
+
+<!--more-->
+
+
+<p>The pinger will ask the given URL every 'interval' minutes if it detects
+some activity by listening to the events listed in 'listen' parameter.</p>
+
+<p>Have a look to the 'defaults' variable below for further details about available parameters and default values.</p>
+
+<p><div><script src='https://gist.github.com/1107059.js?file='></script>
+<noscript><pre><code>/**
+ * $.pinger
+ * 
+ * If your page runs into an iframe hosted by another domain, you may want to keep the session open.
+ * This plugin automates the &quot;ping URL&quot; process and provides some options.
+ * 
+ * The pinger will ask the given URL every 'interval' minutes if it detects
+ * some activity by listening to the events listed in 'listen' parameter.
+ * 
+ * Have a look to the 'defaults' variable below for further details about available parameters and default values.
+ * 
+ * Example:
+ * Ping Google Logo every 5 minutes and launch the first ping right now:
+ * 	$.pinger({
+ * 		interval: 5
+ * 		url: &quot;http://www.google.co.uk/images/logos/ps_logo2.png&quot;,
+ * 		pingNow: true
+ * 	});
+ * 
+ * Initialize pinger without listening to events. Update activity on demand.
+ * 	$.pinger({
+ * 		url: &quot;http://www.google.co.uk/images/logos/ps_logo2.png&quot;,
+ * 		listen: null
+ * 	});
+ * 	...
+ * 	$.pinger.now('manual ping');
+ */
+(function($){
+
+	var defaults = {
+		interval: 10,					// pings the given URL every 'interval' MINUTES. Set to 0 for manual ping only
+		url: null,						// the URL to ping
+		listen: [&quot;click&quot;, &quot;keydown&quot;],	// events to listen for updating activity
+		pingNow: false,					// If true, sends a ping request just after init
+		beforeSend: null,				// Callback function, called before ping (should return true. false will cancels ping query)
+		callback: false					// Callback function, called after ping query callback received
+	};
+	
+	var options = {};
+	var lastUpdate, checkInterval, iTime, pingImg, _pingerLogs = true;
+	
+	/* Public methods */
+	var methods = {
+		init: function( settings ) {
+			options = $.extend(true, defaults, settings);
+
+			if (!options.url) {
+				$.error( 'jQuery.pinger: url parameter is mandatory');
+				return;
+			}
+			
+			log(&quot;$.pinger.init:&quot;, options);
+			if ( options.interval &gt; 0 ) {
+				
+				lastUpdate = 0;
+				iTime = (options.interval * 60 * 1000);
+				
+				checkInterval = setInterval( function(){
+
+					log(&quot;$.pinger: Should I ping? (&quot;, ((new Date()).getTime() - lastUpdate), &quot;&gt;&quot;, iTime, &quot;?)&quot;);
+					if ( ( (new Date()).getTime() - lastUpdate) &gt; iTime ) {
+						stop('timeout');
+					}
+					else {
+						ping('interval');
+					}
+				}, iTime);
+				
+				if (options.listen &amp;&amp; $.isArray(options.listen) &amp;&amp; options.listen.length &gt; 0) {
+
+					$(document).bind(options.listen.join('.pinger '), function(event) {
+						update(event.type);
+					});	
+				}
+				
+				if (options.pingNow) {
+					ping('init');
+				}
+			}
+		},
+		/*
+		 * $.pinger.now(param)
+		 * Manual activity update
+		 * param : some message to log
+		 */
+		now: function (param) {
+			( options.interval &amp;&amp; options.interval &gt; 0 ) ? update(param) : ping(param);
+		},
+		/*
+		 * $.pinger.destroy();
+		 * destroy pinger
+		 */
+		destroy: function() {
+
+			stop('destroy');
+		}
+	};
+
+	/* Private Methods */
+	function update(param) {
+		log(&quot;$.pinger: activity update -&quot;,param);
+		lastUpdate = (new Date()).getTime();
+	}
+	
+	function ping(param) {
+		log(&quot;$.pinger: Ping to&quot;, options.url, &quot;(&quot;, param, &quot;)&quot;);
+		if (!options.beforeSend || options.beforeSend.apply(this, arguments)) {
+			
+			if (!pingImg) {
+				// In FF or Chrome, we could use a GET xhr but IE blocks due to cross-domain policy
+				// Image object looks fine for that ping job
+				pingImg = new Image();
+				pingImg.onload = function() {
+					//Success callback
+					log(&quot;$.pinger: Ping callback&quot;, arguments);
+					if (options.callback) {
+						options.callback.apply(this, arguments);
+					}
+				}
+			}
+			pingImg.src = options.url + &quot;?&quot; + (new Date().getTime());
+		}
+	}
+	
+	function stop(param) {
+		log(&quot;$.pinger: Stopped -&quot;,param);
+		if (options.listen &amp;&amp; $.isArray(options.listen) &amp;&amp; options.listen.length &gt; 0) {
+			$(document).unbind(options.listen.join('.pinger '));
+		}
+		clearInterval(checkInterval);
+	}
+	
+	function log() {
+		if (_pingerLogs &amp;&amp; console &amp;&amp; console.log) {
+			if (console.log.apply) {
+				console.log.apply(console, arguments);
+			}
+			else {
+				// console.log doesn't seem to be a &quot;real&quot; function in IE so apply can't be used 
+				console.log((Array.prototype.slice.call(arguments)).join(&quot; &quot;));
+			}
+		}
+	}
+
+	/* Plugin entry point */
+	$.pinger = function( method ) {
+		// Method calling logic
+		if ( methods[method] ) {
+			return methods[ method ].apply( this, Array.prototype.slice.call(arguments, 1));
+		} else if ( typeof method === 'object' || !method ) {
+			return methods.init.apply(this, arguments );
+		} else {
+			$.error( 'Method ' + method + ' does not exist on jQuery.pinger');
+			return this;
+		}
+	};
+})(jQuery);</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery plugin pattern written in Coffeescript]]></title>
+    <link href="http://www.dhar.fr/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/"/>
+    <updated>2011-07-24T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript</id>
+    <content type="html"><![CDATA[<p>Once your <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> environment is up and running, you may want to write some awesome new jQuery plugin with CoffeeScript.</p>
+
+<p>The code bellow is a starting point, it's clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
+
+<p><div><script src='https://gist.github.com/1101485.js?file='></script>
+<noscript><pre><code>###*
+ * jQuery pluginName plugin v0.1
+ * ==========================
+ * see http://docs.jquery.com/Plugins/Authoring
+ *
+ * plugin description goes here
+ * author your.name@email.com
+###
+
+(($) -&gt;
+	# Private functions 
+	privateFunc = () -&gt;
+		console.log &quot;private&quot;
+	
+	# Public Functions
+	methods = 
+		init: () -&gt;
+			console.log 'init'
+			@each -&gt;
+				$this = $(@)
+				data = $this.data 'pluginName'
+				if not data
+					### Do more stuff here ###
+					$(@).data 'pluginName' 
+						target: $this
+				return
+		
+		destroy: () -&gt;
+			@each -&gt;
+				$this = $(@)
+				data = $this.data 'pluginName'
+				
+				data.pluginName.remove()
+				$this.removeData 'pluginName'
+				return
+
+	$.fn.pluginName = (method) -&gt;
+		
+		# Method calling logic
+		if methods[method]
+			methods[method].apply this, Array.prototype.slice.call arguments, 1 
+		else if typeof method is 'object' or !method 
+			methods.init.apply this, arguments
+		else
+			$.error &quot;jQuery.pluginName: Method #{ method } does not exist on jQuery.pluginName&quot;
+	return
+)(jQuery)
+</code></pre></noscript></div>
+</p>
+
+<p>Links Summary:</p>
+
+<ul>
+<li><a href="https://gist.github.com/1101485#file_jquery.plugin_name.coffee">jquery.plugin_name.coffee</a> source code</li>
+<li><a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a></li>
+<li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Plugin jQuery - Aide contextuelle Javascript]]></title>
+    <link href="http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/"/>
+    <updated>2010-09-05T00:00:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript</id>
+    <content type="html"><![CDATA[<p>Voilà déjà pas mal de temps que je n'ai rien publié ici... Ce qui ne veux pas dire que j'ai rien dans les cartons. C'est plutôt le temps qui manque un peu quand il s'agit de présenter tout ça de façon correcte.</p>
+
+<p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd'hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c'est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d'un autre. J'ai appelé ce plugin 'helpBox' car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
+
+<p>Voici le <strong> <a href="https://gist.github.com/1101480">code source</a></strong>.</p>
+
+<!--more-->
+
+
+<p>Rien de bien compliqué ici si l'on connais déjà la structure d'un plugin jQuery.
+On commence par définir quelques paramètres...</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">helpContent</span><span class="o">:</span><span class="s1">&#39;&amp;lt;p&amp;gt;help content&amp;lt;/p&amp;gt;&#39;</span><span class="p">,</span>  <span class="c1">// jQuery Selector or plain text HTML.</span>
+</span><span class='line'><span class="nx">contentCls</span><span class="o">:</span><span class="s1">&#39;help-content&#39;</span><span class="p">,</span>          <span class="c1">// CSS Class applied to the help box.</span>
+</span><span class='line'><span class="nx">buttonCls</span><span class="o">:</span><span class="s1">&#39;help-button&#39;</span><span class="p">,</span>            <span class="c1">// CSS Class applied to the help button.</span>
+</span><span class='line'><span class="nx">buttonText</span><span class="o">:</span><span class="s1">&#39;Help&#39;</span>                   <span class="c1">// Help Button text</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Ensuite, le plugin 'helpBox' se contente de recherche le code HTML du contenu de l'aide pour l'ajouter au document avec le bouton associé.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">options</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Gets help content</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">).</span><span class="nx">size</span><span class="p">()</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">0</span> <span class="p">)</span> <span class="o">?</span> <span class="nx">$</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">).</span><span class="nx">html</span><span class="p">()</span> <span class="o">:</span> <span class="nx">o</span><span class="p">.</span><span class="nx">helpContent</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Appends help box and help button</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&amp;amp;lt;div class=&#39;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s2">&quot;&#39;&amp;gt;&quot;</span> <span class="o">+</span> <span class="nx">content</span> <span class="o">+</span> <span class="s2">&quot;&amp;amp;lt;/div&amp;gt;&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&amp;amp;lt;div class=&#39;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+</span><span class="s2">&quot;&#39;&amp;gt;&amp;amp;lt;a href=&#39;#&#39;&amp;gt;&quot;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonText</span><span class="o">+</span><span class="s2">&quot;&amp;amp;lt;/a&amp;gt;&amp;amp;lt;/div&amp;gt;&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// [...]</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Ensuite, il ajoute deux gestionnaires d’événement au bouton: un 'mouseover' pour ouvrir le dialogue d'aide et un 'click' pour fermer ce dernier.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Open the box on button mouseover, close it on click</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+</span><span class="s1">&#39; a&#39;</span><span class="p">).</span><span class="nx">mouseover</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s1">&#39;:hidden&#39;</span><span class="p">).</span><span class="nx">slideDown</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}).</span><span class="nx">click</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s1">&#39;:visible&#39;</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Voilà tout. Facile non?</p>
+
+<ul>
+<li>Le code complet est ici: <strong> <a href="https://gist.github.com/1101480">jquery.helpbox.js</a> </strong></li></li>
+</ul>
+
+
+<p>Quelques ressources utiles pour finir:</p>
+
+<ul>
+<li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Plugin Authoring</a></li>
+<li><a href="http://www.learningjquery.com/2007/10/a-plugin-development-pattern">Les bases du développement de plugin jQuery</a> sur learningjquery.com</li>
+</ul>
+
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+</feed>
