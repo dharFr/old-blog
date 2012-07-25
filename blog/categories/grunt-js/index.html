@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Queued ajax requests with jQuery and Coffescript - dhar's Blog</title>
+  <title>Category: grunt.js - dhar's Blog</title>
   <meta name="author" content="Olivier Audard">
 
   
-  <meta name="description" content="I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217; &hellip;">
+  <meta name="description" content="Category: grunt.js">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Using jQuery&#8217; &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">
+  <link rel="canonical" href="http://www.dhar.frblog/categories/grunt-js/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,152 +75,36 @@ Using jQuery&#8217; &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Queued Ajax Requests With jQuery and Coffescript</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-31T21:46:00+02:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
-        
-      </p>
+    <h1 class="entry-title">Category: grunt.js</h1>
     
   </header>
-
-
-<div class="entry-content"><p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
-
-<!--more-->
-
-
-<p>You probably already know that all jQuery&#8217;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&#8217;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries&#8217; progress.</p>
-
-<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&#8217;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
-
-<p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
-
-<div><script src='https://gist.github.com/2244946.js?file=jquery.queue.coffee'></script>
-<noscript><pre><code>###*
- * jQuery queue plugin v0.1
- * ==========================
- *
- * Used to queue $.Deferred's Promise objects
- * author @_dhar
-###
-
-(($) -&gt;
-
-  class $.Queueable
-
-    constructor: (@builder, @args, @validator = -&gt; yes) -&gt;
-
-    promise: -&gt; @builder(@args...).promise()
-    expose:  -&gt; @args
-    isValid: -&gt; @validator(@args...)
-
-  $.queuedWhen = (queueables) -&gt;
-    
-    d = $.Deferred();
-
-    prev = null
-    deferredObjs = ((
-      do (q) -&gt;
-        if not q instanceof $.Queueable 
-          d.reject &quot;#{q} is not a $.Queueable object&quot;, q
-        else
-          prev = if prev then prev.pipe -&gt; q.promise() else q.promise()
-          prev.done -&gt; d.notify q.expose()
-          prev.fail -&gt; d.reject q.expose()
-    ) for q in queueables when q.isValid() )
-
-    $.when(deferredObjs...).then -&gt; d.resolve()
-
-    return d.promise()
-)(jQuery)</code></pre></noscript></div>
-
-
-<h3>References</h3>
-
-<ul>
-<li>jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
-<li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
-<li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
-</ul>
-
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Olivier Audard</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2012</h2>
+
+<article>
+  
+<h1><a href="/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/">Some fun with git hooks and Grunt.js</a></h1>
+<time datetime="2012-07-23T22:55:00+02:00" pubdate><span class='month'>Jul</span> <span class='day'>23</span> <span class='year'>2012</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/automation/'>Automation</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/git-hooks/'>git hooks</a>, <a class='category' href='/blog/categories/grunt-js/'>grunt.js</a></span>
+</footer>
 
 
-<time datetime="2012-03-31T21:46:00+02:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/coffeescript/'>Coffeescript</a>, <a class='category' href='/blog/categories/deferred-objects/'>Deferred objects</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/jquery-plugin/'>jQuery plugin</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/" title="Previous Post: File Upload Form - Part 1: Feature Detection">&laquo; File Upload Form - Part 1: Feature Detection</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/" title="Next Post: File Upload Form - Part 2: Loosely Coupled Modules">File Upload Form - Part 2: Loosely Coupled Modules &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -356,10 +239,7 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
       var disqus_shortname = 'dhar';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/';
-        var disqus_url = 'http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

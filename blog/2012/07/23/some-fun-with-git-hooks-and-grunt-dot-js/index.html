@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Some fun with git hooks and Grunt.js - dhar's Blog</title>
+  <meta name="author" content="Olivier Audard">
+
+  
+  <meta name="description" content="Before going further, I&#8217;ll start by saying that I&#8217;m a Git and Github noob, so if you have a better solution to achieve the same goal, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1823374-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">dhar's Blog</a></h1>
+  
+    <h2>My personnal blog. Mostly Web Dev stuff...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.dhar.fr" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Some Fun With Git Hooks and Grunt.js</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-23T22:55:00+02:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Before going further, I&#8217;ll start by saying that I&#8217;m a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I&#8217;ll be happy to hear it..!</p>
+
+<p>A few weeks ago, I implemented a small bookmarklet to apply <a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a> anywhere on the Web.
+I put the source code <a href="https://github.com/dharFr/prettyprint-bookmarklet">on Github</a> and used the (<em>awesome</em>) <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">Automatic Page Generator</a> to quickly create a landing page to host my bookmarklet.</p>
+
+<p>The generated page lives on the same repository, on a branch called <code>gh-pages</code>.
+At this point, my concern was the following: How could I include the bookmarklet link on <code>gh-pages</code> branch from the source code living on the <code>master</code>?</p>
+
+<!-- more -->
+
+
+<h2>Basic (handmade™) workflow</h2>
+
+<p>In a first try, I could just copy/paste the minified source into an <code>&lt;a href="..."&gt;</code> link in my <code>index.html</code>.
+But what happens if I update the source?
+I&#8217;ll probably have to deal with that kind of work flow:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>grunt <span class="c"># lint, concat and minifies source</span>
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;Probably improved something in there&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># copy content from dist/prettyprinter.min.js</span>
+</span><span class='line'>
+</span><span class='line'>git checkout gh-pages <span class="c"># checkout gh-pages branch</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># paste code somewhere into index.html (without)</span>
+</span><span class='line'>
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;Updated landing page with latest bookmarklet version&quot;</span>
+</span><span class='line'>
+</span><span class='line'>git checkout master <span class="c"># back to master branch</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rather boring, right? Totally agree! And that&#8217;s why I decided to dig a little further to see how I could automate this.</p>
+
+<h2>Automate the whole thing!</h2>
+
+<h3>Avoiding copy / paste</h3>
+
+<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it&#8217;s probably better to use the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git checkout gh-pages <span class="c"># checkout gh-pages branch</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># add/update &#39;dist&#39; directory from master branch</span>
+</span><span class='line'>git checkout master -- dist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Updating HTML content</h3>
+
+<p>As mentioned earlier, I already used <a href="http://gruntjs.com/">grunt.js</a> to lint, concat and minify my source on the <code>master</code> branch.
+So I searched for a way to use grunt to update the HTML link. I quickly found <a href="https://github.com/outaTiME/grunt-replace">grunt-replace</a>, perfect fit for the job.
+I ended up with an HTML source file, with a placeholder for the bookmarklet:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&#39;@@bookmarklet&#39;</span><span class="nt">&gt;</span>Prettify<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And a simple grunt <code>replace</code> task, reading the minified source and generating an up-to-date <code>index.html</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">replace</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/index.html&#39;</span><span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">variables</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">bookmarklet</span><span class="o">:</span> <span class="s1">&#39;&lt;%= grunt.file.read(\&#39;dist/prettyprinter.min.js\&#39;) %&gt;&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Introducing Git Hooks</h3>
+
+<p>Basically, <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks">Git Hooks</a> allow you to automatically run custom scripts at any step in your workflow.
+Hooks must be defined in the <code>.git/hooks/</code> folder.
+Placeholder files are already created, giving a pretty good idea about what&#8217;s possible or not.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls .git/hooks/
+</span><span class='line'>applypatch-msg.sample
+</span><span class='line'>commit-msg.sample
+</span><span class='line'>post-commit.sample
+</span><span class='line'>post-receive.sample
+</span><span class='line'>post-update.sample
+</span><span class='line'>pre-applypatch.sample
+</span><span class='line'>pre-commit.sample
+</span><span class='line'>pre-rebase.sample
+</span><span class='line'>prepare-commit-msg.sample
+</span><span class='line'>update.sample
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You only need to remove the <code>.sample</code> extension to define a hook, then edit the script to create your own awesome automation.</p>
+
+<h3>Bringing the pieces together</h3>
+
+<p>In my case, I created a <code>post-commit</code> script. Right after every new commit on the <code>master</code> branch, this piece of code runs and does all the crappy work.</p>
+
+<figure class='code'><figcaption><span>post-commit</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;\n| [prettify bookmarklet post-commit hook]&quot;</span>
+</span><span class='line'>git checkout gh-pages
+</span><span class='line'>
+</span><span class='line'><span class="c"># Update bookmarklet script from master branch</span>
+</span><span class='line'>git checkout master -- dist lib
+</span><span class='line'>
+</span><span class='line'><span class="c"># update index.html &amp; commit changes</span>
+</span><span class='line'>grunt replace
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;Regenerated index.html from master branch&quot;</span>
+</span><span class='line'>
+</span><span class='line'>git checkout master
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;| All Done -- Use &#39;git push --all&#39; instead of &#39;git push origin master&#39; to push changes&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As both <code>master</code> and <code>gh-pages</code> branches are modified, they both need to be pushed on the remote repository.
+I use <code>git push --all</code>, which is fine if you don&#8217;t have any other updated branch. Otherwise, you&#8217;ll need a specific push for each branch.</p>
+
+<h2>Going further</h2>
+
+<p>I&#8217;d like to find a way to stop the script if the commit doesn&#8217;t occur on the <code>master</code> branch, but I&#8217;m not sure how to do it&#8230;</p>
+
+<p>I&#8217;ll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
+Grunt.js already simplified this to a one liner, but I often forget to call it before committing changes.</p>
+
+<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I&#8217;d like to have an opportunity to try it on a larger project and see how it goes.</p>
+
+<hr />
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://lea.verou.me/2011/10/easily-keep-gh-pages-in-sync-with-master/">Easily keep gh-pages in sync with master</a> by Lea Verou</li>
+<li><a href="http://oli.jp/2011/github-pages-workflow/">Github Pages Workflow</a> by by Oli Studholme</li>
+<li><a href="http://get.inject.io/n/XxsZ6RE7">Git post-commit hook to keep master and gh-pages branch in sync</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Olivier Audard</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-23T22:55:00+02:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/automation/'>Automation</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/git-hooks/'>git hooks</a>, <a class='category' href='/blog/categories/grunt-js/'>grunt.js</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/" title="Previous Post: File Upload Form - Part 2: Loosely Coupled Modules">&laquo; File Upload Form - Part 2: Loosely Coupled Modules</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+  <h1>About Me</h1>
+  <div id="twitter-profile" style="margin-top:0.5em;">
+    <p>
+      <strong>Olivier Audard</strong> 
+      (<a href="http://twitter.com/_dhar">@_dhar</a>)
+    </p>
+    <p></p>
+  </div>
+  <script type="text/javascript">
+    $.domReady(function(){
+        var container = $('#twitter-profile'),
+            user = "_dhar";
+        
+        function parseTwLinks(s) {
+          var twUrl = "http://www.twitter.com/"
+          s = s.replace(/ (@([\w]+))/g, function(match, p1, p2) {
+              return " <a href='"+twUrl+p2+"'>"+p1+"</a>"
+          }).replace(/ (#([\w]+))/g, function(match, p1, p2) {
+              return " <a href='"+twUrl+"#!/search?q=%23"+p2+"'>"+p1+"</a>"
+          })
+          return s
+        }
+
+        $.ajax({
+            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
+          , type: 'jsonp'
+          , error: function (err) { $('#twitter-profile').addClass('error');  }
+          , success: function(data) {
+              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong> (<a href="http://twitter.com/'+user+'">@'+user+'</a>)<br/>'+data.location+'</p><p>'+parseTwLinks(data.description)+'</p>');
+            }
+        })
+      });
+  </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/">Some fun with git hooks and Grunt.js</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">Queued ajax requests with jQuery and Coffescript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">File Upload Form - Part 1: Feature Detection</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">jQuery plugin for ping-URL process</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/dharFr">@dharFr</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'dharFr',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("_dhar", 5, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <p>Follow <a href="http://twitter.com/_dhar">@_dhar</a></p>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Olivier Audard -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'dhar';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/';
+        var disqus_url = 'http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

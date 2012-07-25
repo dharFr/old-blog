@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's Blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-07-22T16:56:53+02:00</updated>
+  <updated>2012-07-26T00:30:55+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -12,6 +12,209 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Some fun with git hooks and Grunt.js]]></title>
+    <link href="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/"/>
+    <updated>2012-07-23T22:55:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js</id>
+    <content type="html"><![CDATA[<p>Before going further, I&#8217;ll start by saying that I&#8217;m a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I&#8217;ll be happy to hear it..!</p>
+
+<p>A few weeks ago, I implemented a small bookmarklet to apply <a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a> anywhere on the Web.
+I put the source code <a href="https://github.com/dharFr/prettyprint-bookmarklet">on Github</a> and used the (<em>awesome</em>) <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">Automatic Page Generator</a> to quickly create a landing page to host my bookmarklet.</p>
+
+<p>The generated page lives on the same repository, on a branch called <code>gh-pages</code>.
+At this point, my concern was the following: How could I include the bookmarklet link on <code>gh-pages</code> branch from the source code living on the <code>master</code>?</p>
+
+<!-- more -->
+
+
+<h2>Basic (handmade™) workflow</h2>
+
+<p>In a first try, I could just copy/paste the minified source into an <code>&lt;a href="..."&gt;</code> link in my <code>index.html</code>.
+But what happens if I update the source?
+I&#8217;ll probably have to deal with that kind of work flow:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>grunt <span class="c"># lint, concat and minifies source</span>
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;Probably improved something in there&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># copy content from dist/prettyprinter.min.js</span>
+</span><span class='line'>
+</span><span class='line'>git checkout gh-pages <span class="c"># checkout gh-pages branch</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># paste code somewhere into index.html (without)</span>
+</span><span class='line'>
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;Updated landing page with latest bookmarklet version&quot;</span>
+</span><span class='line'>
+</span><span class='line'>git checkout master <span class="c"># back to master branch</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rather boring, right? Totally agree! And that&#8217;s why I decided to dig a little further to see how I could automate this.</p>
+
+<h2>Automate the whole thing!</h2>
+
+<h3>Avoiding copy / paste</h3>
+
+<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it&#8217;s probably better to use the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git checkout gh-pages <span class="c"># checkout gh-pages branch</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># add/update &#39;dist&#39; directory from master branch</span>
+</span><span class='line'>git checkout master -- dist
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Updating HTML content</h3>
+
+<p>As mentioned earlier, I already used <a href="http://gruntjs.com/">grunt.js</a> to lint, concat and minify my source on the <code>master</code> branch.
+So I searched for a way to use grunt to update the HTML link. I quickly found <a href="https://github.com/outaTiME/grunt-replace">grunt-replace</a>, perfect fit for the job.
+I ended up with an HTML source file, with a placeholder for the bookmarklet:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&#39;@@bookmarklet&#39;</span><span class="nt">&gt;</span>Prettify<span class="nt">&lt;/a&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And a simple grunt <code>replace</code> task, reading the minified source and generating an up-to-date <code>index.html</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">replace</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/index.html&#39;</span><span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">variables</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">bookmarklet</span><span class="o">:</span> <span class="s1">&#39;&lt;%= grunt.file.read(\&#39;dist/prettyprinter.min.js\&#39;) %&gt;&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Introducing Git Hooks</h3>
+
+<p>Basically, <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks">Git Hooks</a> allow you to automatically run custom scripts at any step in your workflow.
+Hooks must be defined in the <code>.git/hooks/</code> folder.
+Placeholder files are already created, giving a pretty good idea about what&#8217;s possible or not.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ls .git/hooks/
+</span><span class='line'>applypatch-msg.sample
+</span><span class='line'>commit-msg.sample
+</span><span class='line'>post-commit.sample
+</span><span class='line'>post-receive.sample
+</span><span class='line'>post-update.sample
+</span><span class='line'>pre-applypatch.sample
+</span><span class='line'>pre-commit.sample
+</span><span class='line'>pre-rebase.sample
+</span><span class='line'>prepare-commit-msg.sample
+</span><span class='line'>update.sample
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You only need to remove the <code>.sample</code> extension to define a hook, then edit the script to create your own awesome automation.</p>
+
+<h3>Bringing the pieces together</h3>
+
+<p>In my case, I created a <code>post-commit</code> script. Right after every new commit on the <code>master</code> branch, this piece of code runs and does all the crappy work.</p>
+
+<figure class='code'><figcaption><span>post-commit</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;\n| [prettify bookmarklet post-commit hook]&quot;</span>
+</span><span class='line'>git checkout gh-pages
+</span><span class='line'>
+</span><span class='line'><span class="c"># Update bookmarklet script from master branch</span>
+</span><span class='line'>git checkout master -- dist lib
+</span><span class='line'>
+</span><span class='line'><span class="c"># update index.html &amp; commit changes</span>
+</span><span class='line'>grunt replace
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;Regenerated index.html from master branch&quot;</span>
+</span><span class='line'>
+</span><span class='line'>git checkout master
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;| All Done -- Use &#39;git push --all&#39; instead of &#39;git push origin master&#39; to push changes&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As both <code>master</code> and <code>gh-pages</code> branches are modified, they both need to be pushed on the remote repository.
+I use <code>git push --all</code>, which is fine if you don&#8217;t have any other updated branch. Otherwise, you&#8217;ll need a specific push for each branch.</p>
+
+<h2>Going further</h2>
+
+<p>I&#8217;d like to find a way to stop the script if the commit doesn&#8217;t occur on the <code>master</code> branch, but I&#8217;m not sure how to do it&#8230;</p>
+
+<p>I&#8217;ll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
+Grunt.js already simplified this to a one liner, but I often forget to call it before committing changes.</p>
+
+<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I&#8217;d like to have an opportunity to try it on a larger project and see how it goes.</p>
+
+<hr />
+
+<h2>References</h2>
+
+<ul>
+<li><a href="http://lea.verou.me/2011/10/easily-keep-gh-pages-in-sync-with-master/">Easily keep gh-pages in sync with master</a> by Lea Verou</li>
+<li><a href="http://oli.jp/2011/github-pages-workflow/">Github Pages Workflow</a> by by Oli Studholme</li>
+<li><a href="http://get.inject.io/n/XxsZ6RE7">Git post-commit hook to keep master and gh-pages branch in sync</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[File Upload Form - Part 2: Loosely Coupled Modules]]></title>
