@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's Blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-07-26T00:30:55+02:00</updated>
+  <updated>2012-08-14T01:36:25+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Compte-rendu du Riviera Coding Week-end]]></title>
+    <link href="http://www.dhar.fr/blog/2012/08/13/fr-compte-rendu-du-riviera-coding-week-end/"/>
+    <updated>2012-08-13T15:07:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/08/13/fr-compte-rendu-du-riviera-coding-week-end</id>
+    <content type="html"><![CDATA[<p><em>This post is about the Riviera Coding Week-end, a geek event that took place in Nice (France) from 10 to 12 August 2012.
+As this post is closely related to a French event, I think for once, it&#8217;s more appropriate to write in French, even if I usually blog in English.
+If you&#8217;re anyway interested, I&#8217;m <a href="http://translate.google.com/translate?hl=en&amp;sl=fr&amp;tl=en&amp;u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F">Google translate</a> or any other translation tool can fit your needs&#8230;</em></p>
+
+<p>Du 10 au 12 Août dernier, j&#8217;ai participé au premier <em>Riviera Coding Week-end</em>, organisé par les membres du <a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">RivieraGUG</a> avec la participation du <a href="http://groups.google.com/group/jssophia">JSSophia</a> dont je fais partie.
+À ma connaissance, c&#8217;est le premier événement du genre qui ait lieu sur la côte d&#8217;azur.
+C&#8217;est en tout cas le premier auquel j&#8217;ai eu l&#8217;occasion de participer.
+Après ces 48 heures passées à construire, échanger, mais surtout coder, un petit bilan me semble bien utile.</p>
+
+<!-- more -->
+
+
+<h2>Un Coding Week-End, quelle idée&#8230;</h2>
+
+<p>D&#8217;abord initié par le <em><a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">Groovy &amp; Grails User Group</a></em> , l&#8217;événement avait pour objectif de construire un site dédié pour le groupe.
+Par la suite, alors que certains membres du <em><a href="http://groups.google.com/group/jssophia">Javascript User Group</a></em> ont aussi souhaité participer au week-end, la thématique de l&#8217;événement a un peu changée, pour s&#8217;axer d&#8217;avantage sur la collaboration entre les communautés locales.</p>
+
+<p>Nous y voilà, c&#8217;est Vendredi soir, il est un peu plus de 19h30 lorsque j&#8217;arrive aux <a href="http://www.satellites-teletravail.com/">Satellites</a> (qui nous ont hébergés gracieusement tout le week-end).
+La plupart des participants sont déjà arrivés.
+Il y a quelques visages bien connus, des collègues de travail, avec qui je passe déjà mes journées en semaines; certains sont simplement familiers, croisés lors des précédentes réunions du JSSophia ou lors de conférences qui ont eu lieu à Sophia-Antipolis quelques mois plus tôt; puis d&#8217;autres, enfin, que je rencontre pour la première fois.</p>
+
+<p>D&#8217;entrée de jeu, l&#8217;ambiance est décontractée, l&#8217;accueil chaleureux et tout le monde est souriant.
+Sans trop savoir ce que va donner cette expérience, on sait déjà qu&#8217;on est tous là pour la même chose: partager notre passion du web et construire quelque chose, tous ensemble, <em>just for fun</em>.</p>
+
+<h2>Entrée en matière</h2>
+
+<pre><code>| Loading Grails 2.1.0
+</code></pre>
+
+<p>Le programme du Week-end est assez simple et couvre principalement la soirée du vendredi, après tout, on est pas là pour subir un planning rigoureux.</p>
+
+<p>Le début de soirée est assez calme.
+On fait connaissance, on se raconte nos vacances (pour ceux qui en ont pris&#8230;), on prends l&#8217;apéro en terrasse, on envoie quelques tweets en espérant ramener de nouveaux participants de dernière minute.
+Certains configurent le Raspberry Pi qui hébergera un <a href="http://fr.wikipedia.org/wiki/EtherPad">EtherPad</a> pour la durée du week-end.</p>
+
+<h2>Grails Crash Course</h2>
+
+<pre><code>| Configuring classpath
+</code></pre>
+
+<p>Après avoir dévoré quelques pizzas, on attaque les choses sérieuses avec un <em>Crash Course Grails</em> d&#8217;une petite demi-heure présenté par <a href="https://twitter.com/bgoetzmann">Bertrand Goetzmann</a>, bien utile pour ceux qui n&#8217;auraient jamais eu l&#8217;occasion d&#8217;utiliser le Framework.
+Là encore, l&#8217;ambiance est bien loin d&#8217;un cours magistral.
+La plupart des participants connaissent bien les rouages de Grails et le cours de Bertrand devient un bon prétexte pour partager les expériences de chacun et échanger les points de vue.</p>
+
+<h2>Brainstorming</h2>
+
+<pre><code>| Environment set to development
+</code></pre>
+
+<p>Presque deux heures plus tard (la demi-heure la plus longue qu&#8217;on ai connu), nous démarrons un Brainstorming animé avec un objectif simple : qu&#8217;allons nous construire pendant le week-end?</p>
+
+<p>Rapidement, quelques sujets intéressants font surface, souvent liés à l&#8217;activité des User Groups autour de Sophia-Antipolis :</p>
+
+<ul>
+<li>Manque d&#8217;activité des communautés : Il y a bien quelques user groups plus ou moins actifs mais la plupart restent globalement peu connus.</li>
+<li>Manque de relations et de collaboration entre ces groupes.</li>
+<li>Problématiques récurrentes d&#8217;un groupe à l&#8217;autre: trouver une salle, un sponsor, se faire connaître localement, informer et impliquer les membres</li>
+</ul>
+
+
+<p>Vient ensuite l&#8217;idée de créer un site dédié aux User Groups de la région, ayant pour objectif de faciliter la découverte des communautés locales et leur collaboration.
+Le projet est ambitieux, mais l&#8217;important est surtout de lancer une initiative.
+Pour pouvoir obtenir un résultat concret en un week-end, nous décidons de nous concentrer sur les éléments de base du site et de garder de côté les idées qui demandent davantage de travail.</p>
+
+<h4>Première itération: Briques de base</h4>
+
+<ul>
+<li>Enregistrement des utilisateurs</li>
+<li>Création d&#8217;un groupe par un utilisateur</li>
+<li>Abonnement à un groupe existant par un utilisateur</li>
+<li>Publication d&#8217;éventements organisés par le groupe</li>
+<li>Publication d&#8217;articles (blog) par un groupe</li>
+<li>Présentation des sponsors d&#8217;un groupe</li>
+<li>Association de tags aux groupes, utilisateurs</li>
+</ul>
+
+
+<h4>Développements ultérieurs:</h4>
+
+<ul>
+<li>Favoriser la mise en relations des groupes géographiquement proches</li>
+<li>Favoriser la découverte des groupes par les utilisateurs</li>
+<li>Favoriser la mise en commun des ressources (salles, sponsors, relations) des groupes</li>
+</ul>
+
+
+<p> C&#8217;est un résumé un peu rapide, mais tous les détails sont en ligne grâce au <a href="https://github.com/rivieragug/website/blob/master/RASPBERRY_MINUTE.md">Raspberry Minute</a></p>
+
+<h2>On est là pour coder, non?</h2>
+
+<pre><code>| Packaging Grails application
+</code></pre>
+
+<p>Après avoir déterminé notre objectif pour le week-end, nous n&#8217;avions plus qu&#8217;à nous mettre au travail.
+Raconter les deux jours suivants en détail serait sans doute trop long et assez peu constructif.</p>
+
+<p>L&#8217;important à retenir est sans doute que les contributions ont été nombreuses : écrire du code, décortiquer OAuth, dessiner des croquis d&#8217;IHM, mettre en place l&#8217;intégration continue (<em>continious outage?</em>), travailler le design de site, aider les débutants ou simplement mettre l&#8217;ambiance et remotiver les troupes; chacun a contribué au projet selon ses compétences et sa forme du moment.</p>
+
+<p>Le résultat est là! Le projet est bien démarré, le code est <a href="https://github.com/rivieragug/website">disponible sur Github</a> et une première version est <a href="http://ughub.cloudfoundry.com/">déjà en ligne</a></p>
+
+<h2>Bilan</h2>
+
+<pre><code>| Running Grails application
+</code></pre>
+
+<p>Concernant la soirée de vendredi, je crois qu&#8217;il aurait été judicieux d&#8217;attaquer le brainstorming avant le Crash Course Grails.
+Cela aurait permis d&#8217;entrer directement dans le vif du sujet et d&#8217;utiliser le cours pour construire les premiers éléments du projet. On aurait gagné un peu de temps, et tout le monde aurait été plus impliqué dans le cours.</p>
+
+<p>Ensuite, comme je l&#8217;ai dis plus haut, le projet était sans doute trop ambitieux par rapport au temps à notre disposition. Il faut reconnaître que la version obtenue à l&#8217;issue du week-end est plus proche du prototype que d&#8217;une application de qualité professionnelle.</p>
+
+<p>Malgré tout, en ce qui me concerne, cette expérience a été clairement positive.
+Une ambiance bien sympa, des locaux au top, et une belle brochette de passionnés qui se sont tous  impliqués dans le projet comme si l&#8217;enjeu avait été important.</p>
+
+<p>Et tant pis si le résultat n&#8217;a pas la qualité que nous aurions pu attendre.
+Après tout, l&#8217;initiative est lancée et le code est là, ouvert à tous, disponible sur Github.
+Il ne tiens qu&#8217;à nous de continuer à faire avancer ce projet, en y contribuant nous-même ou en motivant d&#8217;autres personnes à participer. Quelques <em>pull requests</em> de plus et on l&#8217;aura le site communautaire qu&#8217;on a imaginé tous ensemble vendredi dernier.</p>
+
+<p>Y&#8217;a plus qu&#8217;à comme on dit&#8230; ;)</p>
+
+<h2>Remerciements</h2>
+
+<pre><code>| Server running. Browse to http://ughub.cloudfoundry.com/
+</code></pre>
+
+<p>Quelques remerciements pour finir.
+D&#8217;abord parce que j&#8217;ai passé un excellent week-end, mais aussi parce que ce type d&#8217;initiative participe à créer cette dynamique locale qui nous tiens tous à cœur.</p>
+
+<p>Merci, donc, aux membres du RiveraGUG pour avoir lancé l&#8217;initiative et géré l&#8217;organisation.
+Merci aux <a href="http://www.satellites-teletravail.com/">Satellites</a>, et plus particulièrement à Nicolas, qui a accueilli notre petit groupe sans rien demander en retour. Vos locaux sont géniaux, si un jour je me met à mon compte, je sais déjà où établir mon QG ;)
+Merci aussi à nos deux sponsors, <a href="http://www.avisto.com">Avisto</a> et <a href="http://www.sopragroup.com/">Sopra Group</a> pour avoir nous avoir permis de travailler le ventre plein.</p>
+
+<p>Et merci enfin à tous ceux qui étaient présent et qui se sont impliqués au cours du week-end.</p>
+
+<h2>Quelques liens en vrac</h2>
+
+<ul>
+<li>L&#8217;application sur cloud-foundry : <a href="http://ughub.cloudfoundry.com/">UG-hub</a></li>
+<li>Le <a href="https://github.com/rivieragug/website">Code Source</a> sur Github</li>
+<li><a href="http://photos.dhar.fr/photos/album-2/list">Quelques Photos</a></li>
+<li>Les participants sont aussi <a href="https://twitter.com/_dhar/rivieracwe-2012">sur Twitter</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Some fun with git hooks and Grunt.js]]></title>
