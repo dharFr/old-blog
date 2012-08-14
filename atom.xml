@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's Blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-08-14T01:36:25+02:00</updated>
+  <updated>2012-08-14T02:17:05+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -22,7 +22,8 @@
 As this post is closely related to a French event, I think for once, it&#8217;s more appropriate to write in French, even if I usually blog in English.
 If you&#8217;re anyway interested, I&#8217;m <a href="http://translate.google.com/translate?hl=en&amp;sl=fr&amp;tl=en&amp;u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F">Google translate</a> or any other translation tool can fit your needs&#8230;</em></p>
 
-<p>Du 10 au 12 Août dernier, j&#8217;ai participé au premier <em>Riviera Coding Week-end</em>, organisé par les membres du <a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">RivieraGUG</a> avec la participation du <a href="http://groups.google.com/group/jssophia">JSSophia</a> dont je fais partie.
+<p><a href="http://photos.dhar.fr/p/ke/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/5d466e-EB855D13-DD73-423D-ACF1-51A94E35A82A_960x180.jpg"></a>
+Du 10 au 12 Août dernier, j&#8217;ai participé au premier <em>Riviera Coding Week-end</em>, organisé par les membres du <a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">RivieraGUG</a> avec la participation du <a href="http://groups.google.com/group/jssophia">JSSophia</a> dont je fais partie.
 À ma connaissance, c&#8217;est le premier événement du genre qui ait lieu sur la côte d&#8217;azur.
 C&#8217;est en tout cas le premier auquel j&#8217;ai eu l&#8217;occasion de participer.
 Après ces 48 heures passées à construire, échanger, mais surtout coder, un petit bilan me semble bien utile.</p>
@@ -35,7 +36,8 @@ Après ces 48 heures passées à construire, échanger, mais surtout coder, un p
 <p>D&#8217;abord initié par le <em><a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">Groovy &amp; Grails User Group</a></em> , l&#8217;événement avait pour objectif de construire un site dédié pour le groupe.
 Par la suite, alors que certains membres du <em><a href="http://groups.google.com/group/jssophia">Javascript User Group</a></em> ont aussi souhaité participer au week-end, la thématique de l&#8217;événement a un peu changée, pour s&#8217;axer d&#8217;avantage sur la collaboration entre les communautés locales.</p>
 
-<p>Nous y voilà, c&#8217;est Vendredi soir, il est un peu plus de 19h30 lorsque j&#8217;arrive aux <a href="http://www.satellites-teletravail.com/">Satellites</a> (qui nous ont hébergés gracieusement tout le week-end).
+<p><a href="http://photos.dhar.fr/p/kd/album-2"><img class="left" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/3eebc3-26D8653A-2BBB-4830-9F00-A240FF4514C6_960x180.jpg"></a>
+Nous y voilà, c&#8217;est Vendredi soir, il est un peu plus de 19h30 lorsque j&#8217;arrive aux <a href="http://www.satellites-teletravail.com/">Satellites</a> (qui nous ont hébergés gracieusement tout le week-end).
 La plupart des participants sont déjà arrivés.
 Il y a quelques visages bien connus, des collègues de travail, avec qui je passe déjà mes journées en semaines; certains sont simplement familiers, croisés lors des précédentes réunions du JSSophia ou lors de conférences qui ont eu lieu à Sophia-Antipolis quelques mois plus tôt; puis d&#8217;autres, enfin, que je rencontre pour la première fois.</p>
 
@@ -58,7 +60,8 @@ Certains configurent le Raspberry Pi qui hébergera un <a href="http://fr.wikipe
 <pre><code>| Configuring classpath
 </code></pre>
 
-<p>Après avoir dévoré quelques pizzas, on attaque les choses sérieuses avec un <em>Crash Course Grails</em> d&#8217;une petite demi-heure présenté par <a href="https://twitter.com/bgoetzmann">Bertrand Goetzmann</a>, bien utile pour ceux qui n&#8217;auraient jamais eu l&#8217;occasion d&#8217;utiliser le Framework.
+<p><a href="http://photos.dhar.fr/p/k2/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/2a719f-04CDD1E8-97CF-4210-9593-14718F7D2CBC_960x180.jpg"></a>
+Après avoir dévoré quelques pizzas, on attaque les choses sérieuses avec un <em>Crash Course Grails</em> d&#8217;une petite demi-heure présenté par <a href="https://twitter.com/bgoetzmann">Bertrand Goetzmann</a>, bien utile pour ceux qui n&#8217;auraient jamais eu l&#8217;occasion d&#8217;utiliser le Framework.
 Là encore, l&#8217;ambiance est bien loin d&#8217;un cours magistral.
 La plupart des participants connaissent bien les rouages de Grails et le cours de Bertrand devient un bon prétexte pour partager les expériences de chacun et échanger les points de vue.</p>
 
@@ -70,6 +73,8 @@ La plupart des participants connaissent bien les rouages de Grails et le cours d
 <p>Presque deux heures plus tard (la demi-heure la plus longue qu&#8217;on ai connu), nous démarrons un Brainstorming animé avec un objectif simple : qu&#8217;allons nous construire pendant le week-end?</p>
 
 <p>Rapidement, quelques sujets intéressants font surface, souvent liés à l&#8217;activité des User Groups autour de Sophia-Antipolis :</p>
+
+<p><a href="http://photos.dhar.fr/p/k8/album-2"><img class="left" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/35f68b-C28C7051-09CB-46B5-9D8C-BB48B373EF4D_960x180.jpg"></a></p>
 
 <ul>
 <li>Manque d&#8217;activité des communautés : Il y a bien quelques user groups plus ou moins actifs mais la plupart restent globalement peu connus.</li>
@@ -111,7 +116,8 @@ Pour pouvoir obtenir un résultat concret en un week-end, nous décidons de nous
 <pre><code>| Packaging Grails application
 </code></pre>
 
-<p>Après avoir déterminé notre objectif pour le week-end, nous n&#8217;avions plus qu&#8217;à nous mettre au travail.
+<p><a href="http://photos.dhar.fr/p/kc/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/495cd2-54FB5929-52D6-4A99-8A37-D7DC18031AC9_960x180.jpg"></a>
+Après avoir déterminé notre objectif pour le week-end, nous n&#8217;avions plus qu&#8217;à nous mettre au travail.
 Raconter les deux jours suivants en détail serait sans doute trop long et assez peu constructif.</p>
 
 <p>L&#8217;important à retenir est sans doute que les contributions ont été nombreuses : écrire du code, décortiquer OAuth, dessiner des croquis d&#8217;IHM, mettre en place l&#8217;intégration continue (<em>continious outage?</em>), travailler le design de site, aider les débutants ou simplement mettre l&#8217;ambiance et remotiver les troupes; chacun a contribué au projet selon ses compétences et sa forme du moment.</p>
