@@ -10,6 +10,7 @@ _This post is about the Riviera Coding Week-end, a geek event that took place in
 As this post is closely related to a French event, I think for once, it's more appropriate to write in French, even if I usually blog in English.
 If you're anyway interested, I'm [Google translate](http://translate.google.com/translate?hl=en&sl=fr&tl=en&u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F) or any other translation tool can fit your needs..._
 
+[{% img right http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/5d466e-EB855D13-DD73-423D-ACF1-51A94E35A82A_960x180.jpg %}](http://photos.dhar.fr/p/ke/album-2)
 Du 10 au 12 Août dernier, j'ai participé au premier _Riviera Coding Week-end_, organisé par les membres du [RivieraGUG](http://www.meetup.com/Riviera-Groovy-Grails-User-Group/) avec la participation du [JSSophia](http://groups.google.com/group/jssophia) dont je fais partie.
 À ma connaissance, c'est le premier événement du genre qui ait lieu sur la côte d'azur.
 C'est en tout cas le premier auquel j'ai eu l'occasion de participer. 
@@ -22,6 +23,7 @@ Après ces 48 heures passées à construire, échanger, mais surtout coder, un p
 D'abord initié par le _[Groovy & Grails User Group](http://www.meetup.com/Riviera-Groovy-Grails-User-Group/)_ , l'événement avait pour objectif de construire un site dédié pour le groupe.
 Par la suite, alors que certains membres du _[Javascript User Group](http://groups.google.com/group/jssophia)_ ont aussi souhaité participer au week-end, la thématique de l'événement a un peu changée, pour s'axer d'avantage sur la collaboration entre les communautés locales.
 
+[{% img left http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/3eebc3-26D8653A-2BBB-4830-9F00-A240FF4514C6_960x180.jpg %}](http://photos.dhar.fr/p/kd/album-2)
 Nous y voilà, c'est Vendredi soir, il est un peu plus de 19h30 lorsque j'arrive aux [Satellites](http://www.satellites-teletravail.com/) (qui nous ont hébergés gracieusement tout le week-end).
 La plupart des participants sont déjà arrivés.
 Il y a quelques visages bien connus, des collègues de travail, avec qui je passe déjà mes journées en semaines; certains sont simplement familiers, croisés lors des précédentes réunions du JSSophia ou lors de conférences qui ont eu lieu à Sophia-Antipolis quelques mois plus tôt; puis d'autres, enfin, que je rencontre pour la première fois. 
@@ -43,6 +45,7 @@ Certains configurent le Raspberry Pi qui hébergera un [EtherPad](http://fr.wiki
 
     | Configuring classpath
 
+[{% img right http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/2a719f-04CDD1E8-97CF-4210-9593-14718F7D2CBC_960x180.jpg %}](http://photos.dhar.fr/p/k2/album-2)
 Après avoir dévoré quelques pizzas, on attaque les choses sérieuses avec un _Crash Course Grails_ d'une petite demi-heure présenté par [Bertrand Goetzmann](https://twitter.com/bgoetzmann), bien utile pour ceux qui n'auraient jamais eu l'occasion d'utiliser le Framework. 
 Là encore, l'ambiance est bien loin d'un cours magistral.
 La plupart des participants connaissent bien les rouages de Grails et le cours de Bertrand devient un bon prétexte pour partager les expériences de chacun et échanger les points de vue.
@@ -50,10 +53,11 @@ La plupart des participants connaissent bien les rouages de Grails et le cours d
 ## Brainstorming
 
     | Environment set to development
-
 Presque deux heures plus tard (la demi-heure la plus longue qu'on ai connu), nous démarrons un Brainstorming animé avec un objectif simple : qu'allons nous construire pendant le week-end?
 
 Rapidement, quelques sujets intéressants font surface, souvent liés à l'activité des User Groups autour de Sophia-Antipolis :
+
+[{% img left http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/35f68b-C28C7051-09CB-46B5-9D8C-BB48B373EF4D_960x180.jpg %}](http://photos.dhar.fr/p/k8/album-2)
 
  - Manque d'activité des communautés : Il y a bien quelques user groups plus ou moins actifs mais la plupart restent globalement peu connus.
  - Manque de relations et de collaboration entre ces groupes.
@@ -85,6 +89,7 @@ Pour pouvoir obtenir un résultat concret en un week-end, nous décidons de nous
 
     | Packaging Grails application
 
+[{% img right http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/495cd2-54FB5929-52D6-4A99-8A37-D7DC18031AC9_960x180.jpg %}](http://photos.dhar.fr/p/kc/album-2)
 Après avoir déterminé notre objectif pour le week-end, nous n'avions plus qu'à nous mettre au travail.
 Raconter les deux jours suivants en détail serait sans doute trop long et assez peu constructif.
 
