@@ -8,7 +8,7 @@ categories:
 
 _This post is about the Riviera Coding Week-end, a geek event that took place in Nice (France) from 10 to 12 August 2012.
 As this post is closely related to a French event, I think for once, it's more appropriate to write in French, even if I usually blog in English.
-If you're anyway interested, I'm [Google translate](http://translate.google.com/translate?hl=en&sl=fr&tl=en&u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F) or any other translation tool can fit your needs..._
+If you're anyway interested, I'm sure [Google translate](http://translate.google.com/translate?hl=en&sl=fr&tl=en&u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F) or any other translation tool can fit your needs..._
 
 [{% img right http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/5d466e-EB855D13-DD73-423D-ACF1-51A94E35A82A_960x180.jpg %}](http://photos.dhar.fr/p/ke/album-2)
 Du 10 au 12 Août dernier, j'ai participé au premier _Riviera Coding Week-end_, organisé par les membres du [RivieraGUG](http://www.meetup.com/Riviera-Groovy-Grails-User-Group/) avec la participation du [JSSophia](http://groups.google.com/group/jssophia) dont je fais partie.
