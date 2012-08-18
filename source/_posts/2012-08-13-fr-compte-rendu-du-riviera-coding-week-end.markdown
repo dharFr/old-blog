@@ -134,7 +134,7 @@ Et merci enfin à tous ceux qui étaient présent et qui se sont impliqués au c
  - Le [Code Source](https://github.com/rivieragug/website) sur Github
  - [Quelques Photos](http://photos.dhar.fr/photos/album-2/list) 
  - Les participants sont aussi [sur Twitter](https://twitter.com/_dhar/rivieracwe-2012)
- - _Update: Les [slides](http://www.odelia-technologies.com/Grails/Grails.impress.html) de Bertrand sont maintenant disponibles _
+ - _Update_: Les [slides](http://www.odelia-technologies.com/Grails/Grails.impress.html) de Bertrand sont maintenant disponibles
 
 
 
