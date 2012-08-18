@@ -20,6 +20,9 @@ subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
+# humans.txt file can list your location if specified
+# it also uses 'author', 'email', 'twitter_user' and  'github_user'
+location: Nice, France
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -94,7 +97,7 @@ disqus_short_name: dhar
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id: UA-1823374-1
+#google_analytics_tracking_id: UA-1823374-1
 
 # Facebook Like
 facebook_like: false
