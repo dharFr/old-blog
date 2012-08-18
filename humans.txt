@@ -1,0 +1,10 @@
+/* TEAM */
+Owner: Olivier Audard.
+Twitter: @_dhar
+Github: dharFr
+Location: Nice, France
+
+
+/* SITE */
+Last update: 18 August 2012
+Software: Octopress, Jekyll
