@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's Blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-08-18T23:44:36+02:00</updated>
+  <updated>2012-08-27T22:43:21+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Grunt brings automation to the front-end side]]></title>
+    <link href="http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/"/>
+    <updated>2012-08-26T16:26:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side</id>
+    <content type="html"><![CDATA[<p>Over the past few weeks, I realized that I added <a href="http://www.gruntjs.com" title="Grunt">grunt</a> in every little side project I worked on.
+Thinking about it, I&#8217;m not sure if I can even imagine to start a project without this tool.</p>
+
+<p>You probably already heard about <strong>grunt</strong>, don&#8217;t you? In case you don&#8217;t (seriously?), it&#8217;s been created by <a href="http://benalman.com/">Ben Alman (aka. cowboy)</a>.
+I guess the best description is the one from the official home page:</p>
+
+<blockquote><p>Grunt is a task-based command line build tool for JavaScript projects.</p></blockquote>
+
+<p>OK, looks nice.
+But what&#8217;s new?
+I already have tools to <em>lint</em> or <em>minify</em> my Javascript.
+I already use <em>qunit</em> to unit test my code.
+And so on&#8230; Why should I use <em>grunt</em> instead of all these tools?</p>
+
+<p>Here is why:</p>
+
+<ol>
+<li>Because you probably don&#8217;t really use all these tools.
+I mean, for sure you know about them, and you already give them a try; but most people I worked with (including me) just don&#8217;t use them on real projects, in their day to day work, because bringing the pieces together is not that easy.</li>
+<li><em>Grunt</em> also uses the exact same tools you already know, or in the worst case, it can learn to use them.
+It doesn&#8217;t reinvent anything but allows you to organize your workflow in an uniform, yet flexible, way.</li>
+</ol>
+
+
+<h2>Do we need such a tool?</h2>
+
+<p>As a front-end developer, automation wasn&#8217;t really part of my workflow.
+My first job was in some king of web agency were every desktop machine ran on Windows XP, and our main development tools were Dreamweaver MX (I guess I&#8217;m getting old&#8230;) and Filezilla. <!-- more -->
+At the time we would never have considered automation, unit testing or continuous integration.</p>
+
+<p>Then I left that company and found a real engineer job.
+But still, like many other developers, I relied on some kind of heavy IDE where every <em>low level</em> interaction with the OS tend to be hidden.
+And I never really felt a need to dig into this.
+Until recently, I was convinced <em>automation</em> was only a concern for back-end or system engineers.</p>
+
+<h2>Everything you need is a terminal!</h2>
+
+<p>On the other hand, a lot of <em>front-end</em> tools came up recently, especially since <em>Node.js</em> brought Javascript to the Terminal but not only.
+<strong>Uglify-js</strong>, <strong>JSLint</strong>, <strong>Qunit</strong>, <strong>Jasmine</strong>, <strong>CoffeeScript</strong>, <strong>SASS</strong>, <strong>LESS</strong> are only the most famous but there are many others.
+These tools are changing our approach to front-end technologies, they make us more productive, adding value to our jobs.</p>
+
+<p>But those tools remains <em>command line tools</em>.
+Even if each one of them is pretty simple to setup and use, combining all of these to make something adapted to a particular project can quickly become a nightmare for someone who&#8217;s not familiar with his Terminal.
+From my experience, a lot of front-end developers, especially younger ones, are not familiar with Bash scripting (<em>and sometimes are afraid of it</em>). For sure, that&#8217;s probably a bad approach, but that&#8217;s how I felt not that long ago and I&#8217;m pretty sure I&#8217;m not the only one in that case.</p>
+
+<p>Grails developers write their scripts in Groovy.
+Rails developers have Rake files.
+<strong>We know how to write Javascript!</strong> That&#8217;s where we are comfortable and productive.
+We don&#8217;t want to get a headache by writing some messy <em>bash</em> script <sup>[<a href="#note1">1</a>]</sup>.</p>
+
+<h2>Here comes grunt</h2>
+
+<p>That&#8217;s what <em>grunt</em> does. It allows you to define a bunch of tasks, in a <strong>consistent way</strong>, by writing Javascript.
+<em>Consistent</em> is an important word here because you could probably achieve the same goal directly with <em>Node.js</em> but <em>grunt</em> gives you a simple way to write and organize your tasks.
+The most common ones (<em>lint</em>, <em>concat</em>, <em>minify</em>, <em>test</em>, etc.) are already included <a href="https://github.com/cowboy/grunt#built-in-tasks" title="grunt built-in Tasks">in the package</a> so you don&#8217;t have to think about how to deal with them.</p>
+
+<p>It also came with a really simple <a href="https://github.com/cowboy/grunt/blob/master/docs/getting_started.md#loading-grunt-plugins-or-tasks-folders" title="Loading grunt plugins or tasks folders">plugin system</a> based on <a href="https://npmjs.org" title="Node Packaged Modules">npm</a>.
+If you find yourself needing to do something not included as a build-in task, try to search <em>npm</em> to see if somebody else has not already released a plugin that fits your needs.
+Otherwise, you can still write your own plugin and publish it to <em>npm</em>.
+The <a href="https://github.com/cowboy/grunt/blob/master/docs/api.md" title="The grunt API">grunt API</a> allows you to do pretty much everything you could need.
+And thanks to the built-in project scaffolding, it only takes a few minutes to change your spaghetti code into a well written plugin. Once here, publishing to npm is just a command line away so do not hesitate.</p>
+
+<h2>What&#8217;s next?</h2>
+
+<p>I hope you will give a try to <em>grunt</em>. Even more because something called <a href="http://yeoman.io/">Yeoman</a> is getting close to the public release. I asked for a beta invite on twitter but for now, I didn&#8217;t have a chance to try it yet.
+It seems that it can do many more and as it&#8217;s based on <em>grunt</em>, among many others, it&#8217;s probably a good idea to get familiar with that one as soon as possible.</p>
+
+<p><a id="note1"></a>
+<small>[1]: I actually did a lot of bash scripting recently and, believe it or not, I liked it. I wouldn&#8217;t have said that a few years ago. It&#8217;s a powerful programming tool and every developer should be comfortable with it. You&#8217;re not? Learn some basics. ;)</small></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Compte-rendu du Riviera Coding Week-end]]></title>

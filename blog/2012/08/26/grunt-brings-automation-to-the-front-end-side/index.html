@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Queued ajax requests with jQuery and Coffescript - dhar's Blog</title>
+  <title>Grunt brings automation to the front-end side - dhar's Blog</title>
   <meta name="author" content="Olivier Audard">
 
   
-  <meta name="description" content="I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217; &hellip;">
+  <meta name="description" content="Over the past few weeks, I realized that I added grunt in every little side project I worked on.
+Thinking about it, I&#8217;m not sure if I can even &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ Using jQuery&#8217; &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">
+  <link rel="canonical" href="http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">
   <link rel="author" href="/humans.txt" />
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -81,7 +81,7 @@ Using jQuery&#8217; &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Queued Ajax Requests With jQuery and Coffescript</h1>
+      <h1 class="entry-title">Grunt Brings Automation to the Front-end Side</h1>
     
     
       <p class="meta">
@@ -97,73 +97,82 @@ Using jQuery&#8217; &hellip;">
   
 
 
-<time datetime="2012-03-31T21:46:00+02:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+<time datetime="2012-08-26T16:26:00+02:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
+<div class="entry-content"><p>Over the past few weeks, I realized that I added <a href="http://www.gruntjs.com" title="Grunt">grunt</a> in every little side project I worked on.
+Thinking about it, I&#8217;m not sure if I can even imagine to start a project without this tool.</p>
 
-<!--more-->
+<p>You probably already heard about <strong>grunt</strong>, don&#8217;t you? In case you don&#8217;t (seriously?), it&#8217;s been created by <a href="http://benalman.com/">Ben Alman (aka. cowboy)</a>.
+I guess the best description is the one from the official home page:</p>
 
+<blockquote><p>Grunt is a task-based command line build tool for JavaScript projects.</p></blockquote>
 
-<p>You probably already know that all jQuery&#8217;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&#8217;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries&#8217; progress.</p>
+<p>OK, looks nice.
+But what&#8217;s new?
+I already have tools to <em>lint</em> or <em>minify</em> my Javascript.
+I already use <em>qunit</em> to unit test my code.
+And so on&#8230; Why should I use <em>grunt</em> instead of all these tools?</p>
 
-<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&#8217;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
+<p>Here is why:</p>
 
-<p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
-
-<div><script src='https://gist.github.com/2244946.js?file=jquery.queue.coffee'></script>
-<noscript><pre><code>###*
- * jQuery queue plugin v0.1
- * ==========================
- *
- * Used to queue $.Deferred's Promise objects
- * author @_dhar
-###
-
-(($) -&gt;
-
-  class $.Queueable
-
-    constructor: (@builder, @args, @validator = -&gt; yes) -&gt;
-
-    promise: -&gt; @builder(@args...).promise()
-    expose:  -&gt; @args
-    isValid: -&gt; @validator(@args...)
-
-  $.queuedWhen = (queueables) -&gt;
-    
-    d = $.Deferred();
-
-    prev = null
-    deferredObjs = ((
-      do (q) -&gt;
-        if not q instanceof $.Queueable 
-          d.reject &quot;#{q} is not a $.Queueable object&quot;, q
-        else
-          prev = if prev then prev.pipe -&gt; q.promise() else q.promise()
-          prev.done -&gt; d.notify q.expose()
-          prev.fail -&gt; d.reject q.expose()
-    ) for q in queueables when q.isValid() )
-
-    $.when(deferredObjs...).then -&gt; d.resolve()
-
-    return d.promise()
-)(jQuery)</code></pre></noscript></div>
+<ol>
+<li>Because you probably don&#8217;t really use all these tools.
+I mean, for sure you know about them, and you already give them a try; but most people I worked with (including me) just don&#8217;t use them on real projects, in their day to day work, because bringing the pieces together is not that easy.</li>
+<li><em>Grunt</em> also uses the exact same tools you already know, or in the worst case, it can learn to use them.
+It doesn&#8217;t reinvent anything but allows you to organize your workflow in an uniform, yet flexible, way.</li>
+</ol>
 
 
-<h3>References</h3>
+<h2>Do we need such a tool?</h2>
 
-<ul>
-<li>jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
-<li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
-<li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
-</ul>
+<p>As a front-end developer, automation wasn&#8217;t really part of my workflow.
+My first job was in some king of web agency were every desktop machine ran on Windows XP, and our main development tools were Dreamweaver MX (I guess I&#8217;m getting old&#8230;) and Filezilla. <!-- more -->
+At the time we would never have considered automation, unit testing or continuous integration.</p>
 
+<p>Then I left that company and found a real engineer job.
+But still, like many other developers, I relied on some kind of heavy IDE where every <em>low level</em> interaction with the OS tend to be hidden.
+And I never really felt a need to dig into this.
+Until recently, I was convinced <em>automation</em> was only a concern for back-end or system engineers.</p>
+
+<h2>Everything you need is a terminal!</h2>
+
+<p>On the other hand, a lot of <em>front-end</em> tools came up recently, especially since <em>Node.js</em> brought Javascript to the Terminal but not only.
+<strong>Uglify-js</strong>, <strong>JSLint</strong>, <strong>Qunit</strong>, <strong>Jasmine</strong>, <strong>CoffeeScript</strong>, <strong>SASS</strong>, <strong>LESS</strong> are only the most famous but there are many others.
+These tools are changing our approach to front-end technologies, they make us more productive, adding value to our jobs.</p>
+
+<p>But those tools remains <em>command line tools</em>.
+Even if each one of them is pretty simple to setup and use, combining all of these to make something adapted to a particular project can quickly become a nightmare for someone who&#8217;s not familiar with his Terminal.
+From my experience, a lot of front-end developers, especially younger ones, are not familiar with Bash scripting (<em>and sometimes are afraid of it</em>). For sure, that&#8217;s probably a bad approach, but that&#8217;s how I felt not that long ago and I&#8217;m pretty sure I&#8217;m not the only one in that case.</p>
+
+<p>Grails developers write their scripts in Groovy.
+Rails developers have Rake files.
+<strong>We know how to write Javascript!</strong> That&#8217;s where we are comfortable and productive.
+We don&#8217;t want to get a headache by writing some messy <em>bash</em> script <sup>[<a href="#note1">1</a>]</sup>.</p>
+
+<h2>Here comes grunt</h2>
+
+<p>That&#8217;s what <em>grunt</em> does. It allows you to define a bunch of tasks, in a <strong>consistent way</strong>, by writing Javascript.
+<em>Consistent</em> is an important word here because you could probably achieve the same goal directly with <em>Node.js</em> but <em>grunt</em> gives you a simple way to write and organize your tasks.
+The most common ones (<em>lint</em>, <em>concat</em>, <em>minify</em>, <em>test</em>, etc.) are already included <a href="https://github.com/cowboy/grunt#built-in-tasks" title="grunt built-in Tasks">in the package</a> so you don&#8217;t have to think about how to deal with them.</p>
+
+<p>It also came with a really simple <a href="https://github.com/cowboy/grunt/blob/master/docs/getting_started.md#loading-grunt-plugins-or-tasks-folders" title="Loading grunt plugins or tasks folders">plugin system</a> based on <a href="https://npmjs.org" title="Node Packaged Modules">npm</a>.
+If you find yourself needing to do something not included as a build-in task, try to search <em>npm</em> to see if somebody else has not already released a plugin that fits your needs.
+Otherwise, you can still write your own plugin and publish it to <em>npm</em>.
+The <a href="https://github.com/cowboy/grunt/blob/master/docs/api.md" title="The grunt API">grunt API</a> allows you to do pretty much everything you could need.
+And thanks to the built-in project scaffolding, it only takes a few minutes to change your spaghetti code into a well written plugin. Once here, publishing to npm is just a command line away so do not hesitate.</p>
+
+<h2>What&#8217;s next?</h2>
+
+<p>I hope you will give a try to <em>grunt</em>. Even more because something called <a href="http://yeoman.io/">Yeoman</a> is getting close to the public release. I asked for a beta invite on twitter but for now, I didn&#8217;t have a chance to try it yet.
+It seems that it can do many more and as it&#8217;s based on <em>grunt</em>, among many others, it&#8217;s probably a good idea to get familiar with that one as soon as possible.</p>
+
+<p><a id="note1"></a>
+<small>[1]: I actually did a lot of bash scripting recently and, believe it or not, I liked it. I wouldn&#8217;t have said that a few years ago. It&#8217;s a powerful programming tool and every developer should be comfortable with it. You&#8217;re not? Learn some basics. ;)</small></p>
 </div>
 
 
@@ -186,12 +195,12 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
   
 
 
-<time datetime="2012-03-31T21:46:00+02:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+<time datetime="2012-08-26T16:26:00+02:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/coffeescript/'>Coffeescript</a>, <a class='category' href='/blog/categories/deferred-objects/'>Deferred objects</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/jquery-plugin/'>jQuery plugin</a>
+    <a class='category' href='/blog/categories/automation/'>Automation</a>, <a class='category' href='/blog/categories/grunt-js/'>grunt.js</a>, <a class='category' href='/blog/categories/tools/'>tools</a>
   
 </span>
 
@@ -200,7 +209,7 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" >Tweet</a>
   
   
   
@@ -209,10 +218,8 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/" title="Previous Post: File Upload Form - Part 1: Feature Detection">&laquo; File Upload Form - Part 1: Feature Detection</a>
+        <a class="basic-alignment left" href="/blog/2012/08/13/fr-compte-rendu-du-riviera-coding-week-end/" title="Previous Post: Compte-rendu du Riviera Coding Week-end">&laquo; Compte-rendu du Riviera Coding Week-end</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/" title="Next Post: File Upload Form - Part 2: Loosely Coupled Modules">File Upload Form - Part 2: Loosely Coupled Modules &raquo;</a>
       
     </p>
   </footer>
@@ -366,8 +373,8 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/';
-        var disqus_url = 'http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/';
+        var disqus_identifier = 'http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/';
+        var disqus_url = 'http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/';
         var disqus_script = 'embed.js';
       
     (function () {
