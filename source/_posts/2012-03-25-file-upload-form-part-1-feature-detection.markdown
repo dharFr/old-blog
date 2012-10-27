@@ -41,7 +41,7 @@ The talk was in French so the slides are also written in French, even if it uses
 	</style>
 	<div class="keep-aspect-ratio">
 	<div><img src="/assets/dhar/aspect-ratio-4-3.png" /><div>
-	<iframe src="/assets/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
+	<iframe src="/assets/slides/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
 	</div></div><div class="clearfix"></div>
 	</div>
 </div>
