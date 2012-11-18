@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's Blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-11-18T17:53:25+01:00</updated>
+  <updated>2012-11-18T17:54:33+01:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -12,6 +12,466 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A quick talk about Grunt]]></title>
+    <link href="http://www.dhar.fr/blog/2012/10/28/a-quick-talk-about-grunt/"/>
+    <updated>2012-10-28T00:24:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/10/28/a-quick-talk-about-grunt</id>
+    <content type="html"><![CDATA[<p>A few weeks ago, a gave a quick talk about <a href="http://www.gruntjs.com" title="Grunt homepage">Grunt</a> at <a href="http://www.twitter.com/jssophia" title="JS Sophia-Antipolis">@JSSophia</a>, our local Javascript User Group.
+During this talk, my purpose was to quickly present the tool and show some example use cases.
+I must confess I wasn&#8217;t as prepared as I would have been, so my talk may have been confused or unclear from time to time.
+If you attended the event, I hope this post will give you more details.
+If not, it doesn&#8217;t matter, I&#8217;m still happy to share my thoughts about this amazing tool.</p>
+
+<p>You&#8217;ll find the slides bellow.
+The first part mostly present <em>Grunt</em> and why I think it&#8217;s a game-changer for front-end developers. As I already wrote about this in my <a href="http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
+In the second part, I focused on showing a few examples use cases and concrete examples.
+That&#8217;s what I&#8217;m going to detail in this post.</p>
+
+<div class="dhar-style-embedder">
+  <style>
+    .clearfix { clear:both; }
+    div.keep-aspect-ratio { max-width:600px;margin:0 auto; }
+    div.keep-aspect-ratio > div { border:0;padding:0;margin:0;position:relative; }
+    div.keep-aspect-ratio > div > img { border:0;padding:0;margin:0;z-index:-1000;position:relative;top:0;bottom:0;left:0;width:100%;display:block; }
+    div.keep-aspect-ratio > div > div { border:0;padding:0;margin:0;position:absolute;top:0;bottom:0;left:0;width:100%;overflow:auto;}
+  </style>
+  <div class="keep-aspect-ratio">
+  <div><img src="http://www.dhar.fr/assets/dhar/aspect-ratio-4-3.png" /><div>
+  <iframe src="http://www.dhar.fr/assets/slides/embedder.html#grunt/template.html" frameborder="0" width="100%" height="95%"></iframe>
+  </div></div><div class="clearfix"></div>
+  </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h2>Automating your web application</h2>
+
+<p>Bringing some automation to your web-application is probably the first thing you&#8217;ll try with Grunt.
+After all, that&#8217;s its first purpose, why it was designed for.</p>
+
+<p>Because nothing worth an example, I reused an old project to illustrate this case.
+It&#8217;s a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
+The full project is available <a href="https://github.com/dharFr/gallery" title="Gallery App: 'master' branch">on Github</a>.
+The code I used as an example lives in the <em>master</em> branch.
+The original code, as it was before adding Grunt, lives in the <a href="https://github.com/dharFr/gallery/tree/before-grunt" title="Gallery App: 'before-grunt' branch">before-grunt</a> branch.</p>
+
+<h3>Adding Grunt to an existing project</h3>
+
+<p>Assuming Grunt is already <a href="https://github.com/gruntjs/grunt#installing-grunt" title="Installing Grunt">installed</a> on your system, adding Grunt to your project is as simple as typing the following in your terminal:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt; <span class="nb">cd</span> /path/to/your/project/
+</span><span class='line'>&gt; grunt init:gruntfile
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project&#8217;s folder.
+The basic structure of a gruntfile is looks like this:</p>
+
+<figure class='code'><figcaption><span>grunt file basic structure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/*global module:false*/</span>
+</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Project configuration.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>    <span class="nx">taskName</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// task properties</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We are working with a web-application, so most of the tasks we need are already included in grunt.
+What do we basically need ?</p>
+
+<ul>
+<li><em>lint</em> javascript files</li>
+<li>run <em>qunit</em> unit tests</li>
+<li><em>concat</em> and <em>minify</em> javascript files</li>
+</ul>
+
+
+<p>In addition, it would be interesting to:</p>
+
+<ul>
+<li>run <em>qunit</em> tests again on the minified <code>js</code> files to check if anything is broken in the process</li>
+<li><em>copy</em> assets (<code>css</code>, pictures, etc.) to a build folder in order to have a standalone built version of the application</li>
+<li>create an alternative version of the <code>html</code> files containing minified <code>js</code> files rather than development files</li>
+</ul>
+
+
+<h3>Setting up your tasks</h3>
+
+<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won&#8217;t be too difficult to define these for our project.
+If you need another task, start by searching if an existing <code>grunt-plugin</code> have already been created by the community.
+You can search for an existing plugin on <a href="http://www.gruntjs.com" title="Grunt homepage">grunt homepage</a> or directly with npm:</p>
+
+<figure class='code'><figcaption><span>Searching for grunt plugins on NPM</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Search for a grunt plugin to do some magic:</span>
+</span><span class='line'>&gt; npm search gruntplugin <span class="s1">&#39;do magic&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Otherwise, you can define your own task using the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API</a>, but unless you need something very specific, I doubt you had to go there.
+Seriously, there are already 190 existing plugins at the time I write these lines.</p>
+
+<p>Once you&#8217;ve found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
+In our case, we&#8217;ll need two external tasks:</p>
+
+<figure class='code'><figcaption><span>Loading external tasks </span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js#L125-126'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="c1">// ...</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-copy&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-targethtml&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="c1">// ...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>From there, we just need to configure our tasks.
+I&#8217;m not going to detail every single line in the resulting <code>gruntfile</code> bellow.
+Basically, it allows us to build (lint, concat and minify) javascript files, copy any other files to a <code>dist</code> folder, and run the tests on both <code>dev</code> and <code>dist</code> files.
+The syntax is quite self-explaining and you can always refer to the <a href="https://github.com/gruntjs/grunt/blob/master/docs/toc.md" title="Grunt Documentation">official documentation</a> is needed.</p>
+
+<figure class='code'><figcaption><span>Extract from Gallery Gruntfile </span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/*global module:false*/</span>
+</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Project configuration.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// read some data from package.json file</span>
+</span><span class='line'>    <span class="nx">pkg</span><span class="o">:</span> <span class="s1">&#39;&lt;json:package.json&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="c1">// Defines project&#39;s meta data</span>
+</span><span class='line'>    <span class="c1">// the banner is used by minification task and </span>
+</span><span class='line'>    <span class="c1">// will be at the beginning of each processed file</span>
+</span><span class='line'>    <span class="nx">meta</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">banner</span><span class="o">:</span> <span class="s1">&#39;/*! &lt;%= pkg.title || pkg.name %&gt; - v&lt;%= pkg.version %&gt; - &#39;</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39;&lt;%= grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt;\n&#39;</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39;&lt;%= pkg.homepage ? &quot;* &quot; + pkg.homepage + &quot;\n&quot; : &quot;&quot; %&gt;&#39;</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39;* Copyright (c) &lt;%= grunt.template.today(&quot;yyyy&quot;) %&gt; &lt;%= pkg.author.name %&gt;;&#39;</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39; Licensed &lt;%= _.pluck(pkg.licenses, &quot;type&quot;).join(&quot;, &quot;) %&gt; */&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// Defines a custom config property.</span>
+</span><span class='line'>    <span class="c1">// This property &#39;&lt;%= build.dest %&gt;&#39;</span>
+</span><span class='line'>    <span class="nx">build</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;dist&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// lint task</span>
+</span><span class='line'>    <span class="c1">// Defines witch files to lint</span>
+</span><span class='line'>    <span class="nx">lint</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">files</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;grunt.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/**/*.js&#39;</span><span class="p">,</span> <span class="s1">&#39;tests/js/**/*.js&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// qunit multi-task</span>
+</span><span class='line'>    <span class="c1">// Defines 2 different targets</span>
+</span><span class='line'>    <span class="c1">// (dev, dist) for running qunit.</span>
+</span><span class='line'>    <span class="c1">// Each target defines a list of test files</span>
+</span><span class='line'>    <span class="nx">qunit</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">dev</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;tests/index.html&#39;</span><span class="p">],</span>
+</span><span class='line'>      <span class="nx">dist</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;%= build.dest %&gt;/tests/index.html&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// concat multi-task</span>
+</span><span class='line'>    <span class="c1">// Defines 3 different targets </span>
+</span><span class='line'>    <span class="c1">// (libs, tests, dist) for concatenation.</span>
+</span><span class='line'>    <span class="c1">// Each target defines a list of files to concatenate</span>
+</span><span class='line'>    <span class="c1">// and a destination file to write the output</span>
+</span><span class='line'>    <span class="nx">concat</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">libs</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;js/libs/json2.js&quot;</span><span class="p">,</span> <span class="s2">&quot;js/libs/jquery-1.8.2.min.js&quot;</span><span class="p">,</span> <span class="s2">&quot;js/libs/mustache-0.7.js&quot;</span><span class="p">,</span> <span class="s2">&quot;js/libs/underscore-1.4.1.min.js&quot;</span><span class="p">,</span> <span class="s2">&quot;js/libs/backbone-0.9.2.min.js&quot;</span> <span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/js/libs/&lt;%= pkg.name %&gt;-libs.&lt;%= pkg.version %&gt;.js&#39;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">tests</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>          <span class="s1">&#39;&lt;banner:meta.banner&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/config.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/models/gallery.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/header.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/main-image.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/thumbnails.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/gallery.js&#39;</span> <span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/tests/js/&lt;%= pkg.name %&gt;-tests.&lt;%= pkg.version %&gt;.js&#39;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>          <span class="s1">&#39;&lt;banner:meta.banner&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/config.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/models/gallery.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/header.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/main-image.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/thumbnails.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/views/gallery.js&#39;</span><span class="p">,</span> <span class="s1">&#39;js/gallery/app.js&#39;</span> <span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/js/&lt;%= pkg.name %&gt;-app.&lt;%= pkg.version %&gt;.js&#39;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// min multi-task</span>
+</span><span class='line'>    <span class="c1">// Defines 3 different targets </span>
+</span><span class='line'>    <span class="c1">// (libs, tests, dist) for minification.</span>
+</span><span class='line'>    <span class="c1">// Each target defines a list of files to minify</span>
+</span><span class='line'>    <span class="c1">// and a destination file to write the output</span>
+</span><span class='line'>    <span class="nx">min</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">libs</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;config:concat.libs.dest&gt;&#39;</span><span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/js/libs/&lt;%= pkg.name %&gt;-libs.&lt;%= pkg.version %&gt;.min.js&#39;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">tests</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;banner:meta.banner&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;config:concat.tests.dest&gt;&#39;</span><span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/tests/js/&lt;%= pkg.name %&gt;-tests.&lt;%= pkg.version %&gt;.min.js&#39;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;banner:meta.banner&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;config:concat.dist.dest&gt;&#39;</span><span class="p">],</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/js/&lt;%= pkg.name %&gt;-app.&lt;%= pkg.version %&gt;.min.js&#39;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// targethtml multi-task</span>
+</span><span class='line'>    <span class="c1">// Defines 2 different targets (release, tests) </span>
+</span><span class='line'>    <span class="c1">// Each target defines a source file to process</span>
+</span><span class='line'>    <span class="c1">// and a destination file to write the output</span>
+</span><span class='line'>    <span class="nx">targethtml</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">release</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;index.html&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/index.html&#39;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">tests</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;tests/index.html&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;&lt;%= build.dest %&gt;/tests/index.html&#39;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// copy multi-task</span>
+</span><span class='line'>    <span class="c1">// Defines 1 single target (dist) </span>
+</span><span class='line'>    <span class="c1">// copy files from development path </span>
+</span><span class='line'>    <span class="c1">// to &#39;build.dest&#39; folder</span>
+</span><span class='line'>    <span class="nx">copy</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">dist</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="s2">&quot;&lt;%= build.dest %&gt;/css/&quot;</span><span class="o">:</span> <span class="s2">&quot;css/**&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s2">&quot;&lt;%= build.dest %&gt;/img/gallery/&quot;</span><span class="o">:</span> <span class="s2">&quot;img/gallery/**&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s2">&quot;&lt;%= build.dest %&gt;/js/libs/bootstrap/&quot;</span><span class="o">:</span> <span class="s2">&quot;js/libs/bootstrap/**&quot;</span><span class="p">,</span>
+</span><span class='line'>          <span class="s2">&quot;&lt;%= build.dest %&gt;/tests/&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;tests/js/**&quot;</span><span class="p">,</span> <span class="s2">&quot;tests/libs/**&quot;</span><span class="p">],</span>
+</span><span class='line'>          <span class="s2">&quot;&lt;%= build.dest %&gt;/gallery_data.json&quot;</span><span class="o">:</span> <span class="s2">&quot;gallery_data.json&quot;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// clean task</span>
+</span><span class='line'>    <span class="c1">// remove every file from the defined folders</span>
+</span><span class='line'>    <span class="nx">clean</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;&lt;%= build.dest %&gt;&quot;</span><span class="p">],</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// watch task</span>
+</span><span class='line'>    <span class="c1">// runs the defined tasks every time a watched file is updated</span>
+</span><span class='line'>    <span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">files</span><span class="o">:</span> <span class="s1">&#39;&lt;config:lint.files&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">tasks</span><span class="o">:</span> <span class="s1">&#39;lint qunit:dev&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Load external tasks (grunt plugins)</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-clean&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-copy&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-targethtml&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Register custom tasks (alias tasks)</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="s1">&#39;concat min targethtml copy&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;clean-build&#39;</span><span class="p">,</span> <span class="s1">&#39;clean concat min targethtml copy&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="c1">// Default task.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;lint qunit:dev build qunit:dist&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each task can be run independently by typing <code>grunt taskName</code> in a terminal.
+Additionally, you can run a specific target on every multi-task by typing <code>grunt multiTaskName:targetName</code>.
+The <code>registerTask</code> API allows us to define aliases to run a few tasks with a single command.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># run lint task</span>
+</span><span class='line'>&gt; grunt lint
+</span><span class='line'>
+</span><span class='line'><span class="c"># run concat and minify tasks</span>
+</span><span class='line'>&gt; grunt concat min
+</span><span class='line'>
+</span><span class='line'><span class="c"># run only dev target of qunit task</span>
+</span><span class='line'>&gt; grunt qunit:dev
+</span><span class='line'>
+</span><span class='line'><span class="c"># run &quot;build&quot; alias (ie: &#39;grunt concat min targethtml copy&#39;)</span>
+</span><span class='line'>&gt; grunt build
+</span><span class='line'>
+</span><span class='line'><span class="c"># run default task (ie: &#39;grunt lint qunit:dev build qunit:dist&#39;)</span>
+</span><span class='line'>&gt; grunt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>So what&#8217;s next?</h2>
+
+<p>I hope you already see the kind of benefits you can get by adding Grunt to your web-application projects.</p>
+
+<p>I also encourage you to take a look at the plugin system, which will allow you to create your own tasks.
+The well made <code>gruntplugin</code> init task (<code>grunt init:gruntplugin</code>) will bootstrap everything you need to start your own task and publish it in minutes.
+If you find yourself stucked at some point, the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API documentation</a> is a very good reference.
+You can also check the source code of one of the official plugins on github.</p>
+
+<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you&#8217;re going to try.
+But I&#8217;m convinced you can use it in many other ways.
+If you need some more examples, I invite you to look at my own experiments with Grunt:</p>
+
+<ul>
+<li><a href="https://github.com/dharFr/static-templater" title="Static Templater">static-templater</a>: A grunt-based command line tool to render HMTL and PDF from JSON and HTML templates</li>
+<li><a href="https://github.com/dharFr/grunt-wkhtmltopdf" title="grunt-wkhtmltopdf">grunt-wkhtmltopdf</a>: A simple Grunt multitask that uses wkhtmltopdf to convert HTML files to PDF.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Grunt brings automation to the front-end side]]></title>

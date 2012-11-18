@@ -4,7 +4,7 @@
   <title><![CDATA[Category: grunt.js | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/grunt-js/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-11-18T17:53:25+01:00</updated>
+  <updated>2012-11-18T17:54:33+01:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -12,6 +12,317 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A quick talk about Grunt]]></title>
+    <link href="http://www.dhar.fr/blog/2012/10/28/a-quick-talk-about-grunt/"/>
+    <updated>2012-10-28T00:24:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/10/28/a-quick-talk-about-grunt</id>
+    <content type="html"><![CDATA[<p>A few weeks ago, a gave a quick talk about <a href="http://www.gruntjs.com" title="Grunt homepage">Grunt</a> at <a href="http://www.twitter.com/jssophia" title="JS Sophia-Antipolis">@JSSophia</a>, our local Javascript User Group.
+During this talk, my purpose was to quickly present the tool and show some example use cases.
+I must confess I wasn't as prepared as I would have been, so my talk may have been confused or unclear from time to time.
+If you attended the event, I hope this post will give you more details.
+If not, it doesn't matter, I'm still happy to share my thoughts about this amazing tool.</p>
+
+<p>You'll find the slides bellow.
+The first part mostly present <em>Grunt</em> and why I think it's a game-changer for front-end developers. As I already wrote about this in my <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
+In the second part, I focused on showing a few examples use cases and concrete examples.
+That's what I'm going to detail in this post.</p>
+
+<div class="dhar-style-embedder">
+  <style>
+    .clearfix { clear:both; }
+    div.keep-aspect-ratio { max-width:600px;margin:0 auto; }
+    div.keep-aspect-ratio > div { border:0;padding:0;margin:0;position:relative; }
+    div.keep-aspect-ratio > div > img { border:0;padding:0;margin:0;z-index:-1000;position:relative;top:0;bottom:0;left:0;width:100%;display:block; }
+    div.keep-aspect-ratio > div > div { border:0;padding:0;margin:0;position:absolute;top:0;bottom:0;left:0;width:100%;overflow:auto;}
+  </style>
+  <div class="keep-aspect-ratio">
+  <div><img src="http://www.dhar.fr/assets/dhar/aspect-ratio-4-3.png" /><div>
+  <iframe src="http://www.dhar.fr/assets/slides/embedder.html#grunt/template.html" frameborder="0" width="100%" height="95%"></iframe>
+  </div></div><div class="clearfix"></div>
+  </div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<h2>Automating your web application</h2>
+
+<p>Bringing some automation to your web-application is probably the first thing you'll try with Grunt.
+After all, that's its first purpose, why it was designed for.</p>
+
+<p>Because nothing worth an example, I reused an old project to illustrate this case.
+It's a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
+The full project is available <a href="https://github.com/dharFr/gallery" title="Gallery App: 'master' branch">on Github</a>.
+The code I used as an example lives in the <em>master</em> branch.
+The original code, as it was before adding Grunt, lives in the <a href="https://github.com/dharFr/gallery/tree/before-grunt" title="Gallery App: 'before-grunt' branch">before-grunt</a> branch.</p>
+
+<h3>Adding Grunt to an existing project</h3>
+
+<p>Assuming Grunt is already <a href="https://github.com/gruntjs/grunt#installing-grunt" title="Installing Grunt">installed</a> on your system, adding Grunt to your project is as simple as typing the following in your terminal:</p>
+
+<p>``` bash</p>
+
+<blockquote><p>cd /path/to/your/project/
+grunt init:gruntfile
+```</p></blockquote>
+
+<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project's folder.
+The basic structure of a gruntfile is looks like this:</p>
+
+<p>``` js grunt file basic structure
+/<em>global module:false</em>/
+module.exports = function(grunt) {</p>
+
+<p>  // Project configuration.
+  grunt.initConfig({</p>
+
+<pre><code>// ...
+taskName: {
+  // task properties
+},
+// ...
+</code></pre>
+
+<p>  });
+};
+```</p>
+
+<p>We are working with a web-application, so most of the tasks we need are already included in grunt.
+What do we basically need ?</p>
+
+<ul>
+<li><em>lint</em> javascript files</li>
+<li>run <em>qunit</em> unit tests</li>
+<li><em>concat</em> and <em>minify</em> javascript files</li>
+</ul>
+
+
+<p>In addition, it would be interesting to:</p>
+
+<ul>
+<li>run <em>qunit</em> tests again on the minified <code>js</code> files to check if anything is broken in the process</li>
+<li><em>copy</em> assets (<code>css</code>, pictures, etc.) to a build folder in order to have a standalone built version of the application</li>
+<li>create an alternative version of the <code>html</code> files containing minified <code>js</code> files rather than development files</li>
+</ul>
+
+
+<h3>Setting up your tasks</h3>
+
+<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won't be too difficult to define these for our project.
+If you need another task, start by searching if an existing <code>grunt-plugin</code> have already been created by the community.
+You can search for an existing plugin on <a href="http://www.gruntjs.com" title="Grunt homepage">grunt homepage</a> or directly with npm:</p>
+
+<p>``` bash Searching for grunt plugins on NPM</p>
+
+<h1>Search for a grunt plugin to do some magic:</h1>
+
+<blockquote><p>npm search gruntplugin 'do magic'
+```</p></blockquote>
+
+<p>Otherwise, you can define your own task using the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API</a>, but unless you need something very specific, I doubt you had to go there.
+Seriously, there are already 190 existing plugins at the time I write these lines.</p>
+
+<p>Once you've found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
+In our case, we'll need two external tasks:</p>
+
+<p><code>js Loading external tasks https://github.com/dharFr/gallery/blob/master/grunt.js#L125-126 source
+  // ...
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-targethtml');
+  // ...
+</code></p>
+
+<p>From there, we just need to configure our tasks.
+I'm not going to detail every single line in the resulting <code>gruntfile</code> bellow.
+Basically, it allows us to build (lint, concat and minify) javascript files, copy any other files to a <code>dist</code> folder, and run the tests on both <code>dev</code> and <code>dist</code> files.
+The syntax is quite self-explaining and you can always refer to the <a href="https://github.com/gruntjs/grunt/blob/master/docs/toc.md" title="Grunt Documentation">official documentation</a> is needed.</p>
+
+<p>``` js Extract from Gallery Gruntfile https://github.com/dharFr/gallery/blob/master/grunt.js source
+/<em>global module:false</em>/
+module.exports = function(grunt) {</p>
+
+<p>  // Project configuration.
+  grunt.initConfig({</p>
+
+<pre><code>// read some data from package.json file
+pkg: '&lt;json:package.json&gt;',
+// Defines project's meta data
+// the banner is used by minification task and 
+// will be at the beginning of each processed file
+meta: {
+  banner: '/*! &lt;%= pkg.title || pkg.name %&gt; - v&lt;%= pkg.version %&gt; - ' +
+    '&lt;%= grunt.template.today("yyyy-mm-dd") %&gt;\n' +
+    '&lt;%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %&gt;' +
+    '* Copyright (c) &lt;%= grunt.template.today("yyyy") %&gt; &lt;%= pkg.author.name %&gt;;' +
+    ' Licensed &lt;%= _.pluck(pkg.licenses, "type").join(", ") %&gt; */'
+},
+// Defines a custom config property.
+// This property '&lt;%= build.dest %&gt;'
+build: {
+  dest: 'dist'
+},
+// lint task
+// Defines witch files to lint
+lint: {
+  files: ['grunt.js', 'js/gallery/**/*.js', 'tests/js/**/*.js']
+},
+// qunit multi-task
+// Defines 2 different targets
+// (dev, dist) for running qunit.
+// Each target defines a list of test files
+qunit: {
+  dev: ['tests/index.html'],
+  dist: ['&lt;%= build.dest %&gt;/tests/index.html']
+},
+// concat multi-task
+// Defines 3 different targets 
+// (libs, tests, dist) for concatenation.
+// Each target defines a list of files to concatenate
+// and a destination file to write the output
+concat: { 
+  libs: {
+    src: [ "js/libs/json2.js", "js/libs/jquery-1.8.2.min.js", "js/libs/mustache-0.7.js", "js/libs/underscore-1.4.1.min.js", "js/libs/backbone-0.9.2.min.js" ],
+    dest: '&lt;%= build.dest %&gt;/js/libs/&lt;%= pkg.name %&gt;-libs.&lt;%= pkg.version %&gt;.js'
+  },
+  tests: {
+    src: [
+      '&lt;banner:meta.banner&gt;', 'js/gallery/config.js', 'js/gallery/models/gallery.js', 'js/gallery/views/header.js', 'js/gallery/views/main-image.js', 'js/gallery/views/thumbnails.js', 'js/gallery/views/gallery.js' ],
+    dest: '&lt;%= build.dest %&gt;/tests/js/&lt;%= pkg.name %&gt;-tests.&lt;%= pkg.version %&gt;.js'
+  },
+  dist: {
+    src: [
+      '&lt;banner:meta.banner&gt;', 'js/gallery/config.js', 'js/gallery/models/gallery.js', 'js/gallery/views/header.js', 'js/gallery/views/main-image.js', 'js/gallery/views/thumbnails.js', 'js/gallery/views/gallery.js', 'js/gallery/app.js' ],
+    dest: '&lt;%= build.dest %&gt;/js/&lt;%= pkg.name %&gt;-app.&lt;%= pkg.version %&gt;.js'
+  }
+},
+// min multi-task
+// Defines 3 different targets 
+// (libs, tests, dist) for minification.
+// Each target defines a list of files to minify
+// and a destination file to write the output
+min: {
+  libs: {
+    src: ['&lt;config:concat.libs.dest&gt;'],
+    dest: '&lt;%= build.dest %&gt;/js/libs/&lt;%= pkg.name %&gt;-libs.&lt;%= pkg.version %&gt;.min.js'
+  },
+  tests: {
+    src: ['&lt;banner:meta.banner&gt;', '&lt;config:concat.tests.dest&gt;'],
+    dest: '&lt;%= build.dest %&gt;/tests/js/&lt;%= pkg.name %&gt;-tests.&lt;%= pkg.version %&gt;.min.js'
+  },
+  dist: {
+    src: ['&lt;banner:meta.banner&gt;', '&lt;config:concat.dist.dest&gt;'],
+    dest: '&lt;%= build.dest %&gt;/js/&lt;%= pkg.name %&gt;-app.&lt;%= pkg.version %&gt;.min.js'
+  }
+},
+// targethtml multi-task
+// Defines 2 different targets (release, tests) 
+// Each target defines a source file to process
+// and a destination file to write the output
+targethtml: {
+  release: {
+    src: 'index.html',
+    dest: '&lt;%= build.dest %&gt;/index.html'
+  },
+  tests: {
+    src: 'tests/index.html',
+    dest: '&lt;%= build.dest %&gt;/tests/index.html'
+  }
+},
+// copy multi-task
+// Defines 1 single target (dist) 
+// copy files from development path 
+// to 'build.dest' folder
+copy: {
+  dist: {
+    files: {
+      "&lt;%= build.dest %&gt;/css/": "css/**",
+      "&lt;%= build.dest %&gt;/img/gallery/": "img/gallery/**",
+      "&lt;%= build.dest %&gt;/js/libs/bootstrap/": "js/libs/bootstrap/**",
+      "&lt;%= build.dest %&gt;/tests/": ["tests/js/**", "tests/libs/**"],
+      "&lt;%= build.dest %&gt;/gallery_data.json": "gallery_data.json"
+    }
+  }
+},
+// clean task
+// remove every file from the defined folders
+clean: ["&lt;%= build.dest %&gt;"],
+
+// watch task
+// runs the defined tasks every time a watched file is updated
+watch: {
+  files: '&lt;config:lint.files&gt;',
+  tasks: 'lint qunit:dev'
+},
+// ...
+</code></pre>
+
+<p>  });</p>
+
+<p>  // Load external tasks (grunt plugins)
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-targethtml');</p>
+
+<p>  // Register custom tasks (alias tasks)
+  grunt.registerTask('build', 'concat min targethtml copy');
+  grunt.registerTask('clean-build', 'clean concat min targethtml copy');
+  // Default task.
+  grunt.registerTask('default', 'lint qunit:dev build qunit:dist');
+};
+```</p>
+
+<p>Each task can be run independently by typing <code>grunt taskName</code> in a terminal.
+Additionally, you can run a specific target on every multi-task by typing <code>grunt multiTaskName:targetName</code>.
+The <code>registerTask</code> API allows us to define aliases to run a few tasks with a single command.</p>
+
+<p>``` bash</p>
+
+<h1>run lint task</h1>
+
+<blockquote><p>grunt lint</p></blockquote>
+
+<h1>run concat and minify tasks</h1>
+
+<blockquote><p>grunt concat min</p></blockquote>
+
+<h1>run only dev target of qunit task</h1>
+
+<blockquote><p>grunt qunit:dev</p></blockquote>
+
+<h1>run "build" alias (ie: 'grunt concat min targethtml copy')</h1>
+
+<blockquote><p>grunt build</p></blockquote>
+
+<h1>run default task (ie: 'grunt lint qunit:dev build qunit:dist')</h1>
+
+<blockquote><p>grunt
+```</p></blockquote>
+
+<h2>So what's next?</h2>
+
+<p>I hope you already see the kind of benefits you can get by adding Grunt to your web-application projects.</p>
+
+<p>I also encourage you to take a look at the plugin system, which will allow you to create your own tasks.
+The well made <code>gruntplugin</code> init task (<code>grunt init:gruntplugin</code>) will bootstrap everything you need to start your own task and publish it in minutes.
+If you find yourself stucked at some point, the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API documentation</a> is a very good reference.
+You can also check the source code of one of the official plugins on github.</p>
+
+<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you're going to try.
+But I'm convinced you can use it in many other ways.
+If you need some more examples, I invite you to look at my own experiments with Grunt:</p>
+
+<ul>
+<li><a href="https://github.com/dharFr/static-templater" title="Static Templater">static-templater</a>: A grunt-based command line tool to render HMTL and PDF from JSON and HTML templates</li>
+<li><a href="https://github.com/dharFr/grunt-wkhtmltopdf" title="grunt-wkhtmltopdf">grunt-wkhtmltopdf</a>: A simple Grunt multitask that uses wkhtmltopdf to convert HTML files to PDF.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Grunt brings automation to the front-end side]]></title>
