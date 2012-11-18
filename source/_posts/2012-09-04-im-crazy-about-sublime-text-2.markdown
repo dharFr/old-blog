@@ -7,6 +7,8 @@ categories:
  - tools
  - Sublime Text 2
 
+status: draft
+draft: true
 published: false
 ---
 
