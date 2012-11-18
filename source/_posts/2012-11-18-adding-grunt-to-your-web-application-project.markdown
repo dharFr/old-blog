@@ -1,12 +1,11 @@
 ---
 layout: post
-title: "A quick talk about Grunt"
+title: "Adding Grunt to your web-application project"
 date: 2012-10-28 00:24
 comments: true
 categories: 
  - grunt.js
  - tools
-
 ---
 
 
