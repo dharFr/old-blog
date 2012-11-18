@@ -6,5 +6,5 @@ Location: Nice, France
 
 
 /* SITE */
-Last update: 27 August 2012
+Last update: 18 November 2012
 Software: Octopress, Jekyll

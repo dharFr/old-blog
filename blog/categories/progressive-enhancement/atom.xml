@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Progressive Enhancement | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/progressive-enhancement/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-08-27T22:43:21+02:00</updated>
+  <updated>2012-11-18T17:53:25+01:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -204,7 +204,7 @@ I'll cover the second part, <em>loosely coupled modules</em>, in another article
     </style>
     <div class="keep-aspect-ratio">
     <div><img src="http://www.dhar.fr/assets/dhar/aspect-ratio-4-3.png" /><div>
-    <iframe src="http://www.dhar.fr/assets/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
+    <iframe src="http://www.dhar.fr/assets/slides/embedder.html#uploader-thumbnail/slides.html" frameborder="0" width="100%" height="95%"></iframe>
     </div></div><div class="clearfix"></div>
     </div>
 </div>
