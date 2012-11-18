@@ -4,7 +4,7 @@
   <title><![CDATA[Category: grunt.js | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/grunt-js/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-11-18T17:54:33+01:00</updated>
+  <updated>2012-11-18T23:20:27+01:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[A quick talk about Grunt]]></title>
-    <link href="http://www.dhar.fr/blog/2012/10/28/a-quick-talk-about-grunt/"/>
+    <title type="html"><![CDATA[Adding Grunt to your web-application project]]></title>
+    <link href="http://www.dhar.fr/blog/2012/10/28/adding-grunt-to-your-web-application-project/"/>
     <updated>2012-10-28T00:24:00+02:00</updated>
-    <id>http://www.dhar.fr/blog/2012/10/28/a-quick-talk-about-grunt</id>
+    <id>http://www.dhar.fr/blog/2012/10/28/adding-grunt-to-your-web-application-project</id>
     <content type="html"><![CDATA[<p>A few weeks ago, a gave a quick talk about <a href="http://www.gruntjs.com" title="Grunt homepage">Grunt</a> at <a href="http://www.twitter.com/jssophia" title="JS Sophia-Antipolis">@JSSophia</a>, our local Javascript User Group.
 During this talk, my purpose was to quickly present the tool and show some example use cases.
 I must confess I wasn't as prepared as I would have been, so my talk may have been confused or unclear from time to time.

@@ -57,12 +57,14 @@
         <lastmod>2012-08-27T22:39:58+02:00</lastmod>
     </url>
     <url>
-        <loc>http://www.dhar.fr/blog/2012/10/28/a-quick-talk-about-grunt/</loc>
-        <lastmod>2012-11-18T17:54:10+01:00</lastmod>
+        <loc>
+            http://www.dhar.fr/blog/2012/10/28/adding-grunt-to-your-web-application-project/
+        </loc>
+        <lastmod>2012-11-18T23:18:04+01:00</lastmod>
     </url>
     <url>
         <loc>http://www.dhar.fr/blog/archives/</loc>
-        <lastmod>2012-11-18T17:54:10+01:00</lastmod>
+        <lastmod>2012-11-18T23:18:04+01:00</lastmod>
     </url>
     <url>
         <loc>http://www.dhar.fr/humans.txt</loc>
@@ -70,6 +72,6 @@
     </url>
     <url>
         <loc>http://www.dhar.fr/</loc>
-        <lastmod>2012-11-18T17:54:10+01:00</lastmod>
+        <lastmod>2012-11-18T23:18:04+01:00</lastmod>
     </url>
 </urlset>
