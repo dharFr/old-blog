@@ -4,6 +4,9 @@ title: "Compte-rendu du Riviera Coding Week-end"
 date: 2012-08-13 15:07
 comments: true
 categories: 
+ - In French
+ - Personal Life
+ - Events
 ---
 
 _This post is about the Riviera Coding Week-end, a geek event that took place in Nice (France) from 10 to 12 August 2012.
