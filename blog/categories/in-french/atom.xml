@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: In French | dhar's Blog]]></title>
+  <link href="http://www.dhar.fr/blog/categories/in-french/atom.xml" rel="self"/>
+  <link href="http://www.dhar.fr/"/>
+  <updated>2013-01-25T02:41:45+01:00</updated>
+  <id>http://www.dhar.fr/</id>
+  <author>
+    <name><![CDATA[Olivier Audard]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[De l'art de converser sur Twitter (entre geeks)]]></title>
+    <link href="http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/"/>
+    <updated>2013-01-24T23:28:00+01:00</updated>
+    <id>http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter</id>
+    <content type="html"><![CDATA[<p>Ce soir, pour la première fois depuis la création de mon compte il y a environ 3 400 tweets, je me suis fait agresser sur Twitter.</p>
+
+<p>Bon, d'accord, j'exagère un peu. C'est bien moins grave que ça en a l'air mais cette prise à partie m'a tellement surpris que j'en écris un article à chaud.</p>
+
+<p>Oh, je m'en remettrais, hein! Ne vous en faites pas ;)</p>
+
+<h2>Un peu de contexte</h2>
+
+<p>Voici donc le tweet initial, celui qui a attiré mon attention et m'a fait réagir :</p>
+
+<p><blockquote><p>@<strong><strong> @</strong></strong>____ de ce côté tu seras pas déçu, y a <em>rien</em> de fait pour le blogging ;) quelques hooks plus tard je vous dirai des news ^^</p></blockquote></p>
+
+<p>Et voilà ma réponse :
+<blockquote><p>@</em><strong><strong><strong> @</strong></strong> @</strong>______ Pas sur d'avoir tout le contexte, mais http://octopress.org/  ? non?</p></blockquote></p>
+
+<p>Ça semble anodin comme ça...</p>
+
+<p>En intervenant dans cette conversation, mon intention était avant tout d'apporter mon aide éventuelle et d'en apprendre plus sur les outils que je peux être amené à utiliser.
+Mon erreur est sans doute d'avoir donné mon avis sans connaître le contexte complet de la conversation, ni même les participants.
+Mais après tout, le propre d'une conversation sur un media public, c'est bien qu'elle est ouverte à tout le monde, non?
+Pour avoir suivie celle-ci jusqu'au bout, il est évident maintenant que mon intervention était hors sujet et que je manquais d'éléments pour fournir un point de vue pertinent; pour autant, je n'aurais pas cru déclencher des réactions aussi <em>violentes</em> (le terme est un peu fort, mais je ne trouve pas plus approprié).</p>
+
+<p>L'objectif de ce billet n'est pas de commenter l'intégralité de la conversation, ni même de justifier mes arguments au cours de celle-ci ou d'accuser qui que ce soit, mais plutôt de présenter mon ressenti à la lecture des réponses que l'on m'a adressé.</p>
+
+<h2>Principes de base</h2>
+
+<p>Lorsque je m'adresse à quelqu'un, que ce soit dans la vie réelle, sur Internet, en privé ou en public, je fais de mon mieux pour rester respectueux et poli, et j'attends de mes interlocuteurs qu'ils en fassent de même.
+C'est la base de relations sociales <em>saines</em> et <em>constructives</em>.
+À partir de là, on peut discuter normalement.
+À partir de là, chacun peut avoir une opinion différente, exposer son point de vue, se tromper, convaincre ou rester sur ses positions.</p>
+
+<p>Je crois avoir respecté ces principes de base ici aussi, et si malgré tout, certains de mes propos ont étés mal compris je m'en excuse. Certaines des réponses que j'ai reçu, en revanche, m'ont paru aller bien au delà de ces principes.
+Ça reste un ressenti personnel, j'aurai peut-être réagi différemment à un autre moment et je aussi pense que le format en 140 caractères imposé par Twitter contribue à amplifier cette impression, mais j'ai sérieusement vécu ce moment comme une agression.
+Je ne suis même pas certain que tous les autres participants aient pris conscience de la tournure déplacée de certains propos.</p>
+
+<p>En écrivant ce billet, mon intention n'est pas de viser quelqu'un en particulier.
+J'avais simplement besoin de poser ça par écrit.
+D'abord pour me rappeler ces quelques minutes, et aussi en espérant que les rares lecteurs qui me liront s'en souviendrons lors de leurs discussions futures, en ligne ou non.</p>
+
+<h2>Pour finir</h2>
+
+<p>...si je peux me permettre un conseil qui vaut ce qu'il vaut:</p>
+
+<p>Démarrer une conversation sur un media public implique que tout le monde peut y participer.
+Dans ce contexte, même si chacun est en droit d'estimer qu'un point de vue manque de pertinence, je ne vois pas ce qui justifie le fait d'exprimer son désaccord de façon agressive ou irrespectueuse.
+Si vous ne souhaitez voir personne d'autre intervenir, mentionnez le clairement ou mieux, utilisez un autre moyen de communication, privé de préférence.</p>
+
+<p>Et puis, quand on parle de technos Web là, ça devrait rester fun, non?</p>
+
+<hr />
+
+<p>PS : <em>Pour ceux qui ont participé à la conversation dont il est question ici, s'ils vous arrivait de lire ce texte, sachez que je suis tout à fait disposé à discuter de l'usage et de la pertinence ou non d'octopress comme engine de blog, tant que ça n'a pas lieu en 140 caractères et que le ton reste amical.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Compte-rendu du Riviera Coding Week-end]]></title>
+    <link href="http://www.dhar.fr/blog/2012/08/13/fr-compte-rendu-du-riviera-coding-week-end/"/>
+    <updated>2012-08-13T15:07:00+02:00</updated>
+    <id>http://www.dhar.fr/blog/2012/08/13/fr-compte-rendu-du-riviera-coding-week-end</id>
+    <content type="html"><![CDATA[<p><em>This post is about the Riviera Coding Week-end, a geek event that took place in Nice (France) from 10 to 12 August 2012.
+As this post is closely related to a French event, I think for once, it's more appropriate to write in French, even if I usually blog in English.
+If you're anyway interested, I'm sure <a href="http://translate.google.com/translate?hl=en&amp;sl=fr&amp;tl=en&amp;u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F">Google translate</a> or any other translation tool can fit your needs...</em></p>
+
+<p><a href="http://photos.dhar.fr/p/ke/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/5d466e-EB855D13-DD73-423D-ACF1-51A94E35A82A_960x180.jpg"></a>
+Du 10 au 12 Août dernier, j'ai participé au premier <em>Riviera Coding Week-end</em>, organisé par les membres du <a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">RivieraGUG</a> avec la participation du <a href="http://groups.google.com/group/jssophia">JSSophia</a> dont je fais partie.
+À ma connaissance, c'est le premier événement du genre qui ait lieu sur la côte d'azur.
+C'est en tout cas le premier auquel j'ai eu l'occasion de participer.
+Après ces 48 heures passées à construire, échanger, mais surtout coder, un petit bilan me semble bien utile.</p>
+
+<!-- more -->
+
+
+<h2>Un Coding Week-End, quelle idée...</h2>
+
+<p>D'abord initié par le <em><a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">Groovy &amp; Grails User Group</a></em> , l'événement avait pour objectif de construire un site dédié pour le groupe.
+Par la suite, alors que certains membres du <em><a href="http://groups.google.com/group/jssophia">Javascript User Group</a></em> ont aussi souhaité participer au week-end, la thématique de l'événement a un peu changée, pour s'axer d'avantage sur la collaboration entre les communautés locales.</p>
+
+<p><a href="http://photos.dhar.fr/p/kd/album-2"><img class="left" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/3eebc3-26D8653A-2BBB-4830-9F00-A240FF4514C6_960x180.jpg"></a>
+Nous y voilà, c'est Vendredi soir, il est un peu plus de 19h30 lorsque j'arrive aux <a href="http://www.satellites-teletravail.com/">Satellites</a> (qui nous ont hébergés gracieusement tout le week-end).
+La plupart des participants sont déjà arrivés.
+Il y a quelques visages bien connus, des collègues de travail, avec qui je passe déjà mes journées en semaines; certains sont simplement familiers, croisés lors des précédentes réunions du JSSophia ou lors de conférences qui ont eu lieu à Sophia-Antipolis quelques mois plus tôt; puis d'autres, enfin, que je rencontre pour la première fois.</p>
+
+<p>D'entrée de jeu, l'ambiance est décontractée, l'accueil chaleureux et tout le monde est souriant.
+Sans trop savoir ce que va donner cette expérience, on sait déjà qu'on est tous là pour la même chose: partager notre passion du web et construire quelque chose, tous ensemble, <em>just for fun</em>.</p>
+
+<h2>Entrée en matière</h2>
+
+<pre><code>| Loading Grails 2.1.0
+</code></pre>
+
+<p>Le programme du Week-end est assez simple et couvre principalement la soirée du vendredi, après tout, on est pas là pour subir un planning rigoureux.</p>
+
+<p>Le début de soirée est assez calme.
+On fait connaissance, on se raconte nos vacances (pour ceux qui en ont pris...), on prends l'apéro en terrasse, on envoie quelques tweets en espérant ramener de nouveaux participants de dernière minute.
+Certains configurent le Raspberry Pi qui hébergera un <a href="http://fr.wikipedia.org/wiki/EtherPad">EtherPad</a> pour la durée du week-end.</p>
+
+<h2>Grails Crash Course</h2>
+
+<pre><code>| Configuring classpath
+</code></pre>
+
+<p><a href="http://photos.dhar.fr/p/k2/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/2a719f-04CDD1E8-97CF-4210-9593-14718F7D2CBC_960x180.jpg"></a>
+Après avoir dévoré quelques pizzas, on attaque les choses sérieuses avec un <em>Crash Course Grails</em> d'une petite demi-heure présenté par <a href="https://twitter.com/bgoetzmann">Bertrand Goetzmann</a>, bien utile pour ceux qui n'auraient jamais eu l'occasion d'utiliser le Framework.
+Là encore, l'ambiance est bien loin d'un cours magistral.
+La plupart des participants connaissent bien les rouages de Grails et le cours de Bertrand devient un bon prétexte pour partager les expériences de chacun et échanger les points de vue.</p>
+
+<h2>Brainstorming</h2>
+
+<pre><code>| Environment set to development
+</code></pre>
+
+<p>Presque deux heures plus tard (la demi-heure la plus longue qu'on ai connu), nous démarrons un Brainstorming animé avec un objectif simple : qu'allons nous construire pendant le week-end?</p>
+
+<p>Rapidement, quelques sujets intéressants font surface, souvent liés à l'activité des User Groups autour de Sophia-Antipolis :</p>
+
+<p><a href="http://photos.dhar.fr/p/k8/album-2"><img class="left" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/35f68b-C28C7051-09CB-46B5-9D8C-BB48B373EF4D_960x180.jpg"></a></p>
+
+<ul>
+<li>Manque d'activité des communautés : Il y a bien quelques user groups plus ou moins actifs mais la plupart restent globalement peu connus.</li>
+<li>Manque de relations et de collaboration entre ces groupes.</li>
+<li>Problématiques récurrentes d'un groupe à l'autre: trouver une salle, un sponsor, se faire connaître localement, informer et impliquer les membres</li>
+</ul>
+
+
+<p>Vient ensuite l'idée de créer un site dédié aux User Groups de la région, ayant pour objectif de faciliter la découverte des communautés locales et leur collaboration.
+Le projet est ambitieux, mais l'important est surtout de lancer une initiative.
+Pour pouvoir obtenir un résultat concret en un week-end, nous décidons de nous concentrer sur les éléments de base du site et de garder de côté les idées qui demandent davantage de travail.</p>
+
+<h4>Première itération: Briques de base</h4>
+
+<ul>
+<li>Enregistrement des utilisateurs</li>
+<li>Création d'un groupe par un utilisateur</li>
+<li>Abonnement à un groupe existant par un utilisateur</li>
+<li>Publication d'éventements organisés par le groupe</li>
+<li>Publication d'articles (blog) par un groupe</li>
+<li>Présentation des sponsors d'un groupe</li>
+<li>Association de tags aux groupes, utilisateurs</li>
+</ul>
+
+
+<h4>Développements ultérieurs:</h4>
+
+<ul>
+<li>Favoriser la mise en relations des groupes géographiquement proches</li>
+<li>Favoriser la découverte des groupes par les utilisateurs</li>
+<li>Favoriser la mise en commun des ressources (salles, sponsors, relations) des groupes</li>
+</ul>
+
+
+<p> C'est un résumé un peu rapide, mais tous les détails sont en ligne grâce au <a href="https://github.com/rivieragug/website/blob/master/RASPBERRY_MINUTE.md">Raspberry Minute</a></p>
+
+<h2>On est là pour coder, non?</h2>
+
+<pre><code>| Packaging Grails application
+</code></pre>
+
+<p><a href="http://photos.dhar.fr/p/kc/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/495cd2-54FB5929-52D6-4A99-8A37-D7DC18031AC9_960x180.jpg"></a>
+Après avoir déterminé notre objectif pour le week-end, nous n'avions plus qu'à nous mettre au travail.
+Raconter les deux jours suivants en détail serait sans doute trop long et assez peu constructif.</p>
+
+<p>L'important à retenir est sans doute que les contributions ont été nombreuses : écrire du code, décortiquer OAuth, dessiner des croquis d'IHM, mettre en place l'intégration continue (<em>continious outage?</em>), travailler le design de site, aider les débutants ou simplement mettre l'ambiance et remotiver les troupes; chacun a contribué au projet selon ses compétences et sa forme du moment.</p>
+
+<p>Le résultat est là! Le projet est bien démarré, le code est <a href="https://github.com/rivieragug/website">disponible sur Github</a> et une première version est <a href="http://ughub.cloudfoundry.com/">déjà en ligne</a></p>
+
+<h2>Bilan</h2>
+
+<pre><code>| Running Grails application
+</code></pre>
+
+<p>Concernant la soirée de vendredi, je crois qu'il aurait été judicieux d'attaquer le brainstorming avant le Crash Course Grails.
+Cela aurait permis d'entrer directement dans le vif du sujet et d'utiliser le cours pour construire les premiers éléments du projet. On aurait gagné un peu de temps, et tout le monde aurait été plus impliqué dans le cours.</p>
+
+<p>Ensuite, comme je l'ai dis plus haut, le projet était sans doute trop ambitieux par rapport au temps à notre disposition. Il faut reconnaître que la version obtenue à l'issue du week-end est plus proche du prototype que d'une application de qualité professionnelle.</p>
+
+<p>Malgré tout, en ce qui me concerne, cette expérience a été clairement positive.
+Une ambiance bien sympa, des locaux au top, et une belle brochette de passionnés qui se sont tous  impliqués dans le projet comme si l'enjeu avait été important.</p>
+
+<p>Et tant pis si le résultat n'a pas la qualité que nous aurions pu attendre.
+Après tout, l'initiative est lancée et le code est là, ouvert à tous, disponible sur Github.
+Il ne tiens qu'à nous de continuer à faire avancer ce projet, en y contribuant nous-même ou en motivant d'autres personnes à participer. Quelques <em>pull requests</em> de plus et on l'aura le site communautaire qu'on a imaginé tous ensemble vendredi dernier.</p>
+
+<p>Y'a plus qu'à comme on dit... ;)</p>
+
+<h2>Remerciements</h2>
+
+<pre><code>| Server running. Browse to http://ughub.cloudfoundry.com/
+</code></pre>
+
+<p>Quelques remerciements pour finir.
+D'abord parce que j'ai passé un excellent week-end, mais aussi parce que ce type d'initiative participe à créer cette dynamique locale qui nous tiens tous à cœur.</p>
+
+<p>Merci, donc, aux membres du RiveraGUG pour avoir lancé l'initiative et géré l'organisation.
+Merci aux <a href="http://www.satellites-teletravail.com/">Satellites</a>, et plus particulièrement à Nicolas, qui a accueilli notre petit groupe sans rien demander en retour. Vos locaux sont géniaux, si un jour je me met à mon compte, je sais déjà où établir mon QG ;)
+Merci aussi à nos deux sponsors, <a href="http://www.avisto.com">Avisto</a> et <a href="http://www.sopragroup.com/">Sopra Group</a> pour avoir nous avoir permis de travailler le ventre plein.</p>
+
+<p>Et merci enfin à tous ceux qui étaient présent et qui se sont impliqués au cours du week-end.</p>
+
+<h2>Quelques liens en vrac</h2>
+
+<ul>
+<li>L'application sur cloud-foundry : <a href="http://ughub.cloudfoundry.com/">UG-hub</a></li>
+<li>Le <a href="https://github.com/rivieragug/website">Code Source</a> sur Github</li>
+<li><a href="http://photos.dhar.fr/photos/album-2/list">Quelques Photos</a></li>
+<li>Les participants sont aussi <a href="https://twitter.com/_dhar/rivieracwe-2012">sur Twitter</a></li>
+<li><em>Update</em>: Les <a href="http://www.odelia-technologies.com/Grails/Grails.impress.html">slides</a> de Bertrand sont maintenant disponibles</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

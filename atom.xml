@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's Blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2012-11-18T23:20:27+01:00</updated>
+  <updated>2013-01-25T02:41:45+01:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[De l'art de converser sur Twitter (entre geeks)]]></title>
+    <link href="http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/"/>
+    <updated>2013-01-24T23:28:00+01:00</updated>
+    <id>http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter</id>
+    <content type="html"><![CDATA[<p>Ce soir, pour la première fois depuis la création de mon compte il y a environ 3 400 tweets, je me suis fait agresser sur Twitter.</p>
+
+<p>Bon, d&#8217;accord, j&#8217;exagère un peu. C&#8217;est bien moins grave que ça en a l&#8217;air mais cette prise à partie m&#8217;a tellement surpris que j&#8217;en écris un article à chaud.</p>
+
+<p>Oh, je m&#8217;en remettrais, hein! Ne vous en faites pas ;)</p>
+
+<h2>Un peu de contexte</h2>
+
+<p>Voici donc le tweet initial, celui qui a attiré mon attention et m&#8217;a fait réagir :</p>
+
+<blockquote><p>@____ @________ de ce côté tu seras pas déçu, y a *rien* de fait pour le blogging ;) quelques hooks plus tard je vous dirai des news ^^</p></blockquote>
+
+
+<p>Et voilà ma réponse :</p>
+
+<blockquote><p>@_______ @____ @________ Pas sur d&#8217;avoir tout le contexte, mais http://octopress.org/  ? non?</p></blockquote>
+
+
+<p>Ça semble anodin comme ça&#8230;</p>
+
+<p>En intervenant dans cette conversation, mon intention était avant tout d&#8217;apporter mon aide éventuelle et d&#8217;en apprendre plus sur les outils que je peux être amené à utiliser.
+Mon erreur est sans doute d&#8217;avoir donné mon avis sans connaître le contexte complet de la conversation, ni même les participants.
+Mais après tout, le propre d&#8217;une conversation sur un media public, c&#8217;est bien qu&#8217;elle est ouverte à tout le monde, non?
+Pour avoir suivie celle-ci jusqu&#8217;au bout, il est évident maintenant que mon intervention était hors sujet et que je manquais d&#8217;éléments pour fournir un point de vue pertinent; pour autant, je n&#8217;aurais pas cru déclencher des réactions aussi <em>violentes</em> (le terme est un peu fort, mais je ne trouve pas plus approprié).</p>
+
+<p>L&#8217;objectif de ce billet n&#8217;est pas de commenter l&#8217;intégralité de la conversation, ni même de justifier mes arguments au cours de celle-ci ou d&#8217;accuser qui que ce soit, mais plutôt de présenter mon ressenti à la lecture des réponses que l&#8217;on m&#8217;a adressé.</p>
+
+<h2>Principes de base</h2>
+
+<p>Lorsque je m&#8217;adresse à quelqu&#8217;un, que ce soit dans la vie réelle, sur Internet, en privé ou en public, je fais de mon mieux pour rester respectueux et poli, et j&#8217;attends de mes interlocuteurs qu&#8217;ils en fassent de même.
+C&#8217;est la base de relations sociales <em>saines</em> et <em>constructives</em>.
+À partir de là, on peut discuter normalement.
+À partir de là, chacun peut avoir une opinion différente, exposer son point de vue, se tromper, convaincre ou rester sur ses positions.</p>
+
+<p>Je crois avoir respecté ces principes de base ici aussi, et si malgré tout, certains de mes propos ont étés mal compris je m&#8217;en excuse. Certaines des réponses que j&#8217;ai reçu, en revanche, m&#8217;ont paru aller bien au delà de ces principes.
+Ça reste un ressenti personnel, j&#8217;aurai peut-être réagi différemment à un autre moment et je aussi pense que le format en 140 caractères imposé par Twitter contribue à amplifier cette impression, mais j&#8217;ai sérieusement vécu ce moment comme une agression.
+Je ne suis même pas certain que tous les autres participants aient pris conscience de la tournure déplacée de certains propos.</p>
+
+<p>En écrivant ce billet, mon intention n&#8217;est pas de viser quelqu&#8217;un en particulier.
+J&#8217;avais simplement besoin de poser ça par écrit.
+D&#8217;abord pour me rappeler ces quelques minutes, et aussi en espérant que les rares lecteurs qui me liront s&#8217;en souviendrons lors de leurs discussions futures, en ligne ou non.</p>
+
+<h2>Pour finir</h2>
+
+<p>&#8230;si je peux me permettre un conseil qui vaut ce qu&#8217;il vaut:</p>
+
+<p>Démarrer une conversation sur un media public implique que tout le monde peut y participer.
+Dans ce contexte, même si chacun est en droit d&#8217;estimer qu&#8217;un point de vue manque de pertinence, je ne vois pas ce qui justifie le fait d&#8217;exprimer son désaccord de façon agressive ou irrespectueuse.
+Si vous ne souhaitez voir personne d&#8217;autre intervenir, mentionnez le clairement ou mieux, utilisez un autre moyen de communication, privé de préférence.</p>
+
+<p>Et puis, quand on parle de technos Web là, ça devrait rester fun, non?</p>
+
+<hr />
+
+<p>PS : <em>Pour ceux qui ont participé à la conversation dont il est question ici, s&#8217;ils vous arrivait de lire ce texte, sachez que je suis tout à fait disposé à discuter de l&#8217;usage et de la pertinence ou non d&#8217;octopress comme engine de blog, tant que ça n&#8217;a pas lieu en 140 caractères et que le ton reste amical.</em></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Adding Grunt to your web-application project]]></title>

@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Queued ajax requests with jQuery and Coffescript - dhar's Blog</title>
+  <title>De l'art de converser sur Twitter (entre geeks) - dhar's Blog</title>
   <meta name="author" content="Olivier Audard">
 
   
-  <meta name="description" content="I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217; &hellip;">
+  <meta name="description" content="Ce soir, pour la première fois depuis la création de mon compte il y a environ 3 400 tweets, je me suis fait agresser sur Twitter. Bon, d&#8217; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Using jQuery&#8217; &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/">
+  <link rel="canonical" href="http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">
   <link rel="author" href="/humans.txt" />
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -81,7 +80,7 @@ Using jQuery&#8217; &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Queued Ajax Requests With jQuery and Coffescript</h1>
+      <h1 class="entry-title">De L'art De Converser Sur Twitter (Entre Geeks)</h1>
     
     
       <p class="meta">
@@ -97,73 +96,68 @@ Using jQuery&#8217; &hellip;">
   
 
 
-<time datetime="2012-03-31T21:46:00+02:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+<time datetime="2013-01-24T23:28:00+01:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
+<div class="entry-content"><p>Ce soir, pour la première fois depuis la création de mon compte il y a environ 3 400 tweets, je me suis fait agresser sur Twitter.</p>
 
-<!--more-->
+<p>Bon, d&#8217;accord, j&#8217;exagère un peu. C&#8217;est bien moins grave que ça en a l&#8217;air mais cette prise à partie m&#8217;a tellement surpris que j&#8217;en écris un article à chaud.</p>
 
+<p>Oh, je m&#8217;en remettrais, hein! Ne vous en faites pas ;)</p>
 
-<p>You probably already know that all jQuery&#8217;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&#8217;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries&#8217; progress.</p>
+<h2>Un peu de contexte</h2>
 
-<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&#8217;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
+<p>Voici donc le tweet initial, celui qui a attiré mon attention et m&#8217;a fait réagir :</p>
 
-<p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
-
-<div><script src='https://gist.github.com/2244946.js?file=jquery.queue.coffee'></script>
-<noscript><pre><code>###*
- * jQuery queue plugin v0.1
- * ==========================
- *
- * Used to queue $.Deferred's Promise objects
- * author @_dhar
-###
-
-(($) -&gt;
-
-  class $.Queueable
-
-    constructor: (@builder, @args, @validator = -&gt; yes) -&gt;
-
-    promise: -&gt; @builder(@args...).promise()
-    expose:  -&gt; @args
-    isValid: -&gt; @validator(@args...)
-
-  $.queuedWhen = (queueables) -&gt;
-    
-    d = $.Deferred();
-
-    prev = null
-    deferredObjs = ((
-      do (q) -&gt;
-        if not q instanceof $.Queueable 
-          d.reject &quot;#{q} is not a $.Queueable object&quot;, q
-        else
-          prev = if prev then prev.pipe -&gt; q.promise() else q.promise()
-          prev.done -&gt; d.notify q.expose()
-          prev.fail -&gt; d.reject q.expose()
-    ) for q in queueables when q.isValid() )
-
-    $.when(deferredObjs...).then -&gt; d.resolve()
-
-    return d.promise()
-)(jQuery)</code></pre></noscript></div>
+<blockquote><p>@____ @________ de ce côté tu seras pas déçu, y a *rien* de fait pour le blogging ;) quelques hooks plus tard je vous dirai des news ^^</p></blockquote>
 
 
-<h3>References</h3>
+<p>Et voilà ma réponse :</p>
 
-<ul>
-<li>jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
-<li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
-<li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
-</ul>
+<blockquote><p>@_______ @____ @________ Pas sur d&#8217;avoir tout le contexte, mais http://octopress.org/  ? non?</p></blockquote>
 
+
+<p>Ça semble anodin comme ça&#8230;</p>
+
+<p>En intervenant dans cette conversation, mon intention était avant tout d&#8217;apporter mon aide éventuelle et d&#8217;en apprendre plus sur les outils que je peux être amené à utiliser.
+Mon erreur est sans doute d&#8217;avoir donné mon avis sans connaître le contexte complet de la conversation, ni même les participants.
+Mais après tout, le propre d&#8217;une conversation sur un media public, c&#8217;est bien qu&#8217;elle est ouverte à tout le monde, non?
+Pour avoir suivie celle-ci jusqu&#8217;au bout, il est évident maintenant que mon intervention était hors sujet et que je manquais d&#8217;éléments pour fournir un point de vue pertinent; pour autant, je n&#8217;aurais pas cru déclencher des réactions aussi <em>violentes</em> (le terme est un peu fort, mais je ne trouve pas plus approprié).</p>
+
+<p>L&#8217;objectif de ce billet n&#8217;est pas de commenter l&#8217;intégralité de la conversation, ni même de justifier mes arguments au cours de celle-ci ou d&#8217;accuser qui que ce soit, mais plutôt de présenter mon ressenti à la lecture des réponses que l&#8217;on m&#8217;a adressé.</p>
+
+<h2>Principes de base</h2>
+
+<p>Lorsque je m&#8217;adresse à quelqu&#8217;un, que ce soit dans la vie réelle, sur Internet, en privé ou en public, je fais de mon mieux pour rester respectueux et poli, et j&#8217;attends de mes interlocuteurs qu&#8217;ils en fassent de même.
+C&#8217;est la base de relations sociales <em>saines</em> et <em>constructives</em>.
+À partir de là, on peut discuter normalement.
+À partir de là, chacun peut avoir une opinion différente, exposer son point de vue, se tromper, convaincre ou rester sur ses positions.</p>
+
+<p>Je crois avoir respecté ces principes de base ici aussi, et si malgré tout, certains de mes propos ont étés mal compris je m&#8217;en excuse. Certaines des réponses que j&#8217;ai reçu, en revanche, m&#8217;ont paru aller bien au delà de ces principes.
+Ça reste un ressenti personnel, j&#8217;aurai peut-être réagi différemment à un autre moment et je aussi pense que le format en 140 caractères imposé par Twitter contribue à amplifier cette impression, mais j&#8217;ai sérieusement vécu ce moment comme une agression.
+Je ne suis même pas certain que tous les autres participants aient pris conscience de la tournure déplacée de certains propos.</p>
+
+<p>En écrivant ce billet, mon intention n&#8217;est pas de viser quelqu&#8217;un en particulier.
+J&#8217;avais simplement besoin de poser ça par écrit.
+D&#8217;abord pour me rappeler ces quelques minutes, et aussi en espérant que les rares lecteurs qui me liront s&#8217;en souviendrons lors de leurs discussions futures, en ligne ou non.</p>
+
+<h2>Pour finir</h2>
+
+<p>&#8230;si je peux me permettre un conseil qui vaut ce qu&#8217;il vaut:</p>
+
+<p>Démarrer une conversation sur un media public implique que tout le monde peut y participer.
+Dans ce contexte, même si chacun est en droit d&#8217;estimer qu&#8217;un point de vue manque de pertinence, je ne vois pas ce qui justifie le fait d&#8217;exprimer son désaccord de façon agressive ou irrespectueuse.
+Si vous ne souhaitez voir personne d&#8217;autre intervenir, mentionnez le clairement ou mieux, utilisez un autre moyen de communication, privé de préférence.</p>
+
+<p>Et puis, quand on parle de technos Web là, ça devrait rester fun, non?</p>
+
+<hr />
+
+<p>PS : <em>Pour ceux qui ont participé à la conversation dont il est question ici, s&#8217;ils vous arrivait de lire ce texte, sachez que je suis tout à fait disposé à discuter de l&#8217;usage et de la pertinence ou non d&#8217;octopress comme engine de blog, tant que ça n&#8217;a pas lieu en 140 caractères et que le ton reste amical.</em></p>
 </div>
 
 
@@ -186,12 +180,12 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
   
 
 
-<time datetime="2012-03-31T21:46:00+02:00" pubdate data-updated="true">Mar 31<span>st</span>, 2012</time>
+<time datetime="2013-01-24T23:28:00+01:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/coffeescript/'>Coffeescript</a>, <a class='category' href='/blog/categories/deferred-objects/'>Deferred objects</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/jquery-plugin/'>jQuery plugin</a>
+    <a class='category' href='/blog/categories/in-french/'>In French</a>, <a class='category' href='/blog/categories/personal-life/'>Personal Life</a>
   
 </span>
 
@@ -200,7 +194,7 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/" >Tweet</a>
   
   
   
@@ -209,10 +203,8 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/" title="Previous Post: File Upload Form - Part 1: Feature Detection">&laquo; File Upload Form - Part 1: Feature Detection</a>
+        <a class="basic-alignment left" href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/" title="Previous Post: Adding Grunt to your web-application project">&laquo; Adding Grunt to your web-application project</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/" title="Next Post: File Upload Form - Part 2: Loosely Coupled Modules">File Upload Form - Part 2: Loosely Coupled Modules &raquo;</a>
       
     </p>
   </footer>
@@ -366,8 +358,8 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/';
-        var disqus_url = 'http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/';
+        var disqus_identifier = 'http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/';
+        var disqus_url = 'http://www.dhar.fr/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/';
         var disqus_script = 'embed.js';
       
     (function () {
