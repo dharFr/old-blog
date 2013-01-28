@@ -9,7 +9,7 @@
   <meta name="author" content="Olivier Audard">
 
   
-  <meta name="description" content="Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&#8230; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt &hellip;">
+  <meta name="description" content="If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &#8220; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,145 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">jQuery Plugin for ping-URL Process</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-26T00:00:00+02:00" pubdate data-updated="true">Jul 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &#8220;ping URL&#8221; process and provides some options.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/">jQuery Plugin Pattern Written in Coffeescript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-24T00:00:00+02:00" pubdate data-updated="true">Jul 24<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Once your <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> environment is up and running, you may want to write some awesome new jQuery plugin with CoffeeScript.</p>
+
+<p>The code bellow is a starting point, it&#8217;s clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
+
+<div><script src='https://gist.github.com/1101485.js?file='></script>
+<noscript><pre><code>###*
+ * jQuery pluginName plugin v0.1
+ * ==========================
+ * see http://docs.jquery.com/Plugins/Authoring
+ *
+ * plugin description goes here
+ * author your.name@email.com
+###
+
+(($) -&gt;
+    # Private functions 
+    privateFunc = () -&gt;
+        console.log &quot;private&quot;
+    
+    # Public Functions
+    methods = 
+        init: () -&gt;
+            console.log 'init'
+            @each -&gt;
+                $this = $(@)
+                data = $this.data 'pluginName'
+                if not data
+                    ### Do more stuff here ###
+                    $(@).data 'pluginName' 
+                        target: $this
+                return
+        
+        destroy: () -&gt;
+            @each -&gt;
+                $this = $(@)
+                data = $this.data 'pluginName'
+                
+                data.pluginName.remove()
+                $this.removeData 'pluginName'
+                return
+
+    $.fn.pluginName = (method) -&gt;
+        
+        # Method calling logic
+        if methods[method]
+            methods[method].apply this, Array.prototype.slice.call arguments, 1 
+        else if typeof method is 'object' or !method 
+            methods.init.apply this, arguments
+        else
+            $.error &quot;jQuery.pluginName: Method #{ method } does not exist on jQuery.pluginName&quot;
+    return
+)(jQuery)
+</code></pre></noscript></div>
+
+
+<p>Links Summary:</p>
+
+<ul>
+<li><a href="https://gist.github.com/1101485#file_jquery.plugin_name.coffee">jquery.plugin_name.coffee</a> source code</li>
+<li><a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a></li>
+<li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
