@@ -12,4 +12,5 @@ Owner: {{ site.author }}.
 
 /* SITE */
 Last update: {{ site.time | date_to_long_string }}
-Software: Octopress, Jekyll
+Software: Octopress, Jekyll - http://octopress.org/
+Theme: Greyshade by Shashank Mehta - http://shashankmehta.in/archive/2012/greyshade.html

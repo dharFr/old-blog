@@ -3,11 +3,11 @@
 # ----------------------- #
 
 url: http://www.dhar.fr
-title: dhar's Blog
-subtitle: My personnal blog. Mostly Web Dev stuff...
+title: dhar's blog
+subtitle: Mostly Web Dev stuff...
 author: Olivier Audard
 simple_search: http://google.com/search
-description:
+description: "My name is Olivier Audard, I'm a Front-end developer at <a href='http://www.dailymotion.com/'>Dailymotion</a>, co-founder of  <a href='http://www.twitter.com/JSSophia'>@JSSophia</a>, Tai-Chi-Chuan student, Video Gamer, Role Playing Gamer"
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -75,14 +75,14 @@ github_skip_forks: true
 
 # Twitter
 twitter_user: _dhar
-twitter_tweet_count: 5
+twitter_tweet_count: 0
 twitter_show_replies: false
 twitter_follow_button: false
 twitter_show_follower_count: false
 twitter_tweet_button: true
 
 # Google +1
-google_plus_one: false
+google_plus_one: true
 google_plus_one_size: medium
 
 # Google Plus Profile
@@ -98,12 +98,15 @@ pinboard_count: 3
 delicious_user:
 delicious_count: 3
 
+# Gravatar
+gravatar_email: audard@gmail.com
+
 # Disqus Comments
 disqus_short_name: dhar
 disqus_show_comment_count: false
 
 # Google Analytics
-#google_analytics_tracking_id: UA-1823374-1
+google_analytics_tracking_id: UA-1823374-1
 
 # Facebook Like
 facebook_like: false
