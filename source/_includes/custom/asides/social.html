@@ -1,0 +1,28 @@
+<section>
+  <h1>Social Me</h1>
+  <ul class="socialme">
+    {% if site.twitter_user %}
+    <li class="socialme-twitter">
+      <a href="http://twitter.com/{{ site.twitter_user }}" rel="me" target="_blank" title="twitter">@{{ site.twitter_user }}</a> on Twitter
+    </li>
+    {% endif %}
+        
+    {% if site.github_user %}
+    <li class="socialme-github">
+      <a href="https://github.com/{{ site.github_user }}" rel="me" target="_blank" title="github">Github</a>
+    </li>
+    {% endif %}
+  
+    {% if site.googleplus_user %}
+    <li class="socialme-googleplus">
+      <a href="https://plus.google.com/u/0/{{ site.googleplus_user }}" rel="me" target="_blank" title="googleplus">+Olivier Audard</a> on Google+
+    </li>
+    {% endif %}
+  
+    {% if site.spotify_user %}
+    <li class="socialme-spotify">
+      <a href="http://open.spotify.com/user/{{ site.spotify_user }}" rel="me" target="_blank" title="spotify">Spotify</a>
+    </li>
+    {% endif %}
+  </ul>
+</section>
