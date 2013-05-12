@@ -1,82 +1,91 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>dhar's Blog</title>
-  <meta name="author" content="Olivier Audard">
+	<meta charset="utf-8">
+	<title>dhar's blog</title>
+	<meta name="author" content="Olivier Audard">
 
-  
-  <meta name="description" content="If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &ldquo; &hellip;">
-  
+	
+	<meta name="description" content="Jul 26th, 2011 Javascript, jQuery, jQuery plugin jQuery Plugin for ping-URL Process If your page runs into an iframe hosted by another domain, you &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://www.dhar.fr/blog/page/2">
-  <link rel="author" href="/humans.txt" />
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+	<link href="/atom.xml" rel="alternate" title="dhar's blog" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://www.dhar.fr/blog/page/2/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-  
-
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">dhar's Blog</a></h1>
-  
-    <h2>My personnal blog. Mostly Web Dev stuff...</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:www.dhar.fr" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img class="gravatar" src="http://www.gravatar.com/avatar/cb972f1f26bcba62452abaaae6845e6a?s=160"/>
+</div>
+<h1><a href="/">dhar's blog</a></h1>
+<p class="subtitle">Mostly Web Dev stuff...</p>
+<nav id="main-nav">
+	<ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
+	<section class="aboutme">
+		<p>My name is Olivier Audard, I'm a Front-end developer at <a href='http://www.dailymotion.com/'>Dailymotion</a>, co-founder of  <a href='http://www.twitter.com/JSSophia'>@JSSophia</a>, Tai-Chi-Chuan student, Video Gamer, Role Playing Gamer</p>
+	</section>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">jQuery Plugin for ping-URL Process</a></h1>
-    
-    
-      <p class="meta">
-        
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/101349134484478418778" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/_dhar" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dharFr" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -88,36 +97,31 @@
   
 
 
-<time datetime="2011-07-26T00:00:00+02:00" pubdate data-updated="true">Jul 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-07-26T00:00:00+02:00" data-updated="true" itemprop="datePublished">Jul 26<span>th</span>, 2011</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &ldquo;ping URL&rdquo; process and provides some options.</p>
+	<a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/jquery-plugin/'>jQuery plugin</a>
+
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/">Read on &rarr;</a>
-    </footer>
-  
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/" itemprop="url">jQuery Plugin for ping-URL Process</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &ldquo;ping URL&rdquo; process and provides some options.</p>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/">jQuery Plugin Pattern Written in Coffeescript</a></h1>
-    
-    
-      <p class="meta">
-        
+		
+		<a href="/blog/2011/07/26/jquery-plugin-for-ping-url-process/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -129,14 +133,19 @@
   
 
 
-<time datetime="2011-07-24T00:00:00+02:00" pubdate data-updated="true">Jul 24<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-07-24T00:00:00+02:00" data-updated="true" itemprop="datePublished">Jul 24<span>th</span>, 2011</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p>Once your <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> environment is up and running, you may want to write some awesome new jQuery plugin with CoffeeScript.</p>
+	<a class='category' href='/blog/categories/coffeescript/'>CoffeeScript</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/jquery-plugin/'>jQuery plugin</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript/" itemprop="url">jQuery Plugin Pattern Written in Coffeescript</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Once your <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> environment is up and running, you may want to write some awesome new jQuery plugin with CoffeeScript.</p>
 
 <p>The code bellow is a starting point, it&rsquo;s clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
 
@@ -199,87 +208,81 @@
 <li><a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a></li>
 </ul>
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-05T00:00:00+02:00" data-updated="true" itemprop="datePublished">Sep 5<span>th</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>, <a class='category' href='/blog/categories/jquery-plugin/'>jQuery plugin</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/">Plugin jQuery - Aide Contextuelle Javascript</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-09-05T00:00:00+02:00" pubdate data-updated="true">Sep 5<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&hellip; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt le temps qui manque un peu quand il s&#8217;agit de présenter tout ça de façon correcte.</p>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/" itemprop="url">Plugin jQuery - Aide Contextuelle Javascript</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&hellip; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt le temps qui manque un peu quand il s&#8217;agit de présenter tout ça de façon correcte.</p>
 
 <p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd&#8217;hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c&#8217;est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d&#8217;un autre. J&#8217;ai appelé ce plugin &lsquo;helpBox&rsquo; car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
 
 <p>Voici le <strong> <a href="https://gist.github.com/1101480">code source</a></strong>.</p>
 
+
+		
+		<a href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-20T00:00:00+02:00" data-updated="true" itemprop="datePublished">Apr 20<span>th</span>, 2010</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/qrcode/'>QRCode</a>, <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/">QR Codes: Intégration Dans Votre Application iPhone en 10 Minutes Chrono!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-20T00:00:00+02:00" pubdate data-updated="true">Apr 20<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="/assets/dhar/qrcode.png" width="150" height="150" title="Decode me if you can" alt="Sample QR Code"></p>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/" itemprop="url">QR Codes: Intégration Dans Votre Application iPhone en 10 Minutes Chrono!</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img class="right" src="/assets/dhar/qrcode.png" width="150" height="150" title="Decode me if you can" alt="Sample QR Code"></p>
 
 <h3>Pour les plus pressés, ça se passe ici:</h3>
 
@@ -287,27 +290,17 @@
 
 <h3>Pour les autres, voilà un peu plus de détails:</h3>
 
-<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d&#8217;un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés &ldquo;magiques&rdquo;.</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/">Read on &rarr;</a>
-    </footer>
-  
+<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d&#8217;un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés &ldquo;magiques&rdquo;.
+		
+		<a href="/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/">UIScrollView: Extention Du Protocole Associé Au Delegate</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -319,14 +312,19 @@
   
 
 
-<time datetime="2010-04-15T00:00:00+02:00" pubdate data-updated="true">Apr 15<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2010-04-15T00:00:00+02:00" data-updated="true" itemprop="datePublished">Apr 15<span>th</span>, 2010</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p><img class="right" src="/assets/dhar/ImageViewer1-161x300.png" width="161" height="300" title="UIScrollView dans un ImageViewer" alt="ImageViewer"></p>
+	<a class='category' href='/blog/categories/objective-c/'>Objective-C</a>, <a class='category' href='/blog/categories/iphone/'>iPhone</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/" itemprop="url">UIScrollView: Extention Du Protocole Associé Au Delegate</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img class="right" src="/assets/dhar/ImageViewer1-161x300.png" width="161" height="300" title="UIScrollView dans un ImageViewer" alt="ImageViewer"></p>
 
 <p>Après le grand ménage sur le blog, plein d&#8217;enthousiasme, j&#8217;ai entrepris de rédiger un tutoriel  détaillé  à propos du développement d&#8217;un ImageViewer pour iPhone, avec une interface la plus proche possible de l&#8217;application <code>Photos</code>. Au cours de l&#8217;écriture de ce billet, j&#8217;ai constaté 2 choses:</p>
 
@@ -339,84 +337,31 @@
 <p>En revanche, lors du développement de mon ImageViewer, il y a un aspect qui a attiré mon attention: l&#8217;extension d&#8217;un protocole. Ce point précis peut présenter une certaine difficulté pour peu qu&#8217;on n&#8217;y ai jamais été confronté et il m&#8217;a été assez difficile de trouver des exemples clair sur le web.
 J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la façon de dériver la classe <code>UIScrollView</code> tout en étendant le protocole <code>UIScrollViewDelegate</code> associé.</p>
 
+
+		
+		<a href="/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <div class="pagination">
+<nav id="pagenavi">
     
-    <a href="/blog/archives">Blog Archives</a>
+        <a href="/" class="prev">Prev</a>
     
-    <a class="next" href="/">Newer &rarr;</a>
     
-  </div>
-</div>
-<aside class="sidebar">
-  
-    
-<section>
-  <h1>About Me</h1>
-  <div id="twitter-profile" style="margin-top:0.5em;">
-    <p>
-      <strong>Olivier Audard</strong> 
-      (<a href="http://twitter.com/_dhar">@_dhar</a>)
-    </p>
-    <p></p>
-  </div>
-  <script type="text/javascript">
-    $(document).ready(function(){
-        var container = $('#twitter-profile'),
-            user = "_dhar";
-        
-        function parseTwLinks(s) {
-          var twUrl = "http://www.twitter.com/"
-          s = s.replace(/ (@([\w]+))/g, function(match, p1, p2) {
-              return " <a href='"+twUrl+p2+"'>"+p1+"</a>"
-          }).replace(/ (#([\w]+))/g, function(match, p1, p2) {
-              return " <a href='"+twUrl+"#!/search?q=%23"+p2+"'>"+p1+"</a>"
-          })
-          return s
-        }
-
-        $.ajax({
-            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
-          , dataType: 'jsonp'
-          , error: function (err) { $('#twitter-profile').addClass('error');  }
-          , success: function(data) {
-              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong> (<a href="http://twitter.com/'+user+'">@'+user+'</a>)<br/>'+data.location+'</p><p>'+parseTwLinks(data.description)+'</p>');
-            }
-        })
-      });
-  </script>
-</section>
-
-<section>
-  <h1>Side-projects</h1>
-  <ul>
-    <li><a href="/prettyprint-bookmarklet/">Prettify Bookmarklet</a></li>
-    <li><a href="/grunt-wkhtmltopdf/">Grunt plugin - wkhtmltopdf</a></li>
-  </ul>
-</section>
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
   Copyright &copy; 2013 - Olivier Audard -
   I'm a <a href="/humans.txt">human</a> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
-</footer>
-  
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+
 
 <script type="text/javascript">
       var disqus_shortname = 'dhar';
@@ -433,7 +378,13 @@ J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la faç
 
 
 
-
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 
@@ -449,7 +400,22 @@ J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la faç
 
 
 
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1823374-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
+
+
+		</div>
+	</div>
 </body>
 </html>

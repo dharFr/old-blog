@@ -1,98 +1,87 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>File Upload Form - Part 2: Loosely Coupled Modules - dhar's Blog</title>
-  <meta name="author" content="Olivier Audard">
+	<meta charset="utf-8">
+	<title>File Upload Form - Part 2: Loosely Coupled Modules - dhar's blog</title>
+	<meta name="author" content="Olivier Audard">
 
-  
-  <meta name="description" content="In this post, I&rsquo;ll continue to work on the code started in the first article on Feature Detection and File Upload Forms, so you&rsquo;d better &hellip;">
-  
+	
+	<meta name="description" content="File Upload Form - Part 2: Loosely Coupled Modules In this post, I&rsquo;ll continue to work on the code started in the first article on Feature &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules">
-  <link rel="author" href="/humans.txt" />
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+	<link href="/atom.xml" rel="alternate" title="dhar's blog" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-  
-
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">dhar's Blog</a></h1>
-  
-    <h2>My personnal blog. Mostly Web Dev stuff...</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:www.dhar.fr" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<img class="gravatar" src="http://www.gravatar.com/avatar/cb972f1f26bcba62452abaaae6845e6a?s=160"/>
+</div>
+<h1><a href="/">dhar's blog</a></h1>
+<p class="subtitle">Mostly Web Dev stuff...</p>
+<nav id="main-nav">
+	<ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
+	<section class="aboutme">
+		<p>My name is Olivier Audard, I'm a Front-end developer at <a href='http://www.dailymotion.com/'>Dailymotion</a>, co-founder of  <a href='http://www.twitter.com/JSSophia'>@JSSophia</a>, Tai-Chi-Chuan student, Video Gamer, Role Playing Gamer</p>
+	</section>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">File Upload Form - Part 2: Loosely Coupled Modules</h1>
-    
-    
-      <p class="meta">
-        
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/101349134484478418778" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/_dhar" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dharFr" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-07T17:48:00+02:00" pubdate data-updated="true">Apr 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>In this post, I&rsquo;ll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&rsquo;d better read it before going further.</p>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">File Upload Form - Part 2: Loosely Coupled Modules</h1>
+	<div class="entry-content" itemprop="articleBody"><p>In this post, I&rsquo;ll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&rsquo;d better read it before going further.</p>
 
 <p>Last time, we created a Javascript component used to upload a file asynchronously on the server.
 It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&rsquo;t support those APIs.</p>
@@ -260,152 +249,35 @@ It&rsquo;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 </div>
 
+</article>
 
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Olivier Audard</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-07T17:48:00+02:00" pubdate data-updated="true">Apr 7<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/feature-detection/'>Feature Detection</a>, <a class='category' href='/blog/categories/forms/'>Forms</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/loosely-coupled-modules/'>Loosely Coupled Modules</a>, <a class='category' href='/blog/categories/progressive-enhancement/'>Progressive Enhancement</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
+	<div class="share">
   
   <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/" data-via="_dhar" data-counturl="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/" >Tweet</a>
   
   
+  <div class="g-plusone" data-size="medium"></div>
+  
   
 </div>
 
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript/" title="Previous Post: Queued ajax requests with jQuery and Coffescript">&laquo; Queued ajax requests with jQuery and Coffescript</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/" title="Next Post: Some fun with git hooks and Grunt.js">Some fun with git hooks and Grunt.js &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
 
-  <section>
-    <h1>Comments</h1>
+<section id="comment">
+    <h1 class="title">Comments</h1>
     <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
-
+</section>
 </div>
-
-<aside class="sidebar">
-  
-    
-<section>
-  <h1>About Me</h1>
-  <div id="twitter-profile" style="margin-top:0.5em;">
-    <p>
-      <strong>Olivier Audard</strong> 
-      (<a href="http://twitter.com/_dhar">@_dhar</a>)
-    </p>
-    <p></p>
-  </div>
-  <script type="text/javascript">
-    $(document).ready(function(){
-        var container = $('#twitter-profile'),
-            user = "_dhar";
-        
-        function parseTwLinks(s) {
-          var twUrl = "http://www.twitter.com/"
-          s = s.replace(/ (@([\w]+))/g, function(match, p1, p2) {
-              return " <a href='"+twUrl+p2+"'>"+p1+"</a>"
-          }).replace(/ (#([\w]+))/g, function(match, p1, p2) {
-              return " <a href='"+twUrl+"#!/search?q=%23"+p2+"'>"+p1+"</a>"
-          })
-          return s
-        }
-
-        $.ajax({
-            url: "http://api.twitter.com/1/users/show.json?include_entities=false&screen_name="+user+"&callback=?"
-          , dataType: 'jsonp'
-          , error: function (err) { $('#twitter-profile').addClass('error');  }
-          , success: function(data) {
-              container.html('<img class="left" src="http://api.twitter.com/1/users/profile_image/'+user+'.json?size=bigger" alt="@'+user+'"><p><strong>'+data.name+'</strong> (<a href="http://twitter.com/'+user+'">@'+user+'</a>)<br/>'+data.location+'</p><p>'+parseTwLinks(data.description)+'</p>');
-            }
-        })
-      });
-  </script>
-</section>
-
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/01/27/reading-list-number-1/">Reading List #1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/27/starting-a-reading-list-posts-series/">Starting a "Reading List" Posts Series</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">De L'art De Converser Sur Twitter (Entre Geeks)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/">Adding Grunt to Your Web-application Project</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">Grunt Brings Automation to the Front-end Side</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Side-projects</h1>
-  <ul>
-    <li><a href="/prettyprint-bookmarklet/">Prettify Bookmarklet</a></li>
-    <li><a href="/grunt-wkhtmltopdf/">Grunt plugin - wkhtmltopdf</a></li>
-  </ul>
-</section>
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
+			</div>
+			<footer id="footer" class="inner"><p>
   Copyright &copy; 2013 - Olivier Audard -
   I'm a <a href="/humans.txt">human</a> -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
-</footer>
-  
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+
 
 <script type="text/javascript">
       var disqus_shortname = 'dhar';
@@ -425,7 +297,13 @@ It&rsquo;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 
 
-
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 
@@ -441,7 +319,22 @@ It&rsquo;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 
 
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-1823374-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
+
+
+		</div>
+	</div>
 </body>
 </html>

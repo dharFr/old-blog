@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: git | dhar's Blog]]></title>
+  <title><![CDATA[Category: git | dhar's blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-05-12T17:08:43+02:00</updated>
+  <updated>2013-05-12T23:46:39+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
