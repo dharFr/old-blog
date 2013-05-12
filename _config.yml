@@ -74,15 +74,11 @@ github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-<<<<<<< HEAD
 twitter_user: _dhar
 twitter_tweet_count: 5
 twitter_show_replies: false
 twitter_follow_button: false
 twitter_show_follower_count: false
-=======
-twitter_user:
->>>>>>> 7c31c9cb1e8a2120c0d61fa547f882eb811de12b
 twitter_tweet_button: true
 
 # Google +1
