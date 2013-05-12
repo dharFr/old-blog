@@ -9,7 +9,7 @@
   <meta name="author" content="Olivier Audard">
 
   
-  <meta name="description" content="In this post, I&#8217;ll continue to work on the code started in the first article on Feature Detection and File Upload Forms, so you&#8217;d better &hellip;">
+  <meta name="description" content="In this post, I&rsquo;ll continue to work on the code started in the first article on Feature Detection and File Upload Forms, so you&rsquo;d better &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,31 +18,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">
+  <link rel="canonical" href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules">
   <link rel="author" href="/humans.txt" />
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-1823374-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 
 </head>
 
@@ -103,13 +92,13 @@
   </header>
 
 
-<div class="entry-content"><p>In this post, I&#8217;ll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&#8217;d better read it before going further.</p>
+<div class="entry-content"><p>In this post, I&rsquo;ll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&rsquo;d better read it before going further.</p>
 
 <p>Last time, we created a Javascript component used to upload a file asynchronously on the server.
-It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&#8217;t support those APIs.</p>
+It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&rsquo;t support those APIs.</p>
 
-<p>This time, I&#8217;ll explain how to handle the thumbnail associated to the file input field.
-It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
+<p>This time, I&rsquo;ll explain how to handle the thumbnail associated to the file input field.
+It&rsquo;s a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
 
 <p>As mentioned in the previous post, you can find the source code on Github: <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a>.</p>
 
@@ -119,7 +108,7 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <ul>
 <li>Nicholas Zakas&#8217; talk on <a href="http://www.youtube.com/watch?v=vXjVFPosQHw">Scalable JavaScript Application Architecture</a> [YouTube]</li>
-<li>Addy Osmani&#8217;s <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
+<li>Addy Osmani&rsquo;s <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
 </ul>
 
 
@@ -130,11 +119,11 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <ul>
 <li>Split your code into separate modules, obviously.</li>
-<li>Don&#8217;t allow a module to know about each-other.</li>
+<li>Don&rsquo;t allow a module to know about each-other.</li>
 </ul>
 
 
-<p>How could you do that? Let&#8217;s try to illustrate the idea with our file upload form.</p>
+<p>How could you do that? Let&rsquo;s try to illustrate the idea with our file upload form.</p>
 
 <h3>Creating modules</h3>
 
@@ -147,13 +136,13 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 </ul>
 
 
-<p>In <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won&#8217;t detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let&#8217;s see those two as black boxes that fits with our requirements.</p>
+<p>In <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won&rsquo;t detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let&rsquo;s see those two as black boxes that fits with our requirements.</p>
 
 <h3>Communication between modules: introducing the observer</h3>
 
 <h4>The Observer Pattern</h4>
 
-<p>As mentioned before, our modules can&#8217;t reference each-other. In other words, in the <code>uploader</code>&#8217;s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
+<p>As mentioned before, our modules can&rsquo;t reference each-other. In other words, in the <code>uploader</code>&rsquo;s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -162,9 +151,9 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>That&#8217;s why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
+<p>That&rsquo;s why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
 
-<p>There many different implementations of the observer pattern but it&#8217;s basically a component with 3 methods:</p>
+<p>There many different implementations of the observer pattern but it&rsquo;s basically a component with 3 methods:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -192,24 +181,24 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 
 <ul>
-<li><code>observer.publish('some-topic', message)</code>: send a message on the topic &#8216;some-topic&#8217;</li>
-<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic &#8216;some-topic&#8217;. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
-<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics &#8216;some-topic&#8217;.</li>
+<li><code>observer.publish('some-topic', message)</code>: send a message on the topic &lsquo;some-topic&rsquo;</li>
+<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic &lsquo;some-topic&rsquo;. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
+<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics &lsquo;some-topic&rsquo;.</li>
 </ul>
 
 
 <h4>Using the observer</h4>
 
-<p>Back the the upload form, the implementation doesn&#8217;t change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
+<p>Back the the upload form, the implementation doesn&rsquo;t change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
 
-<figure class='code'><figcaption><span>adding the observer </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>adding the observer</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">obs</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">observer</span> <span class="o">||</span> <span class="p">{</span><span class="nx">publish</span><span class="o">:</span><span class="kd">function</span><span class="p">(){},</span> <span class="nx">subscribe</span><span class="o">:</span><span class="kd">function</span><span class="p">(){}};</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 
 
-<figure class='code'><figcaption><span>notifying the observer </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>notifying the observer</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -232,7 +221,7 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <p>On the other side, the thumbnail module need to listen to these events and to react to these in an appropriate way. In our case, when receiving a <code>submit</code> event, the thumbnail module should hide an existing image and display a load indicator. When receiving a <code>uploaded</code> event, it have to show the newly uploaded picture.</p>
 
-<figure class='code'><figcaption><span>listening to the observer </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>listening to the observer</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -265,8 +254,8 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <ul>
 <li>You mat decide to completely change some module implementation, as long as it sends the same messages to the observer, everything is fine.</li>
-<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That&#8217;s fine, the new module just need to subscribe the appropriate event.</li>
-<li>Last but not least, if some module appears to be broken, or if it doesn&#8217;t starts as expected, other modules won&#8217;t be much affected and your application is still working (even if some features are down).</li>
+<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That&rsquo;s fine, the new module just need to subscribe the appropriate event.</li>
+<li>Last but not least, if some module appears to be broken, or if it doesn&rsquo;t starts as expected, other modules won&rsquo;t be much affected and your application is still working (even if some features are down).</li>
 </ul>
 
 </div>
@@ -344,7 +333,7 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
     <p></p>
   </div>
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         var container = $('#twitter-profile'),
             user = "_dhar";
         
@@ -379,19 +368,19 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
       </li>
     
       <li class="post">
-        <a href="/blog/2013/01/27/starting-a-reading-list-posts-series/">Starting a "Reading List" posts series</a>
+        <a href="/blog/2013/01/27/starting-a-reading-list-posts-series/">Starting a "Reading List" Posts Series</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">De l'art de converser sur Twitter (entre geeks)</a>
+        <a href="/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">De L'art De Converser Sur Twitter (Entre Geeks)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/">Adding Grunt to your web-application project</a>
+        <a href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/">Adding Grunt to Your Web-application Project</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">Grunt brings automation to the front-end side</a>
+        <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">Grunt Brings Automation to the Front-end Side</a>
       </li>
     
   </ul>
@@ -413,7 +402,7 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
   <a href="https://github.com/dharFr">@dharFr</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -440,7 +429,7 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
     <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
       getTwitterFeed("_dhar", 5, false);
     });
   </script>

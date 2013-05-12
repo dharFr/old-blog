@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Deferred objects | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/deferred-objects/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -19,14 +19,14 @@
     <updated>2012-03-31T21:46:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript</id>
     <content type="html"><![CDATA[<p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
+Using jQuery&rsquo;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
 
 <!--more-->
 
 
-<p>You probably already know that all jQuery's ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That's why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries' progress.</p>
+<p>You probably already know that all jQuery&rsquo;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&rsquo;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries' progress.</p>
 
-<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it's such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
+<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&rsquo;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
 
 <p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
 
@@ -73,7 +73,7 @@ Using jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferre
 <h3>References</h3>
 
 <ul>
-<li>jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
+<li>jQuery&rsquo;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
 <li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
 <li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
 </ul>

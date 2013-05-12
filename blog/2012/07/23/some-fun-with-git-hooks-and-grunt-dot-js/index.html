@@ -9,7 +9,7 @@
   <meta name="author" content="Olivier Audard">
 
   
-  <meta name="description" content="Before going further, I&#8217;ll start by saying that I&#8217;m a Git and Github noob, so if you have a better solution to achieve the same goal, &hellip;">
+  <meta name="description" content="Before going further, I&rsquo;ll start by saying that I&rsquo;m a Git and Github noob, so if you have a better solution to achieve the same goal, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,31 +18,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/">
+  <link rel="canonical" href="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js">
   <link rel="author" href="/humans.txt" />
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-1823374-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 
 </head>
 
@@ -103,7 +92,7 @@
   </header>
 
 
-<div class="entry-content"><p>Before going further, I&#8217;ll start by saying that I&#8217;m a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I&#8217;ll be happy to hear it..!</p>
+<div class="entry-content"><p>Before going further, I&rsquo;ll start by saying that I&rsquo;m a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I&rsquo;ll be happy to hear it..!</p>
 
 <p>A few weeks ago, I implemented a small bookmarklet to apply <a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a> anywhere on the Web.
 I put the source code <a href="https://github.com/dharFr/prettyprint-bookmarklet">on Github</a> and used the (<em>awesome</em>) <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">Automatic Page Generator</a> to quickly create a landing page to host my bookmarklet.</p>
@@ -118,7 +107,7 @@ At this point, my concern was the following: How could I include the bookmarklet
 
 <p>In a first try, I could just copy/paste the minified source into an <code>&lt;a href="..."&gt;</code> link in my <code>index.html</code>.
 But what happens if I update the source?
-I&#8217;ll probably have to deal with that kind of work flow:</p>
+I&rsquo;ll probably have to deal with that kind of work flow:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -151,13 +140,13 @@ I&#8217;ll probably have to deal with that kind of work flow:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Rather boring, right? Totally agree! And that&#8217;s why I decided to dig a little further to see how I could automate this.</p>
+<p>Rather boring, right? Totally agree! And that&rsquo;s why I decided to dig a little further to see how I could automate this.</p>
 
 <h2>Automate the whole thing!</h2>
 
 <h3>Avoiding copy / paste</h3>
 
-<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it&#8217;s probably better to use the following:</p>
+<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it&rsquo;s probably better to use the following:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -212,7 +201,7 @@ I ended up with an HTML source file, with a placeholder for the bookmarklet:</p>
 
 <p>Basically, <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks">Git Hooks</a> allow you to automatically run custom scripts at any step in your workflow.
 Hooks must be defined in the <code>.git/hooks/</code> folder.
-Placeholder files are already created, giving a pretty good idea about what&#8217;s possible or not.</p>
+Placeholder files are already created, giving a pretty good idea about what&rsquo;s possible or not.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -277,16 +266,16 @@ Placeholder files are already created, giving a pretty good idea about what&#821
 
 
 <p>As both <code>master</code> and <code>gh-pages</code> branches are modified, they both need to be pushed on the remote repository.
-I use <code>git push --all</code>, which is fine if you don&#8217;t have any other updated branch. Otherwise, you&#8217;ll need a specific push for each branch.</p>
+I use <code>git push --all</code>, which is fine if you don&rsquo;t have any other updated branch. Otherwise, you&rsquo;ll need a specific push for each branch.</p>
 
 <h2>Going further</h2>
 
-<p>I&#8217;d like to find a way to stop the script if the commit doesn&#8217;t occur on the <code>master</code> branch, but I&#8217;m not sure how to do it&#8230;</p>
+<p>I&rsquo;d like to find a way to stop the script if the commit doesn&rsquo;t occur on the <code>master</code> branch, but I&rsquo;m not sure how to do it&hellip;</p>
 
-<p>I&#8217;ll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
+<p>I&rsquo;ll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
 Grunt.js already simplified this to a one liner, but I often forget to call it before committing changes.</p>
 
-<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I&#8217;d like to have an opportunity to try it on a larger project and see how it goes.</p>
+<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I&rsquo;d like to have an opportunity to try it on a larger project and see how it goes.</p>
 
 <hr />
 
@@ -325,7 +314,7 @@ Grunt.js already simplified this to a one liner, but I often forget to call it b
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/automation/'>Automation</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/git-hooks/'>git hooks</a>, <a class='category' href='/blog/categories/grunt-js/'>grunt.js</a>
+    <a class='category' href='/blog/categories/automation/'>Automation</a>, <a class='category' href='/blog/categories/git/'>git</a>, <a class='category' href='/blog/categories/git-hooks/'>git hooks</a>, <a class='category' href='/blog/categories/grunt-dot-js/'>grunt.js</a>
   
 </span>
 
@@ -373,7 +362,7 @@ Grunt.js already simplified this to a one liner, but I often forget to call it b
     <p></p>
   </div>
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         var container = $('#twitter-profile'),
             user = "_dhar";
         
@@ -408,19 +397,19 @@ Grunt.js already simplified this to a one liner, but I often forget to call it b
       </li>
     
       <li class="post">
-        <a href="/blog/2013/01/27/starting-a-reading-list-posts-series/">Starting a "Reading List" posts series</a>
+        <a href="/blog/2013/01/27/starting-a-reading-list-posts-series/">Starting a "Reading List" Posts Series</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">De l'art de converser sur Twitter (entre geeks)</a>
+        <a href="/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">De L'art De Converser Sur Twitter (Entre Geeks)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/">Adding Grunt to your web-application project</a>
+        <a href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/">Adding Grunt to Your Web-application Project</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">Grunt brings automation to the front-end side</a>
+        <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">Grunt Brings Automation to the Front-end Side</a>
       </li>
     
   </ul>
@@ -442,7 +431,7 @@ Grunt.js already simplified this to a one liner, but I often forget to call it b
   <a href="https://github.com/dharFr">@dharFr</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -469,7 +458,7 @@ Grunt.js already simplified this to a one liner, but I often forget to call it b
     <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
       getTwitterFeed("_dhar", 5, false);
     });
   </script>

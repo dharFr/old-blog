@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Feature Detection | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/feature-detection/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -18,13 +18,13 @@
     <link href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/"/>
     <updated>2012-04-07T17:48:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules</id>
-    <content type="html"><![CDATA[<p>In this post, I'll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you'd better read it before going further.</p>
+    <content type="html"><![CDATA[<p>In this post, I&rsquo;ll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&rsquo;d better read it before going further.</p>
 
 <p>Last time, we created a Javascript component used to upload a file asynchronously on the server.
-It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don't support those APIs.</p>
+It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&rsquo;t support those APIs.</p>
 
-<p>This time, I'll explain how to handle the thumbnail associated to the file input field.
-It's a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
+<p>This time, I&rsquo;ll explain how to handle the thumbnail associated to the file input field.
+It&rsquo;s a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
 
 <p>As mentioned in the previous post, you can find the source code on Github: <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a>.</p>
 
@@ -34,7 +34,7 @@ It's a good example to introduce <em>loosely coupled modules</em>, and to show s
 
 <ul>
 <li>Nicholas Zakas' talk on <a href="http://www.youtube.com/watch?v=vXjVFPosQHw">Scalable JavaScript Application Architecture</a> [YouTube]</li>
-<li>Addy Osmani's <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
+<li>Addy Osmani&rsquo;s <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
 </ul>
 
 
@@ -45,11 +45,11 @@ It's a good example to introduce <em>loosely coupled modules</em>, and to show s
 
 <ul>
 <li>Split your code into separate modules, obviously.</li>
-<li>Don't allow a module to know about each-other.</li>
+<li>Don&rsquo;t allow a module to know about each-other.</li>
 </ul>
 
 
-<p>How could you do that? Let's try to illustrate the idea with our file upload form.</p>
+<p>How could you do that? Let&rsquo;s try to illustrate the idea with our file upload form.</p>
 
 <h3>Creating modules</h3>
 
@@ -62,13 +62,13 @@ It's a good example to introduce <em>loosely coupled modules</em>, and to show s
 </ul>
 
 
-<p>In <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won't detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let's see those two as black boxes that fits with our requirements.</p>
+<p>In <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won&rsquo;t detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let&rsquo;s see those two as black boxes that fits with our requirements.</p>
 
 <h3>Communication between modules: introducing the observer</h3>
 
 <h4>The Observer Pattern</h4>
 
-<p>As mentioned before, our modules can't reference each-other. In other words, in the <code>uploader</code>'s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
+<p>As mentioned before, our modules can&rsquo;t reference each-other. In other words, in the <code>uploader</code>&rsquo;s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
 
 <p>``` js</p>
 
@@ -77,9 +77,9 @@ thumbnail.display(picture) // &lt;-- WRONG!
 </code></pre>
 
 <p>```
-That's why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
+That&rsquo;s why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
 
-<p>There many different implementations of the observer pattern but it's basically a component with 3 methods:
+<p>There many different implementations of the observer pattern but it&rsquo;s basically a component with 3 methods:
 ``` js</p>
 
 <pre><code>var observer = {
@@ -98,24 +98,24 @@ That's why we need to introduce the observer component. Its role is to allow com
 <p>```</p>
 
 <ul>
-<li><code>observer.publish('some-topic', message)</code>: send a message on the topic 'some-topic'</li>
-<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic 'some-topic'. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
-<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics 'some-topic'.</li>
+<li><code>observer.publish('some-topic', message)</code>: send a message on the topic &lsquo;some-topic&rsquo;</li>
+<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic &lsquo;some-topic&rsquo;. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
+<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics &lsquo;some-topic&rsquo;.</li>
 </ul>
 
 
 <h4>Using the observer</h4>
 
-<p>Back the the upload form, the implementation doesn't change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
+<p>Back the the upload form, the implementation doesn&rsquo;t change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
 
-<p>``` javascript adding the observer https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13 Source</p>
+<p>``` javascript adding the observer <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13</a> Source</p>
 
 <pre><code>this.obs = options.observer || {publish:function(){}, subscribe:function(){}};
 </code></pre>
 
 <p>```</p>
 
-<p>``` javascript notifying the observer https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144 Source</p>
+<p>``` javascript notifying the observer <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144</a> Source</p>
 
 <pre><code>beforeUpload: function(file) {
   this.obs.publish('submit.uploader', this.fileId, file);
@@ -132,7 +132,7 @@ onUploadDone: function(data) {
 
 <p>On the other side, the thumbnail module need to listen to these events and to react to these in an appropriate way. In our case, when receiving a <code>submit</code> event, the thumbnail module should hide an existing image and display a load indicator. When receiving a <code>uploaded</code> event, it have to show the newly uploaded picture.</p>
 
-<p>``` javascript listening to the observer https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31 Source</p>
+<p>``` javascript listening to the observer <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31</a> Source</p>
 
 <pre><code>Thumbnail.prototype = {
   init: function() {
@@ -155,8 +155,8 @@ As you can see in the above code, both</code>uploader<code>and</code>thumbnail` 
 
 <ul>
 <li>You mat decide to completely change some module implementation, as long as it sends the same messages to the observer, everything is fine.</li>
-<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That's fine, the new module just need to subscribe the appropriate event.</li>
-<li>Last but not least, if some module appears to be broken, or if it doesn't starts as expected, other modules won't be much affected and your application is still working (even if some features are down).</li>
+<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That&rsquo;s fine, the new module just need to subscribe the appropriate event.</li>
+<li>Last but not least, if some module appears to be broken, or if it doesn&rsquo;t starts as expected, other modules won&rsquo;t be much affected and your application is still working (even if some features are down).</li>
 </ul>
 
 ]]></content>
@@ -168,10 +168,10 @@ As you can see in the above code, both</code>uploader<code>and</code>thumbnail` 
     <updated>2012-03-24T16:55:00+01:00</updated>
     <id>http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection</id>
     <content type="html"><![CDATA[<p>Last Thursday, I gave a talk at <a href="http://www.twitter.com/jssophia">@JSSophia</a>, the local Javascript User Group I co-founded with <a href="http://www.twitter.com/FredGuillaume">@FredGuillaume</a>.
-The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn't come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
+The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn&rsquo;t come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
 
-<p>I choose <em>File Upload Form</em> example because it's standalone, frequently used and it can be improved by many ways with HTML5 APIs.
-It's a good example to introduce some very important Javascript concepts:</p>
+<p>I choose <em>File Upload Form</em> example because it&rsquo;s standalone, frequently used and it can be improved by many ways with HTML5 APIs.
+It&rsquo;s a good example to introduce some very important Javascript concepts:</p>
 
 <ol>
 <li>Using <strong>feature detection</strong> for <strong>progressive enhancement</strong></li>
@@ -181,9 +181,9 @@ It's a good example to introduce some very important Javascript concepts:</p>
 
 <p>This post focus on the first part of the talk.
 It presents the <em>feature detection</em> technique.
-I'll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
+I&rsquo;ll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
 
-<p>If you're in a hurry, or simply don't want to read the whole post, you'll find the slides embedded below and everything else on Github:</p>
+<p>If you&rsquo;re in a hurry, or simply don&rsquo;t want to read the whole post, you&rsquo;ll find the slides embedded below and everything else on Github:</p>
 
 <ul>
 <li>The final <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a> source code.</li>
@@ -218,11 +218,11 @@ I'll cover the second part, <em>loosely coupled modules</em>, in another article
 <h3>Initial Markup</h3>
 
 <p>The main idea in progressive enhancement is to provide an application that work in any context.
-A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application's user experience in modern browsers.</p>
+A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application&rsquo;s user experience in modern browsers.</p>
 
 <p>Talking about <em>file upload form</em>, our starting point is a simple HTML markup.</p>
 
-<p>``` html Initial Markup https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs Source</p>
+<p>``` html Initial Markup <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs</a> Source</p>
 
 <pre><code>&lt;form id="upload-form" action="" method="post" enctype="multipart/form-data"&gt;
 
@@ -236,27 +236,27 @@ A good approach is to start development with features that will work (quite) eve
 
 <p>```</p>
 
-<p>It's simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
+<p>It&rsquo;s simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
 On the other hand, it requires a full page reload so the first thing to do to bring some <em>hype</em> in this is to allow uploading the file with an asynchronous request.</p>
 
 <h3>Feature detection</h3>
 
-<p>Uploading a file trough an asynchronous request isn't that easy.
-The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it's not well supported across all browsers (IE, I'm looking at you... See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
+<p>Uploading a file trough an asynchronous request isn&rsquo;t that easy.
+The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it&rsquo;s not well supported across all browsers (IE, I&rsquo;m looking at you&hellip; See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
 
 <p>Remember that our main concern is to provide the best user experience on each browser.
-So how do we upload a file <em>asynchronously</em> in a browser that don't support <code>FormData</code> API?
+So how do we upload a file <em>asynchronously</em> in a browser that don&rsquo;t support <code>FormData</code> API?
 Answer is by using an <code>iframe</code>.</p>
 
 <h4>iframe file upload</h4>
 
 <p>Please note that I started by creating a jQuery plugin to make the code more easily reusable.
-I also hid the submit button and the bound event 'onchange' on the input field to submit the form.
+I also hid the submit button and the bound event &lsquo;onchange&rsquo; on the input field to submit the form.
 The following code snippets come from <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js">step1/upload.js</a> file.</p>
 
 <p>First, we have to listen to the <code>submit</code> event to prepare the form:</p>
 
-<p>``` javascript form submit event listener https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31 Source</p>
+<p>``` javascript form submit event listener <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31</a> Source</p>
 
 <pre><code>this.$form.on('submit.uploader', $.proxy(function(){
 
@@ -268,13 +268,13 @@ The following code snippets come from <a href="https://github.com/dharFr/uploade
 
 <p>```</p>
 
-<p>Next, let's append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
-Once done, the form can be submitted as usual, the server's answer will be loaded into the <code>iframe</code>.</p>
+<p>Next, let&rsquo;s append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
+Once done, the form can be submitted as usual, the server&rsquo;s answer will be loaded into the <code>iframe</code>.</p>
 
-<p>However, due to security concerns, we won't be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
+<p>However, due to security concerns, we won&rsquo;t be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
 This way, the server script will be aware that we are using an <code>iframe</code> and will be able to generate the appropriate response.</p>
 
-<p>``` javascript iframe upload https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80 Source
+<p>``` javascript iframe upload <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80</a> Source
 prepareIframeUpload: function() {</p>
 
 <pre><code>var id, cb, iframe, url;
@@ -315,7 +315,7 @@ window[cb] = $.proxy(function(data) {
 Knowing that the server response will be loaded as</code>iframe<code>content, the server script has to generate this small piece of HTML.
 It includes a</code>script<code>tag, witch calls the</code>callback<code>function on the parent window. The json</code>result` is send as a parameter of that function.</p>
 
-<p>``` html server response https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs Source</p>
+<p>``` html server response <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs</a> Source</p>
 
 <pre><code>&lt;script type="text/javascript"&gt;
 window.top.window['&lt;%- callback %&gt;'](&lt;%- result %&gt;);
@@ -326,26 +326,26 @@ window.top.window['&lt;%- callback %&gt;'](&lt;%- result %&gt;);
 
 <p>Here we are.
 Our script can send files asynchronously, without reloading the whole page, and it even works with old browsers.
-Of course, we could decide to stop there, but we won't because of the following:</p>
+Of course, we could decide to stop there, but we won&rsquo;t because of the following:</p>
 
 <ul>
-<li>No Error handling: if something goes wrong while sending the file, or if the server don't render the good response, the callback function will never be called, and we can't handle the error.
+<li>No Error handling: if something goes wrong while sending the file, or if the server don&rsquo;t render the good response, the callback function will never be called, and we can&rsquo;t handle the error.
 You probably want to add a timeout to the script above to avoid waiting for an answer that would never come.</li>
-<li>It's not AJAX.
+<li>It&rsquo;s not AJAX.
 You probably already notice this point.
 We are faking it.
 The form is still sent as HTML form, we only changed his target.
 The file is uploaded asynchronously, but without any XmlHttpRequest involved.</li>
-<li>It's dirty.
-I'm OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
+<li>It&rsquo;s dirty.
+I&rsquo;m OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
 </ul>
 
 
 <h4>FormData file upload</h4>
 
-<p>Time to do things the right way? OK. Let's start by editing the submit event listener as following:</p>
+<p>Time to do things the right way? OK. Let&rsquo;s start by editing the submit event listener as following:</p>
 
-<p>``` javascript updated submit event listener https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46 Source</p>
+<p>``` javascript updated submit event listener <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46</a> Source</p>
 
 <pre><code>this.$form.on('submit.uploader', $.proxy(function(){
 
@@ -374,17 +374,17 @@ I'm OK as it stays a fall-back solution, but keeping it as the main implementati
 
 <p>The <code>this.$upload</code> variable represents a jQuery object containing the <code>input[type=file]</code> DOM node (see the complete <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js">step2/upload.js</a> file for more details).
 Here we have to check if the browser supports both <code>File</code> and <code>FormData</code> APIs.
-If these two conditions are satisfied, we can go with the <em>"HTML5"</em> file upload.
-Otherwise, we just fall-back to the <code>iframe</code> hack... Simple isn't it?</p>
+If these two conditions are satisfied, we can go with the <em>&ldquo;HTML5&rdquo;</em> file upload.
+Otherwise, we just fall-back to the <code>iframe</code> hack&hellip; Simple isn&rsquo;t it?</p>
 
-<p>This is <strong>Feature Dectection</strong> and it's one of the <strong>key concepts of modern web development</strong>.
-It's the only way we have to use the latest HTML5 features without breaking old browser's support.</p>
+<p>This is <strong>Feature Dectection</strong> and it&rsquo;s one of the <strong>key concepts of modern web development</strong>.
+It&rsquo;s the only way we have to use the latest HTML5 features without breaking old browser&rsquo;s support.</p>
 
-<p>Now, we're sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
-As you can read, it's way simpler and less hacky compared to the <code>iframe</code> method.
+<p>Now, we&rsquo;re sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
+As you can read, it&rsquo;s way simpler and less hacky compared to the <code>iframe</code> method.
 Server response and errors are handled the same way than with any other ajax request.</p>
 
-<p>``` javascript FormData upload https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80 Source</p>
+<p>``` javascript FormData upload <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80</a> Source</p>
 
 <pre><code>upload: function(file) {
 
@@ -411,11 +411,11 @@ Server response and errors are handled the same way than with any other ajax req
 
 <p>```</p>
 
-<p>We're done for part 1.
+<p>We&rsquo;re done for part 1.
 Our upload form is fully functional for both modern and old browsers, and even with Javascript disabled.
 In the 2nd part, I explain how to handle the thumbnail associated to the file input field.
-It's a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
-<a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a></p>
+It&rsquo;s a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
+<a href="/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form &ndash; Part 2: Loosely Coupled Modules</a></p>
 
 <h3>References:</h3>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Objective-C | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/objective-c/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -18,7 +18,7 @@
     <link href="http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono/"/>
     <updated>2010-04-20T00:00:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2010/04/20/qr-codes-integration-dans-votre-application-iphone-en-10-minutes-chrono</id>
-    <content type="html"><![CDATA[<p><img class="right" src="/assets/dhar/qrcode.png" width="150" height="150" title="Decode me if you can" alt="Sample QR Code"></p>
+    <content type="html"><![CDATA[<p><img class="right" src="/assets/dhar/qrcode.png" width="150" height="150" title="&lsquo;Decode me if you can&rsquo; &lsquo;Sample QR Code&rsquo;" ></p>
 
 <h3>Pour les plus pressés, ça se passe ici:</h3>
 
@@ -26,17 +26,17 @@
 
 <h3>Pour les autres, voilà un peu plus de détails:</h3>
 
-<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d'un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés "magiques".<!--more--></p>
+<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d'un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés &ldquo;magiques&rdquo;.<!--more--></p>
 
 <p>Si tel est votre cas, sachez que la tâche sera des plus simples grâce à l'excellent projet <a href="http://zbar.sourceforge.net/">ZBar bar code reader</a>. L'intégration du wrapper Objective-C de cette librairie m'a pris en tout en pour tout 10 minutes. De plus, le scan des codes est effectué à la volée (comprenez sans que l'utilisateur ait besoin de presser le bouton de l'appareil photo, dès que le code est dans le cadre). La documentation limpide fournie sur le wiki du projet transformera votre application en un lecteur de codes à rendre jaloux le caissier de l'hyper en bas de chez vous.</p>
 
-<p>La doc est là:<a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a>. Dépêchez-vous, plus que 9'30...</p>
+<p>La doc est là:<a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a>. Dépêchez-vous, plus que 9'30&hellip;</p>
 
 <h4>Décoder des codes QR:</h4>
 
 <ul>
 <li><a href="http://itunes.apple.com/us/app/zbar-barcode-reader/id344957305?mt=8">L'application ZBar sur l'AppStore</a></li>
-<li><a href="http://code.google.com/p/zxing/">ZXing</a> (prononcer "Zebra_Crossing")</li>
+<li><a href="http://code.google.com/p/zxing/">ZXing</a> (prononcer &ldquo;Zebra_Crossing&rdquo;)</li>
 </ul>
 
 
@@ -55,7 +55,7 @@
     <link href="http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate/"/>
     <updated>2010-04-15T00:00:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2010/04/15/uiscrollview-extention-du-protocole-associe-au-delegate</id>
-    <content type="html"><![CDATA[<p><img class="right" src="/assets/dhar/ImageViewer1-161x300.png" width="161" height="300" title="UIScrollView dans un ImageViewer" alt="ImageViewer"></p>
+    <content type="html"><![CDATA[<p><img class="right" src="/assets/dhar/ImageViewer1-161x300.png" width="161" height="300" title="&lsquo;UIScrollView dans un ImageViewer&rsquo; &lsquo;ImageViewer&rsquo;" ></p>
 
 <p>Après le grand ménage sur le blog, plein d'enthousiasme, j'ai entrepris de rédiger un tutoriel  détaillé  à propos du développement d'un ImageViewer pour iPhone, avec une interface la plus proche possible de l'application <code>Photos</code>. Au cours de l'écriture de ce billet, j'ai constaté 2 choses:</p>
 
@@ -71,7 +71,7 @@ J'ai donc décidé de rédiger un billet plus court, qui détaille la façon de 
 <!--more-->
 
 
-<p>Si vous souhaitez, comme moi, reproduire l'interface de l'application <code>Photos</code> de votre iPhone, vous allez sans doute créer un <code>UIScrollView</code> afin de permettre à l'utilisateur de naviguer d'une image à l'autre. Pour ce faire, le projet "<a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a>" fourni en exemple dans la documentation d’Apple constitue un bon point de départ. La logique du scroll est contenue dans  les méthodes <code>viewDidLoad</code> et <code>layoutScrollImages</code> du fichier <code>MyViewController.m</code> mais il vous faudra l’adapter un peu à votre cas d’utilisation.</p>
+<p>Si vous souhaitez, comme moi, reproduire l'interface de l'application <code>Photos</code> de votre iPhone, vous allez sans doute créer un <code>UIScrollView</code> afin de permettre à l'utilisateur de naviguer d'une image à l'autre. Pour ce faire, le projet &ldquo;<a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a>&rdquo; fourni en exemple dans la documentation d’Apple constitue un bon point de départ. La logique du scroll est contenue dans  les méthodes <code>viewDidLoad</code> et <code>layoutScrollImages</code> du fichier <code>MyViewController.m</code> mais il vous faudra l’adapter un peu à votre cas d’utilisation.</p>
 
 <p>En revanche, j'ai constaté que les événements de <code>Touch</code> n'étaient pas transmis par la <code>UIScrollView</code>. Gênant lorsque l'on veut ajouter des interactions en plus du scroll.</p>
 
@@ -104,10 +104,10 @@ J'ai donc décidé de rédiger un billet plus court, qui détaille la façon de 
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// TapScrollView.m&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="s">&quot;TapScrollView.h&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">TapScrollView</span><span class="p">.</span><span class="n">h</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">implementation</span> <span class="n">TapScrollView</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@implementation</span> <span class="nc">TapScrollView</span>
+</span><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
 </span><span class='line'><span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
@@ -190,7 +190,7 @@ Voilà le code obtenu:</p>
 </span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Ok, on approche du but. <code>TapScrollView</code> réponds bien au protocole et la méthode <code>tap</code> sera correctement appelée elle-aussi. En revanche, les méthodes du protocole <code>UIScrollViewDelegate</code> ne sont plus appelés...
+<p>Ok, on approche du but. <code>TapScrollView</code> réponds bien au protocole et la méthode <code>tap</code> sera correctement appelée elle-aussi. En revanche, les méthodes du protocole <code>UIScrollViewDelegate</code> ne sont plus appelés&hellip;
 On tourne en rond.
 J'ai mis pas mal de temps à trouver la solution. L'astuce consiste à surcharger aussi les accès à la propriété <code>delegate</code>, de façon à transmettre les appels dans les deux sens (<code>UIScrollView</code> vers <code>TapScrollView</code> et vice-versa).
 Voilà le code final:</p>
@@ -215,9 +215,9 @@ Voilà le code final:</p>
 <span class='line-number'>18</span>
 </pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.m&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="s">&quot;TapScrollView.h&quot;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="n">import</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">TapScrollView</span><span class="p">.</span><span class="n">h</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="err">@</span><span class="n">implementation</span> <span class="n">TapScrollView</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@implementation</span> <span class="nc">TapScrollView</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
 </span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span>

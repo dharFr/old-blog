@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery plugin | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/jquery-plugin/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -19,14 +19,14 @@
     <updated>2012-03-31T21:46:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript</id>
     <content type="html"><![CDATA[<p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
+Using jQuery&rsquo;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
 
 <!--more-->
 
 
-<p>You probably already know that all jQuery's ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That's why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries' progress.</p>
+<p>You probably already know that all jQuery&rsquo;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&rsquo;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries' progress.</p>
 
-<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it's such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
+<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&rsquo;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
 
 <p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
 
@@ -73,7 +73,7 @@ Using jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferre
 <h3>References</h3>
 
 <ul>
-<li>jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
+<li>jQuery&rsquo;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
 <li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
 <li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
 </ul>
@@ -86,17 +86,17 @@ Using jQuery's <a href="http://api.jquery.com/category/deferred-object/">Deferre
     <link href="http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process/"/>
     <updated>2011-07-26T00:00:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process</id>
-    <content type="html"><![CDATA[<p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the "ping URL" process and provides some options.</p>
+    <content type="html"><![CDATA[<p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &ldquo;ping URL&rdquo; process and provides some options.</p>
 
 <!--more-->
 
 
-<p>The pinger will ask the given URL every 'interval' minutes if it detects
-some activity by listening to the events listed in 'listen' parameter.</p>
+<p>The pinger will ask the given URL every &lsquo;interval&rsquo; minutes if it detects
+some activity by listening to the events listed in &lsquo;listen&rsquo; parameter.</p>
 
-<p>Have a look to the 'defaults' variable below for further details about available parameters and default values.</p>
+<p>Have a look to the &lsquo;defaults&rsquo; variable below for further details about available parameters and default values.</p>
 
-<p><div><script src='https://gist.github.com/1107059.js?file='></script>
+<p><div><script src='https://gist.github.com/1107059.js'></script>
 <noscript><pre><code>/**
  * $.pinger
  * 
@@ -265,9 +265,9 @@ some activity by listening to the events listed in 'listen' parameter.</p>
     <id>http://www.dhar.fr/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript</id>
     <content type="html"><![CDATA[<p>Once your <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> environment is up and running, you may want to write some awesome new jQuery plugin with CoffeeScript.</p>
 
-<p>The code bellow is a starting point, it's clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
+<p>The code bellow is a starting point, it&rsquo;s clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
 
-<p><div><script src='https://gist.github.com/1101485.js?file='></script>
+<p><div><script src='https://gist.github.com/1101485.js'></script>
 <noscript><pre><code>###*
  * jQuery pluginName plugin v0.1
  * ==========================
@@ -334,9 +334,9 @@ some activity by listening to the events listed in 'listen' parameter.</p>
     <link href="http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/"/>
     <updated>2010-09-05T00:00:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript</id>
-    <content type="html"><![CDATA[<p>Voilà déjà pas mal de temps que je n'ai rien publié ici... Ce qui ne veux pas dire que j'ai rien dans les cartons. C'est plutôt le temps qui manque un peu quand il s'agit de présenter tout ça de façon correcte.</p>
+    <content type="html"><![CDATA[<p>Voilà déjà pas mal de temps que je n'ai rien publié ici&hellip; Ce qui ne veux pas dire que j'ai rien dans les cartons. C'est plutôt le temps qui manque un peu quand il s'agit de présenter tout ça de façon correcte.</p>
 
-<p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd'hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c'est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d'un autre. J'ai appelé ce plugin 'helpBox' car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
+<p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd'hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c'est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d'un autre. J'ai appelé ce plugin &lsquo;helpBox&rsquo; car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
 
 <p>Voici le <strong> <a href="https://gist.github.com/1101480">code source</a></strong>.</p>
 
@@ -344,7 +344,7 @@ some activity by listening to the events listed in 'listen' parameter.</p>
 
 
 <p>Rien de bien compliqué ici si l'on connais déjà la structure d'un plugin jQuery.
-On commence par définir quelques paramètres...</p>
+On commence par définir quelques paramètres&hellip;</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -366,7 +366,7 @@ On commence par définir quelques paramètres...</p>
 </span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Ensuite, le plugin 'helpBox' se contente de recherche le code HTML du contenu de l'aide pour l'ajouter au document avec le bouton associé.</p>
+<p>Ensuite, le plugin &lsquo;helpBox&rsquo; se contente de recherche le code HTML du contenu de l'aide pour l'ajouter au document avec le bouton associé.</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -404,7 +404,7 @@ On commence par définir quelques paramètres...</p>
 </span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">})</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Ensuite, il ajoute deux gestionnaires d’événement au bouton: un 'mouseover' pour ouvrir le dialogue d'aide et un 'click' pour fermer ce dernier.</p>
+<p>Ensuite, il ajoute deux gestionnaires d’événement au bouton: un &lsquo;mouseover&rsquo; pour ouvrir le dialogue d'aide et un &lsquo;click&rsquo; pour fermer ce dernier.</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -419,7 +419,7 @@ On commence par définir quelques paramètres...</p>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Open the box on button mouseover, close it on click</span>
-</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+</span><span class="s1">&#39; a&#39;</span><span class="p">).</span><span class="nx">mouseover</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;.</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">buttonCls</span><span class="o">+&amp;</span><span class="nx">lsquo</span><span class="p">;</span> <span class="nx">a</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;).</span><span class="nx">mouseover</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">o</span><span class="p">.</span><span class="nx">contentCls</span><span class="o">+</span><span class="s1">&#39;:hidden&#39;</span><span class="p">).</span><span class="nx">slideDown</span><span class="p">();</span>
 </span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>

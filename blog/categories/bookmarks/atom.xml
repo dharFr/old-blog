@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bookmarks | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/bookmarks/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -23,7 +23,7 @@
 <ul>
 <li><a href="http://parsleyjs.org/">Javascript forms validation.Powerful, UX aware &amp; Dead simple.</a></li>
 <li><a href="https://developers.google.com/speed/">Make the Web Faster — Google Developers</a></li>
-<li><a href="http://stackoverflow.com/questions/12556593/determining-a-page-is-outdated-on-github-pages">stackoverflow - Determining a page is outdated on github pages</a></li>
+<li><a href="http://stackoverflow.com/questions/12556593/determining-a-page-is-outdated-on-github-pages">stackoverflow &ndash; Determining a page is outdated on github pages</a></li>
 <li><a href="http://www.softwareishard.com/blog/firebug/firebug-tip-include-command/">Firebug Tip : include() command</a></li>
 <li><a href="http://csswizardry.com/2013/01/front-end-performance-for-web-designers-and-front-end-developers/">Front-end performance for web designers and front-end developers</a></li>
 <li><a href="http://parsleyjs.org/index.html">Javascript forms validation.Powerful, UX aware &amp; Dead simple.</a></li>
@@ -57,29 +57,29 @@
     <updated>2013-01-27T18:29:00+01:00</updated>
     <id>http://www.dhar.fr/blog/2013/01/27/starting-a-reading-list-posts-series</id>
     <content type="html"><![CDATA[<p>I read several articles on the Web every day.
-When discovering an article, if I find it interesting, or if I don't have time to read it at the time, I put it aside on <a href="http://getpocket.com" title="Pocket">Pocket</a> in order to easily find it later.</p>
+When discovering an article, if I find it interesting, or if I don&rsquo;t have time to read it at the time, I put it aside on <a href="http://getpocket.com" title="Pocket">Pocket</a> in order to easily find it later.</p>
 
 <p>The downsides are :</p>
 
 <ul>
 <li>I put aside too many items</li>
 <li>I often forgot to check out my reading list on Pocket</li>
-<li>Pocket doesn't provide a easy way share a bunch of links</li>
-<li>I don't want to save those on Pocket without a backup somewhere else</li>
+<li>Pocket doesn&rsquo;t provide a easy way share a bunch of links</li>
+<li>I don&rsquo;t want to save those on Pocket without a backup somewhere else</li>
 </ul>
 
 
 <p>For some time now, I looking for a way to force myself to check this list on a regular basis.
 Moreover, even if <a href="https://ifttt.com" title="IF This Then That">IFTTT</a> allows me to perform automatic backup of the bookmarks, no one but me can take advantage of this list.</p>
 
-<p>Starting today, I am launching a new series of articles entitled "Reading List".
+<p>Starting today, I am launching a new series of articles entitled &ldquo;Reading List&rdquo;.
 As its name obviously suggests, each article will bring together a few links to sites, articles, resources that have caught my attention on the web during the past few days.</p>
 
-<p>I plan to publish these posts on a weekly basis but it could be less depending on the volume I'll collect every week.
+<p>I plan to publish these posts on a weekly basis but it could be less depending on the volume I&rsquo;ll collect every week.
 I hope some of you will find this useful.
 Do not hesitate to tell me your thoughts about this in the comments below.</p>
 
-<p>As the process is mostly automated using IFTTT, Dropbox and a few scripts, I'll also think about explaining it in a upcoming article.</p>
+<p>As the process is mostly automated using IFTTT, Dropbox and a few scripts, I&rsquo;ll also think about explaining it in a upcoming article.</p>
 ]]></content>
   </entry>
   

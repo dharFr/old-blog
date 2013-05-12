@@ -19,31 +19,20 @@ During this talk, my purpose was to quickly present &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.dhar.fr/blog/2012/10/28/adding-grunt-to-your-web-application-project/">
+  <link rel="canonical" href="http://www.dhar.fr/blog/2012/10/28/adding-grunt-to-your-web-application-project">
   <link rel="author" href="/humans.txt" />
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="dhar's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-1823374-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
 
 </head>
 
@@ -106,14 +95,14 @@ During this talk, my purpose was to quickly present &hellip;">
 
 <div class="entry-content"><p>A few weeks ago, a gave a quick talk about <a href="http://www.gruntjs.com" title="Grunt homepage">Grunt</a> at <a href="http://www.twitter.com/jssophia" title="JS Sophia-Antipolis">@JSSophia</a>, our local Javascript User Group.
 During this talk, my purpose was to quickly present the tool and show some example use cases.
-I must confess I wasn&#8217;t as prepared as I would have been, so my talk may have been confused or unclear from time to time.
+I must confess I wasn&rsquo;t as prepared as I would have been, so my talk may have been confused or unclear from time to time.
 If you attended the event, I hope this post will give you more details.
-If not, it doesn&#8217;t matter, I&#8217;m still happy to share my thoughts about this amazing tool.</p>
+If not, it doesn&rsquo;t matter, I&rsquo;m still happy to share my thoughts about this amazing tool.</p>
 
-<p>You&#8217;ll find the slides bellow.
-The first part mostly present <em>Grunt</em> and why I think it&#8217;s a game-changer for front-end developers. As I already wrote about this in my <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
+<p>You&rsquo;ll find the slides bellow.
+The first part mostly present <em>Grunt</em> and why I think it&rsquo;s a game-changer for front-end developers. As I already wrote about this in my <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
 In the second part, I focused on showing a few examples use cases and concrete examples.
-That&#8217;s what I&#8217;m going to detail in this post.</p>
+That&rsquo;s what I&rsquo;m going to detail in this post.</p>
 
 <div class="dhar-style-embedder">
   <style>
@@ -138,11 +127,11 @@ That&#8217;s what I&#8217;m going to detail in this post.</p>
 
 <h2>Automating your web application</h2>
 
-<p>Bringing some automation to your web-application is probably the first thing you&#8217;ll try with Grunt.
-After all, that&#8217;s its first purpose, why it was designed for.</p>
+<p>Bringing some automation to your web-application is probably the first thing you&rsquo;ll try with Grunt.
+After all, that&rsquo;s its first purpose, why it was designed for.</p>
 
 <p>Because nothing worth an example, I reused an old project to illustrate this case.
-It&#8217;s a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
+It&rsquo;s a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
 The full project is available <a href="https://github.com/dharFr/gallery" title="Gallery App: 'master' branch">on Github</a>.
 The code I used as an example lives in the <em>master</em> branch.
 The original code, as it was before adding Grunt, lives in the <a href="https://github.com/dharFr/gallery/tree/before-grunt" title="Gallery App: 'before-grunt' branch">before-grunt</a> branch.</p>
@@ -158,7 +147,7 @@ The original code, as it was before adding Grunt, lives in the <a href="https://
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project&#8217;s folder.
+<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project&rsquo;s folder.
 The basic structure of a gruntfile is looks like this:</p>
 
 <figure class='code'><figcaption><span>grunt file basic structure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -209,7 +198,7 @@ What do we basically need ?</p>
 
 <h3>Setting up your tasks</h3>
 
-<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won&#8217;t be too difficult to define these for our project.
+<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won&rsquo;t be too difficult to define these for our project.
 If you need another task, start by searching if an existing <code>grunt-plugin</code> have already been created by the community.
 You can search for an existing plugin on <a href="http://www.gruntjs.com" title="Grunt homepage">grunt homepage</a> or directly with npm:</p>
 
@@ -223,10 +212,10 @@ You can search for an existing plugin on <a href="http://www.gruntjs.com" title=
 <p>Otherwise, you can define your own task using the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API</a>, but unless you need something very specific, I doubt you had to go there.
 Seriously, there are already 190 existing plugins at the time I write these lines.</p>
 
-<p>Once you&#8217;ve found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
-In our case, we&#8217;ll need two external tasks:</p>
+<p>Once you&rsquo;ve found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
+In our case, we&rsquo;ll need two external tasks:</p>
 
-<figure class='code'><figcaption><span>Loading external tasks </span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js#L125-126'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Loading external tasks</span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js#L125-126'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -238,11 +227,11 @@ In our case, we&#8217;ll need two external tasks:</p>
 
 
 <p>From there, we just need to configure our tasks.
-I&#8217;m not going to detail every single line in the resulting <code>gruntfile</code> bellow.
+I&rsquo;m not going to detail every single line in the resulting <code>gruntfile</code> bellow.
 Basically, it allows us to build (lint, concat and minify) javascript files, copy any other files to a <code>dist</code> folder, and run the tests on both <code>dev</code> and <code>dist</code> files.
 The syntax is quite self-explaining and you can always refer to the <a href="https://github.com/gruntjs/grunt/blob/master/docs/toc.md" title="Grunt Documentation">official documentation</a> is needed.</p>
 
-<figure class='code'><figcaption><span>Extract from Gallery Gruntfile </span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Extract from Gallery Gruntfile</span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -538,7 +527,7 @@ The <code>registerTask</code> API allows us to define aliases to run a few tasks
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>So what&#8217;s next?</h2>
+<h2>So what&rsquo;s next?</h2>
 
 <p>I hope you already see the kind of benefits you can get by adding Grunt to your web-application projects.</p>
 
@@ -547,8 +536,8 @@ The well made <code>gruntplugin</code> init task (<code>grunt init:gruntplugin</
 If you find yourself stucked at some point, the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API documentation</a> is a very good reference.
 You can also check the source code of one of the official plugins on github.</p>
 
-<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you&#8217;re going to try.
-But I&#8217;m convinced you can use it in many other ways.
+<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you&rsquo;re going to try.
+But I&rsquo;m convinced you can use it in many other ways.
 If you need some more examples, I invite you to look at my own experiments with Grunt:</p>
 
 <ul>
@@ -583,7 +572,7 @@ If you need some more examples, I invite you to look at my own experiments with 
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/grunt-js/'>grunt.js</a>, <a class='category' href='/blog/categories/tools/'>tools</a>
+    <a class='category' href='/blog/categories/grunt-dot-js/'>grunt.js</a>, <a class='category' href='/blog/categories/tools/'>tools</a>
   
 </span>
 
@@ -631,7 +620,7 @@ If you need some more examples, I invite you to look at my own experiments with 
     <p></p>
   </div>
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         var container = $('#twitter-profile'),
             user = "_dhar";
         
@@ -666,19 +655,19 @@ If you need some more examples, I invite you to look at my own experiments with 
       </li>
     
       <li class="post">
-        <a href="/blog/2013/01/27/starting-a-reading-list-posts-series/">Starting a "Reading List" posts series</a>
+        <a href="/blog/2013/01/27/starting-a-reading-list-posts-series/">Starting a "Reading List" Posts Series</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">De l'art de converser sur Twitter (entre geeks)</a>
+        <a href="/blog/2013/01/24/fr-de-lart-de-converser-sur-twitter/">De L'art De Converser Sur Twitter (Entre Geeks)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/">Adding Grunt to your web-application project</a>
+        <a href="/blog/2012/10/28/adding-grunt-to-your-web-application-project/">Adding Grunt to Your Web-application Project</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">Grunt brings automation to the front-end side</a>
+        <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/">Grunt Brings Automation to the Front-end Side</a>
       </li>
     
   </ul>
@@ -700,7 +689,7 @@ If you need some more examples, I invite you to look at my own experiments with 
   <a href="https://github.com/dharFr">@dharFr</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -727,7 +716,7 @@ If you need some more examples, I invite you to look at my own experiments with 
     <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
       getTwitterFeed("_dhar", 5, false);
     });
   </script>

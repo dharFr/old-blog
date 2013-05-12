@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: grunt.js | dhar's Blog]]></title>
-  <link href="http://www.dhar.fr/blog/categories/grunt-js/atom.xml" rel="self"/>
+  <link href="http://www.dhar.fr/blog/categories/grunt-dot-js/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -20,14 +20,14 @@
     <id>http://www.dhar.fr/blog/2012/10/28/adding-grunt-to-your-web-application-project</id>
     <content type="html"><![CDATA[<p>A few weeks ago, a gave a quick talk about <a href="http://www.gruntjs.com" title="Grunt homepage">Grunt</a> at <a href="http://www.twitter.com/jssophia" title="JS Sophia-Antipolis">@JSSophia</a>, our local Javascript User Group.
 During this talk, my purpose was to quickly present the tool and show some example use cases.
-I must confess I wasn't as prepared as I would have been, so my talk may have been confused or unclear from time to time.
+I must confess I wasn&rsquo;t as prepared as I would have been, so my talk may have been confused or unclear from time to time.
 If you attended the event, I hope this post will give you more details.
-If not, it doesn't matter, I'm still happy to share my thoughts about this amazing tool.</p>
+If not, it doesn&rsquo;t matter, I&rsquo;m still happy to share my thoughts about this amazing tool.</p>
 
-<p>You'll find the slides bellow.
-The first part mostly present <em>Grunt</em> and why I think it's a game-changer for front-end developers. As I already wrote about this in my <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
+<p>You&rsquo;ll find the slides bellow.
+The first part mostly present <em>Grunt</em> and why I think it&rsquo;s a game-changer for front-end developers. As I already wrote about this in my <a href="/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
 In the second part, I focused on showing a few examples use cases and concrete examples.
-That's what I'm going to detail in this post.</p>
+That&rsquo;s what I&rsquo;m going to detail in this post.</p>
 
 <div class="dhar-style-embedder">
   <style>
@@ -52,11 +52,11 @@ That's what I'm going to detail in this post.</p>
 
 <h2>Automating your web application</h2>
 
-<p>Bringing some automation to your web-application is probably the first thing you'll try with Grunt.
-After all, that's its first purpose, why it was designed for.</p>
+<p>Bringing some automation to your web-application is probably the first thing you&rsquo;ll try with Grunt.
+After all, that&rsquo;s its first purpose, why it was designed for.</p>
 
 <p>Because nothing worth an example, I reused an old project to illustrate this case.
-It's a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
+It&rsquo;s a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
 The full project is available <a href="https://github.com/dharFr/gallery" title="Gallery App: 'master' branch">on Github</a>.
 The code I used as an example lives in the <em>master</em> branch.
 The original code, as it was before adding Grunt, lives in the <a href="https://github.com/dharFr/gallery/tree/before-grunt" title="Gallery App: 'before-grunt' branch">before-grunt</a> branch.</p>
@@ -71,7 +71,7 @@ The original code, as it was before adding Grunt, lives in the <a href="https://
 grunt init:gruntfile
 ```</p></blockquote>
 
-<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project's folder.
+<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project&rsquo;s folder.
 The basic structure of a gruntfile is looks like this:</p>
 
 <p>``` js grunt file basic structure
@@ -113,7 +113,7 @@ What do we basically need ?</p>
 
 <h3>Setting up your tasks</h3>
 
-<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won't be too difficult to define these for our project.
+<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won&rsquo;t be too difficult to define these for our project.
 If you need another task, start by searching if an existing <code>grunt-plugin</code> have already been created by the community.
 You can search for an existing plugin on <a href="http://www.gruntjs.com" title="Grunt homepage">grunt homepage</a> or directly with npm:</p>
 
@@ -121,14 +121,14 @@ You can search for an existing plugin on <a href="http://www.gruntjs.com" title=
 
 <h1>Search for a grunt plugin to do some magic:</h1>
 
-<blockquote><p>npm search gruntplugin 'do magic'
+<blockquote><p>npm search gruntplugin &lsquo;do magic&rsquo;
 ```</p></blockquote>
 
 <p>Otherwise, you can define your own task using the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API</a>, but unless you need something very specific, I doubt you had to go there.
 Seriously, there are already 190 existing plugins at the time I write these lines.</p>
 
-<p>Once you've found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
-In our case, we'll need two external tasks:</p>
+<p>Once you&rsquo;ve found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
+In our case, we&rsquo;ll need two external tasks:</p>
 
 <p><code>js Loading external tasks https://github.com/dharFr/gallery/blob/master/grunt.js#L125-126 source
   // ...
@@ -138,11 +138,11 @@ In our case, we'll need two external tasks:</p>
 </code></p>
 
 <p>From there, we just need to configure our tasks.
-I'm not going to detail every single line in the resulting <code>gruntfile</code> bellow.
+I&rsquo;m not going to detail every single line in the resulting <code>gruntfile</code> bellow.
 Basically, it allows us to build (lint, concat and minify) javascript files, copy any other files to a <code>dist</code> folder, and run the tests on both <code>dev</code> and <code>dist</code> files.
 The syntax is quite self-explaining and you can always refer to the <a href="https://github.com/gruntjs/grunt/blob/master/docs/toc.md" title="Grunt Documentation">official documentation</a> is needed.</p>
 
-<p>``` js Extract from Gallery Gruntfile https://github.com/dharFr/gallery/blob/master/grunt.js source
+<p>``` js Extract from Gallery Gruntfile <a href="https://github.com/dharFr/gallery/blob/master/grunt.js">https://github.com/dharFr/gallery/blob/master/grunt.js</a> source
 /<em>global module:false</em>/
 module.exports = function(grunt) {</p>
 
@@ -264,15 +264,15 @@ watch: {
 <p>  });</p>
 
 <p>  // Load external tasks (grunt plugins)
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-targethtml');</p>
+  grunt.loadNpmTasks(&lsquo;grunt-contrib-clean&rsquo;);
+  grunt.loadNpmTasks(&lsquo;grunt-contrib-copy&rsquo;);
+  grunt.loadNpmTasks(&lsquo;grunt-targethtml&rsquo;);</p>
 
 <p>  // Register custom tasks (alias tasks)
-  grunt.registerTask('build', 'concat min targethtml copy');
-  grunt.registerTask('clean-build', 'clean concat min targethtml copy');
+  grunt.registerTask(&lsquo;build&rsquo;, &lsquo;concat min targethtml copy&rsquo;);
+  grunt.registerTask(&lsquo;clean-build&rsquo;, &lsquo;clean concat min targethtml copy&rsquo;);
   // Default task.
-  grunt.registerTask('default', 'lint qunit:dev build qunit:dist');
+  grunt.registerTask(&lsquo;default&rsquo;, &lsquo;lint qunit:dev build qunit:dist&rsquo;);
 };
 ```</p>
 
@@ -294,16 +294,16 @@ The <code>registerTask</code> API allows us to define aliases to run a few tasks
 
 <blockquote><p>grunt qunit:dev</p></blockquote>
 
-<h1>run "build" alias (ie: 'grunt concat min targethtml copy')</h1>
+<h1>run &ldquo;build&rdquo; alias (ie: &lsquo;grunt concat min targethtml copy&rsquo;)</h1>
 
 <blockquote><p>grunt build</p></blockquote>
 
-<h1>run default task (ie: 'grunt lint qunit:dev build qunit:dist')</h1>
+<h1>run default task (ie: &lsquo;grunt lint qunit:dev build qunit:dist&rsquo;)</h1>
 
 <blockquote><p>grunt
 ```</p></blockquote>
 
-<h2>So what's next?</h2>
+<h2>So what&rsquo;s next?</h2>
 
 <p>I hope you already see the kind of benefits you can get by adding Grunt to your web-application projects.</p>
 
@@ -312,8 +312,8 @@ The well made <code>gruntplugin</code> init task (<code>grunt init:gruntplugin</
 If you find yourself stucked at some point, the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API documentation</a> is a very good reference.
 You can also check the source code of one of the official plugins on github.</p>
 
-<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you're going to try.
-But I'm convinced you can use it in many other ways.
+<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you&rsquo;re going to try.
+But I&rsquo;m convinced you can use it in many other ways.
 If you need some more examples, I invite you to look at my own experiments with Grunt:</p>
 
 <ul>
@@ -330,33 +330,33 @@ If you need some more examples, I invite you to look at my own experiments with 
     <updated>2012-08-26T16:26:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side</id>
     <content type="html"><![CDATA[<p>Over the past few weeks, I realized that I added <a href="http://www.gruntjs.com" title="Grunt">grunt</a> in every little side project I worked on.
-Thinking about it, I'm not sure if I can even imagine to start a project without this tool.</p>
+Thinking about it, I&rsquo;m not sure if I can even imagine to start a project without this tool.</p>
 
-<p>You probably already heard about <strong>grunt</strong>, don't you? In case you don't (seriously?), it's been created by <a href="http://benalman.com/">Ben Alman (aka. cowboy)</a>.
+<p>You probably already heard about <strong>grunt</strong>, don&rsquo;t you? In case you don&rsquo;t (seriously?), it&rsquo;s been created by <a href="http://benalman.com/">Ben Alman (aka. cowboy)</a>.
 I guess the best description is the one from the official home page:</p>
 
 <blockquote><p>Grunt is a task-based command line build tool for JavaScript projects.</p></blockquote>
 
 <p>OK, looks nice.
-But what's new?
+But what&rsquo;s new?
 I already have tools to <em>lint</em> or <em>minify</em> my Javascript.
 I already use <em>qunit</em> to unit test my code.
-And so on... Why should I use <em>grunt</em> instead of all these tools?</p>
+And so on&hellip; Why should I use <em>grunt</em> instead of all these tools?</p>
 
 <p>Here is why:</p>
 
 <ol>
-<li>Because you probably don't really use all these tools.
-I mean, for sure you know about them, and you already give them a try; but most people I worked with (including me) just don't use them on real projects, in their day to day work, because bringing the pieces together is not that easy.</li>
+<li>Because you probably don&rsquo;t really use all these tools.
+I mean, for sure you know about them, and you already give them a try; but most people I worked with (including me) just don&rsquo;t use them on real projects, in their day to day work, because bringing the pieces together is not that easy.</li>
 <li><em>Grunt</em> also uses the exact same tools you already know, or in the worst case, it can learn to use them.
-It doesn't reinvent anything but allows you to organize your workflow in an uniform, yet flexible, way.</li>
+It doesn&rsquo;t reinvent anything but allows you to organize your workflow in an uniform, yet flexible, way.</li>
 </ol>
 
 
 <h2>Do we need such a tool?</h2>
 
-<p>As a front-end developer, automation wasn't really part of my workflow.
-My first job was in some king of web agency were every desktop machine ran on Windows XP, and our main development tools were Dreamweaver MX (I guess I'm getting old...) and Filezilla. <!-- more -->
+<p>As a front-end developer, automation wasn&rsquo;t really part of my workflow.
+My first job was in some king of web agency were every desktop machine ran on Windows XP, and our main development tools were Dreamweaver MX (I guess I&rsquo;m getting old&hellip;) and Filezilla. <!-- more -->
 At the time we would never have considered automation, unit testing or continuous integration.</p>
 
 <p>Then I left that company and found a real engineer job.
@@ -371,19 +371,19 @@ Until recently, I was convinced <em>automation</em> was only a concern for back-
 These tools are changing our approach to front-end technologies, they make us more productive, adding value to our jobs.</p>
 
 <p>But those tools remains <em>command line tools</em>.
-Even if each one of them is pretty simple to setup and use, combining all of these to make something adapted to a particular project can quickly become a nightmare for someone who's not familiar with his Terminal.
-From my experience, a lot of front-end developers, especially younger ones, are not familiar with Bash scripting (<em>and sometimes are afraid of it</em>). For sure, that's probably a bad approach, but that's how I felt not that long ago and I'm pretty sure I'm not the only one in that case.</p>
+Even if each one of them is pretty simple to setup and use, combining all of these to make something adapted to a particular project can quickly become a nightmare for someone who&rsquo;s not familiar with his Terminal.
+From my experience, a lot of front-end developers, especially younger ones, are not familiar with Bash scripting (<em>and sometimes are afraid of it</em>). For sure, that&rsquo;s probably a bad approach, but that&rsquo;s how I felt not that long ago and I&rsquo;m pretty sure I&rsquo;m not the only one in that case.</p>
 
 <p>Grails developers write their scripts in Groovy.
 Rails developers have Rake files.
-<strong>We know how to write Javascript!</strong> That's where we are comfortable and productive.
-We don't want to get a headache by writing some messy <em>bash</em> script <sup>[<a href="#note1">1</a>]</sup>.</p>
+<strong>We know how to write Javascript!</strong> That&rsquo;s where we are comfortable and productive.
+We don&rsquo;t want to get a headache by writing some messy <em>bash</em> script <sup>[<a href="#note1">1</a>]</sup>.</p>
 
 <h2>Here comes grunt</h2>
 
-<p>That's what <em>grunt</em> does. It allows you to define a bunch of tasks, in a <strong>consistent way</strong>, by writing Javascript.
+<p>That&rsquo;s what <em>grunt</em> does. It allows you to define a bunch of tasks, in a <strong>consistent way</strong>, by writing Javascript.
 <em>Consistent</em> is an important word here because you could probably achieve the same goal directly with <em>Node.js</em> but <em>grunt</em> gives you a simple way to write and organize your tasks.
-The most common ones (<em>lint</em>, <em>concat</em>, <em>minify</em>, <em>test</em>, etc.) are already included <a href="https://github.com/cowboy/grunt#built-in-tasks" title="grunt built-in Tasks">in the package</a> so you don't have to think about how to deal with them.</p>
+The most common ones (<em>lint</em>, <em>concat</em>, <em>minify</em>, <em>test</em>, etc.) are already included <a href="https://github.com/cowboy/grunt#built-in-tasks" title="grunt built-in Tasks">in the package</a> so you don&rsquo;t have to think about how to deal with them.</p>
 
 <p>It also came with a really simple <a href="https://github.com/cowboy/grunt/blob/master/docs/getting_started.md#loading-grunt-plugins-or-tasks-folders" title="Loading grunt plugins or tasks folders">plugin system</a> based on <a href="https://npmjs.org" title="Node Packaged Modules">npm</a>.
 If you find yourself needing to do something not included as a build-in task, try to search <em>npm</em> to see if somebody else has not already released a plugin that fits your needs.
@@ -391,13 +391,13 @@ Otherwise, you can still write your own plugin and publish it to <em>npm</em>.
 The <a href="https://github.com/cowboy/grunt/blob/master/docs/api.md" title="The grunt API">grunt API</a> allows you to do pretty much everything you could need.
 And thanks to the built-in project scaffolding, it only takes a few minutes to change your spaghetti code into a well written plugin. Once here, publishing to npm is just a command line away so do not hesitate.</p>
 
-<h2>What's next?</h2>
+<h2>What&rsquo;s next?</h2>
 
-<p>I hope you will give a try to <em>grunt</em>. Even more because something called <a href="http://yeoman.io/">Yeoman</a> is getting close to the public release. I asked for a beta invite on twitter but for now, I didn't have a chance to try it yet.
-It seems that it can do many more and as it's based on <em>grunt</em>, among many others, it's probably a good idea to get familiar with that one as soon as possible.</p>
+<p>I hope you will give a try to <em>grunt</em>. Even more because something called <a href="http://yeoman.io/">Yeoman</a> is getting close to the public release. I asked for a beta invite on twitter but for now, I didn&rsquo;t have a chance to try it yet.
+It seems that it can do many more and as it&rsquo;s based on <em>grunt</em>, among many others, it&rsquo;s probably a good idea to get familiar with that one as soon as possible.</p>
 
 <p><a id="note1"></a>
-<small>[1]: I actually did a lot of bash scripting recently and, believe it or not, I liked it. I wouldn't have said that a few years ago. It's a powerful programming tool and every developer should be comfortable with it. You're not? Learn some basics. ;)</small></p>
+<small>[1]: I actually did a lot of bash scripting recently and, believe it or not, I liked it. I wouldn&rsquo;t have said that a few years ago. It&rsquo;s a powerful programming tool and every developer should be comfortable with it. You&rsquo;re not? Learn some basics. ;)</small></p>
 ]]></content>
   </entry>
   
@@ -406,7 +406,7 @@ It seems that it can do many more and as it's based on <em>grunt</em>, among man
     <link href="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/"/>
     <updated>2012-07-23T22:55:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js</id>
-    <content type="html"><![CDATA[<p>Before going further, I'll start by saying that I'm a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I'll be happy to hear it..!</p>
+    <content type="html"><![CDATA[<p>Before going further, I&rsquo;ll start by saying that I&rsquo;m a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I&rsquo;ll be happy to hear it..!</p>
 
 <p>A few weeks ago, I implemented a small bookmarklet to apply <a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a> anywhere on the Web.
 I put the source code <a href="https://github.com/dharFr/prettyprint-bookmarklet">on Github</a> and used the (<em>awesome</em>) <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">Automatic Page Generator</a> to quickly create a landing page to host my bookmarklet.</p>
@@ -421,12 +421,12 @@ At this point, my concern was the following: How could I include the bookmarklet
 
 <p>In a first try, I could just copy/paste the minified source into an <code>&lt;a href="..."&gt;</code> link in my <code>index.html</code>.
 But what happens if I update the source?
-I'll probably have to deal with that kind of work flow:</p>
+I&rsquo;ll probably have to deal with that kind of work flow:</p>
 
 <p>``` sh
 grunt # lint, concat and minifies source
 git add .
-git commit -m "Probably improved something in there"</p>
+git commit -m &ldquo;Probably improved something in there&rdquo;</p>
 
 <h1>copy content from dist/prettyprinter.min.js</h1>
 
@@ -435,25 +435,25 @@ git commit -m "Probably improved something in there"</p>
 <h1>paste code somewhere into index.html (without)</h1>
 
 <p>git add .
-git commit -m "Updated landing page with latest bookmarklet version"</p>
+git commit -m &ldquo;Updated landing page with latest bookmarklet version&rdquo;</p>
 
 <p>git checkout master # back to master branch</p>
 
 <p>```
-Rather boring, right? Totally agree! And that's why I decided to dig a little further to see how I could automate this.</p>
+Rather boring, right? Totally agree! And that&rsquo;s why I decided to dig a little further to see how I could automate this.</p>
 
 <h2>Automate the whole thing!</h2>
 
 <h3>Avoiding copy / paste</h3>
 
-<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it's probably better to use the following:</p>
+<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it&rsquo;s probably better to use the following:</p>
 
 <p>```
 git checkout gh-pages # checkout gh-pages branch</p>
 
-<h1>add/update 'dist' directory from master branch</h1>
+<h1>add/update &lsquo;dist&rsquo; directory from master branch</h1>
 
-<p>git checkout master -- dist<br/>
+<p>git checkout master &mdash; dist<br/>
 ```</p>
 
 <h3>Updating HTML content</h3>
@@ -486,7 +486,7 @@ And a simple grunt <code>replace</code> task, reading the minified source and ge
 
 <p>Basically, <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks">Git Hooks</a> allow you to automatically run custom scripts at any step in your workflow.
 Hooks must be defined in the <code>.git/hooks/</code> folder.
-Placeholder files are already created, giving a pretty good idea about what's possible or not.</p>
+Placeholder files are already created, giving a pretty good idea about what&rsquo;s possible or not.</p>
 
 <p><code>bash
 $ ls .git/hooks/
@@ -511,34 +511,34 @@ You only need to remove the <code>.sample</code> extension to define a hook, the
 
 <h1>!/bin/sh</h1>
 
-<p>echo "\n| [prettify bookmarklet post-commit hook]"
+<p>echo &ldquo;\n| [prettify bookmarklet post-commit hook]&rdquo;
 git checkout gh-pages</p>
 
 <h1>Update bookmarklet script from master branch</h1>
 
-<p>git checkout master -- dist lib</p>
+<p>git checkout master &mdash; dist lib</p>
 
 <h1>update index.html &amp; commit changes</h1>
 
 <p>grunt replace
 git add .
-git commit -m "Regenerated index.html from master branch"</p>
+git commit -m &ldquo;Regenerated index.html from master branch&rdquo;</p>
 
 <p>git checkout master
-echo "| All Done -- Use 'git push --all' instead of 'git push origin master' to push changes"
+echo &ldquo;| All Done &mdash; Use &lsquo;git push &mdash;all&rsquo; instead of &lsquo;git push origin master&rsquo; to push changes&rdquo;
 ```</p>
 
 <p>As both <code>master</code> and <code>gh-pages</code> branches are modified, they both need to be pushed on the remote repository.
-I use <code>git push --all</code>, which is fine if you don't have any other updated branch. Otherwise, you'll need a specific push for each branch.</p>
+I use <code>git push --all</code>, which is fine if you don&rsquo;t have any other updated branch. Otherwise, you&rsquo;ll need a specific push for each branch.</p>
 
 <h2>Going further</h2>
 
-<p>I'd like to find a way to stop the script if the commit doesn't occur on the <code>master</code> branch, but I'm not sure how to do it...</p>
+<p>I&rsquo;d like to find a way to stop the script if the commit doesn&rsquo;t occur on the <code>master</code> branch, but I&rsquo;m not sure how to do it&hellip;</p>
 
-<p>I'll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
+<p>I&rsquo;ll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
 Grunt.js already simplified this to a one liner, but I often forget to call it before committing changes.</p>
 
-<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I'd like to have an opportunity to try it on a larger project and see how it goes.</p>
+<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I&rsquo;d like to have an opportunity to try it on a larger project and see how it goes.</p>
 
 <hr />
 

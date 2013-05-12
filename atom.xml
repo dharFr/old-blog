@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's Blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -23,7 +23,7 @@
 <ul>
 <li><a href="http://parsleyjs.org/">Javascript forms validation.Powerful, UX aware &amp; Dead simple.</a></li>
 <li><a href="https://developers.google.com/speed/">Make the Web Faster — Google Developers</a></li>
-<li><a href="http://stackoverflow.com/questions/12556593/determining-a-page-is-outdated-on-github-pages">stackoverflow - Determining a page is outdated on github pages</a></li>
+<li><a href="http://stackoverflow.com/questions/12556593/determining-a-page-is-outdated-on-github-pages">stackoverflow &ndash; Determining a page is outdated on github pages</a></li>
 <li><a href="http://www.softwareishard.com/blog/firebug/firebug-tip-include-command/">Firebug Tip : include() command</a></li>
 <li><a href="http://csswizardry.com/2013/01/front-end-performance-for-web-designers-and-front-end-developers/">Front-end performance for web designers and front-end developers</a></li>
 <li><a href="http://parsleyjs.org/index.html">Javascript forms validation.Powerful, UX aware &amp; Dead simple.</a></li>
@@ -57,29 +57,29 @@
     <updated>2013-01-27T18:29:00+01:00</updated>
     <id>http://www.dhar.fr/blog/2013/01/27/starting-a-reading-list-posts-series</id>
     <content type="html"><![CDATA[<p>I read several articles on the Web every day.
-When discovering an article, if I find it interesting, or if I don&#8217;t have time to read it at the time, I put it aside on <a href="http://getpocket.com" title="Pocket">Pocket</a> in order to easily find it later.</p>
+When discovering an article, if I find it interesting, or if I don&rsquo;t have time to read it at the time, I put it aside on <a href="http://getpocket.com" title="Pocket">Pocket</a> in order to easily find it later.</p>
 
 <p>The downsides are :</p>
 
 <ul>
 <li>I put aside too many items</li>
 <li>I often forgot to check out my reading list on Pocket</li>
-<li>Pocket doesn&#8217;t provide a easy way share a bunch of links</li>
-<li>I don&#8217;t want to save those on Pocket without a backup somewhere else</li>
+<li>Pocket doesn&rsquo;t provide a easy way share a bunch of links</li>
+<li>I don&rsquo;t want to save those on Pocket without a backup somewhere else</li>
 </ul>
 
 
 <p>For some time now, I looking for a way to force myself to check this list on a regular basis.
 Moreover, even if <a href="https://ifttt.com" title="IF This Then That">IFTTT</a> allows me to perform automatic backup of the bookmarks, no one but me can take advantage of this list.</p>
 
-<p>Starting today, I am launching a new series of articles entitled &#8220;Reading List&#8221;.
+<p>Starting today, I am launching a new series of articles entitled &ldquo;Reading List&rdquo;.
 As its name obviously suggests, each article will bring together a few links to sites, articles, resources that have caught my attention on the web during the past few days.</p>
 
-<p>I plan to publish these posts on a weekly basis but it could be less depending on the volume I&#8217;ll collect every week.
+<p>I plan to publish these posts on a weekly basis but it could be less depending on the volume I&rsquo;ll collect every week.
 I hope some of you will find this useful.
 Do not hesitate to tell me your thoughts about this in the comments below.</p>
 
-<p>As the process is mostly automated using IFTTT, Dropbox and a few scripts, I&#8217;ll also think about explaining it in a upcoming article.</p>
+<p>As the process is mostly automated using IFTTT, Dropbox and a few scripts, I&rsquo;ll also think about explaining it in a upcoming article.</p>
 ]]></content>
   </entry>
   
@@ -106,10 +106,10 @@ Do not hesitate to tell me your thoughts about this in the comments below.</p>
 
 <p>Et voilà ma réponse :</p>
 
-<blockquote><p>@_______ @____ @________ Pas sur d&#8217;avoir tout le contexte, mais http://octopress.org/  ? non?</p></blockquote>
+<blockquote><p>@_______ @____ @________ Pas sur d&#8217;avoir tout le contexte, mais http://octopress.org/  ? non?</p><footer><strong>@_dhar</strong></footer></blockquote>
 
 
-<p>Ça semble anodin comme ça&#8230;</p>
+<p>Ça semble anodin comme ça&hellip;</p>
 
 <p>En intervenant dans cette conversation, mon intention était avant tout d&#8217;apporter mon aide éventuelle et d&#8217;en apprendre plus sur des outils que je peux être amené à utiliser.
 Mon erreur est sans doute d&#8217;avoir donné mon avis sans connaître le contexte complet de la conversation, ni même les participants.
@@ -135,7 +135,7 @@ D&#8217;abord pour me rappeler ces quelques minutes, et aussi en espérant que l
 
 <h2>Pour finir</h2>
 
-<p>&#8230;si je peux me permettre un conseil qui vaut ce qu&#8217;il vaut:</p>
+<p>&hellip;si je peux me permettre un conseil qui vaut ce qu&#8217;il vaut:</p>
 
 <p>Démarrer une conversation sur un media public implique que tout le monde peut y participer.
 Dans ce contexte, même si chacun est en droit d&#8217;estimer qu&#8217;un point de vue manque de pertinence, je ne vois pas ce qui justifie le fait d&#8217;exprimer son désaccord de façon agressive ou irrespectueuse.
@@ -156,14 +156,14 @@ Si vous ne souhaitez voir personne d&#8217;autre intervenir, mentionnez le clair
     <id>http://www.dhar.fr/blog/2012/10/28/adding-grunt-to-your-web-application-project</id>
     <content type="html"><![CDATA[<p>A few weeks ago, a gave a quick talk about <a href="http://www.gruntjs.com" title="Grunt homepage">Grunt</a> at <a href="http://www.twitter.com/jssophia" title="JS Sophia-Antipolis">@JSSophia</a>, our local Javascript User Group.
 During this talk, my purpose was to quickly present the tool and show some example use cases.
-I must confess I wasn&#8217;t as prepared as I would have been, so my talk may have been confused or unclear from time to time.
+I must confess I wasn&rsquo;t as prepared as I would have been, so my talk may have been confused or unclear from time to time.
 If you attended the event, I hope this post will give you more details.
-If not, it doesn&#8217;t matter, I&#8217;m still happy to share my thoughts about this amazing tool.</p>
+If not, it doesn&rsquo;t matter, I&rsquo;m still happy to share my thoughts about this amazing tool.</p>
 
-<p>You&#8217;ll find the slides bellow.
-The first part mostly present <em>Grunt</em> and why I think it&#8217;s a game-changer for front-end developers. As I already wrote about this in my <a href="http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
+<p>You&rsquo;ll find the slides bellow.
+The first part mostly present <em>Grunt</em> and why I think it&rsquo;s a game-changer for front-end developers. As I already wrote about this in my <a href="http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side/" title="Grunt Brings Automation to the Front-end Side">previous post about Grunt</a>, I invite you to read it if it sounds interesting to you.
 In the second part, I focused on showing a few examples use cases and concrete examples.
-That&#8217;s what I&#8217;m going to detail in this post.</p>
+That&rsquo;s what I&rsquo;m going to detail in this post.</p>
 
 <div class="dhar-style-embedder">
   <style>
@@ -188,11 +188,11 @@ That&#8217;s what I&#8217;m going to detail in this post.</p>
 
 <h2>Automating your web application</h2>
 
-<p>Bringing some automation to your web-application is probably the first thing you&#8217;ll try with Grunt.
-After all, that&#8217;s its first purpose, why it was designed for.</p>
+<p>Bringing some automation to your web-application is probably the first thing you&rsquo;ll try with Grunt.
+After all, that&rsquo;s its first purpose, why it was designed for.</p>
 
 <p>Because nothing worth an example, I reused an old project to illustrate this case.
-It&#8217;s a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
+It&rsquo;s a simple Gallery application build over Backbone.JS, jQuery, QUnit and Twitter Bootstrap.
 The full project is available <a href="https://github.com/dharFr/gallery" title="Gallery App: 'master' branch">on Github</a>.
 The code I used as an example lives in the <em>master</em> branch.
 The original code, as it was before adding Grunt, lives in the <a href="https://github.com/dharFr/gallery/tree/before-grunt" title="Gallery App: 'before-grunt' branch">before-grunt</a> branch.</p>
@@ -208,7 +208,7 @@ The original code, as it was before adding Grunt, lives in the <a href="https://
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project&#8217;s folder.
+<p>After answering a few question, this will produce a single <code>grunt.js</code> file in your project&rsquo;s folder.
 The basic structure of a gruntfile is looks like this:</p>
 
 <figure class='code'><figcaption><span>grunt file basic structure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -259,7 +259,7 @@ What do we basically need ?</p>
 
 <h3>Setting up your tasks</h3>
 
-<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won&#8217;t be too difficult to define these for our project.
+<p>Lint, QUnit, concatenation and minification tasks are already built in Grunt. It won&rsquo;t be too difficult to define these for our project.
 If you need another task, start by searching if an existing <code>grunt-plugin</code> have already been created by the community.
 You can search for an existing plugin on <a href="http://www.gruntjs.com" title="Grunt homepage">grunt homepage</a> or directly with npm:</p>
 
@@ -273,10 +273,10 @@ You can search for an existing plugin on <a href="http://www.gruntjs.com" title=
 <p>Otherwise, you can define your own task using the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API</a>, but unless you need something very specific, I doubt you had to go there.
 Seriously, there are already 190 existing plugins at the time I write these lines.</p>
 
-<p>Once you&#8217;ve found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
-In our case, we&#8217;ll need two external tasks:</p>
+<p>Once you&rsquo;ve found and installed the plugin you need, you still have to made it available in your <code>gruntfile</code> by using the <code>loadNpmTasks</code> api.
+In our case, we&rsquo;ll need two external tasks:</p>
 
-<figure class='code'><figcaption><span>Loading external tasks </span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js#L125-126'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Loading external tasks</span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js#L125-126'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -288,11 +288,11 @@ In our case, we&#8217;ll need two external tasks:</p>
 
 
 <p>From there, we just need to configure our tasks.
-I&#8217;m not going to detail every single line in the resulting <code>gruntfile</code> bellow.
+I&rsquo;m not going to detail every single line in the resulting <code>gruntfile</code> bellow.
 Basically, it allows us to build (lint, concat and minify) javascript files, copy any other files to a <code>dist</code> folder, and run the tests on both <code>dev</code> and <code>dist</code> files.
 The syntax is quite self-explaining and you can always refer to the <a href="https://github.com/gruntjs/grunt/blob/master/docs/toc.md" title="Grunt Documentation">official documentation</a> is needed.</p>
 
-<figure class='code'><figcaption><span>Extract from Gallery Gruntfile </span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Extract from Gallery Gruntfile</span><a href='https://github.com/dharFr/gallery/blob/master/grunt.js'>source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -588,7 +588,7 @@ The <code>registerTask</code> API allows us to define aliases to run a few tasks
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>So what&#8217;s next?</h2>
+<h2>So what&rsquo;s next?</h2>
 
 <p>I hope you already see the kind of benefits you can get by adding Grunt to your web-application projects.</p>
 
@@ -597,8 +597,8 @@ The well made <code>gruntplugin</code> init task (<code>grunt init:gruntplugin</
 If you find yourself stucked at some point, the <a href="https://github.com/gruntjs/grunt/blob/master/docs/api.md" title="Grunt API">Grunt API documentation</a> is a very good reference.
 You can also check the source code of one of the official plugins on github.</p>
 
-<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you&#8217;re going to try.
-But I&#8217;m convinced you can use it in many other ways.
+<p>As I wrote at the beginning of this post, using Grunt to automate some tasks in your web-application projects is probably the first thing you&rsquo;re going to try.
+But I&rsquo;m convinced you can use it in many other ways.
 If you need some more examples, I invite you to look at my own experiments with Grunt:</p>
 
 <ul>
@@ -615,33 +615,33 @@ If you need some more examples, I invite you to look at my own experiments with 
     <updated>2012-08-26T16:26:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/08/26/grunt-brings-automation-to-the-front-end-side</id>
     <content type="html"><![CDATA[<p>Over the past few weeks, I realized that I added <a href="http://www.gruntjs.com" title="Grunt">grunt</a> in every little side project I worked on.
-Thinking about it, I&#8217;m not sure if I can even imagine to start a project without this tool.</p>
+Thinking about it, I&rsquo;m not sure if I can even imagine to start a project without this tool.</p>
 
-<p>You probably already heard about <strong>grunt</strong>, don&#8217;t you? In case you don&#8217;t (seriously?), it&#8217;s been created by <a href="http://benalman.com/">Ben Alman (aka. cowboy)</a>.
+<p>You probably already heard about <strong>grunt</strong>, don&rsquo;t you? In case you don&rsquo;t (seriously?), it&rsquo;s been created by <a href="http://benalman.com/">Ben Alman (aka. cowboy)</a>.
 I guess the best description is the one from the official home page:</p>
 
 <blockquote><p>Grunt is a task-based command line build tool for JavaScript projects.</p></blockquote>
 
 <p>OK, looks nice.
-But what&#8217;s new?
+But what&rsquo;s new?
 I already have tools to <em>lint</em> or <em>minify</em> my Javascript.
 I already use <em>qunit</em> to unit test my code.
-And so on&#8230; Why should I use <em>grunt</em> instead of all these tools?</p>
+And so on&hellip; Why should I use <em>grunt</em> instead of all these tools?</p>
 
 <p>Here is why:</p>
 
 <ol>
-<li>Because you probably don&#8217;t really use all these tools.
-I mean, for sure you know about them, and you already give them a try; but most people I worked with (including me) just don&#8217;t use them on real projects, in their day to day work, because bringing the pieces together is not that easy.</li>
+<li>Because you probably don&rsquo;t really use all these tools.
+I mean, for sure you know about them, and you already give them a try; but most people I worked with (including me) just don&rsquo;t use them on real projects, in their day to day work, because bringing the pieces together is not that easy.</li>
 <li><em>Grunt</em> also uses the exact same tools you already know, or in the worst case, it can learn to use them.
-It doesn&#8217;t reinvent anything but allows you to organize your workflow in an uniform, yet flexible, way.</li>
+It doesn&rsquo;t reinvent anything but allows you to organize your workflow in an uniform, yet flexible, way.</li>
 </ol>
 
 
 <h2>Do we need such a tool?</h2>
 
-<p>As a front-end developer, automation wasn&#8217;t really part of my workflow.
-My first job was in some king of web agency were every desktop machine ran on Windows XP, and our main development tools were Dreamweaver MX (I guess I&#8217;m getting old&#8230;) and Filezilla. <!-- more -->
+<p>As a front-end developer, automation wasn&rsquo;t really part of my workflow.
+My first job was in some king of web agency were every desktop machine ran on Windows XP, and our main development tools were Dreamweaver MX (I guess I&rsquo;m getting old&hellip;) and Filezilla. <!-- more -->
 At the time we would never have considered automation, unit testing or continuous integration.</p>
 
 <p>Then I left that company and found a real engineer job.
@@ -656,19 +656,19 @@ Until recently, I was convinced <em>automation</em> was only a concern for back-
 These tools are changing our approach to front-end technologies, they make us more productive, adding value to our jobs.</p>
 
 <p>But those tools remains <em>command line tools</em>.
-Even if each one of them is pretty simple to setup and use, combining all of these to make something adapted to a particular project can quickly become a nightmare for someone who&#8217;s not familiar with his Terminal.
-From my experience, a lot of front-end developers, especially younger ones, are not familiar with Bash scripting (<em>and sometimes are afraid of it</em>). For sure, that&#8217;s probably a bad approach, but that&#8217;s how I felt not that long ago and I&#8217;m pretty sure I&#8217;m not the only one in that case.</p>
+Even if each one of them is pretty simple to setup and use, combining all of these to make something adapted to a particular project can quickly become a nightmare for someone who&rsquo;s not familiar with his Terminal.
+From my experience, a lot of front-end developers, especially younger ones, are not familiar with Bash scripting (<em>and sometimes are afraid of it</em>). For sure, that&rsquo;s probably a bad approach, but that&rsquo;s how I felt not that long ago and I&rsquo;m pretty sure I&rsquo;m not the only one in that case.</p>
 
 <p>Grails developers write their scripts in Groovy.
 Rails developers have Rake files.
-<strong>We know how to write Javascript!</strong> That&#8217;s where we are comfortable and productive.
-We don&#8217;t want to get a headache by writing some messy <em>bash</em> script <sup>[<a href="#note1">1</a>]</sup>.</p>
+<strong>We know how to write Javascript!</strong> That&rsquo;s where we are comfortable and productive.
+We don&rsquo;t want to get a headache by writing some messy <em>bash</em> script <sup>[<a href="#note1">1</a>]</sup>.</p>
 
 <h2>Here comes grunt</h2>
 
-<p>That&#8217;s what <em>grunt</em> does. It allows you to define a bunch of tasks, in a <strong>consistent way</strong>, by writing Javascript.
+<p>That&rsquo;s what <em>grunt</em> does. It allows you to define a bunch of tasks, in a <strong>consistent way</strong>, by writing Javascript.
 <em>Consistent</em> is an important word here because you could probably achieve the same goal directly with <em>Node.js</em> but <em>grunt</em> gives you a simple way to write and organize your tasks.
-The most common ones (<em>lint</em>, <em>concat</em>, <em>minify</em>, <em>test</em>, etc.) are already included <a href="https://github.com/cowboy/grunt#built-in-tasks" title="grunt built-in Tasks">in the package</a> so you don&#8217;t have to think about how to deal with them.</p>
+The most common ones (<em>lint</em>, <em>concat</em>, <em>minify</em>, <em>test</em>, etc.) are already included <a href="https://github.com/cowboy/grunt#built-in-tasks" title="grunt built-in Tasks">in the package</a> so you don&rsquo;t have to think about how to deal with them.</p>
 
 <p>It also came with a really simple <a href="https://github.com/cowboy/grunt/blob/master/docs/getting_started.md#loading-grunt-plugins-or-tasks-folders" title="Loading grunt plugins or tasks folders">plugin system</a> based on <a href="https://npmjs.org" title="Node Packaged Modules">npm</a>.
 If you find yourself needing to do something not included as a build-in task, try to search <em>npm</em> to see if somebody else has not already released a plugin that fits your needs.
@@ -676,13 +676,13 @@ Otherwise, you can still write your own plugin and publish it to <em>npm</em>.
 The <a href="https://github.com/cowboy/grunt/blob/master/docs/api.md" title="The grunt API">grunt API</a> allows you to do pretty much everything you could need.
 And thanks to the built-in project scaffolding, it only takes a few minutes to change your spaghetti code into a well written plugin. Once here, publishing to npm is just a command line away so do not hesitate.</p>
 
-<h2>What&#8217;s next?</h2>
+<h2>What&rsquo;s next?</h2>
 
-<p>I hope you will give a try to <em>grunt</em>. Even more because something called <a href="http://yeoman.io/">Yeoman</a> is getting close to the public release. I asked for a beta invite on twitter but for now, I didn&#8217;t have a chance to try it yet.
-It seems that it can do many more and as it&#8217;s based on <em>grunt</em>, among many others, it&#8217;s probably a good idea to get familiar with that one as soon as possible.</p>
+<p>I hope you will give a try to <em>grunt</em>. Even more because something called <a href="http://yeoman.io/">Yeoman</a> is getting close to the public release. I asked for a beta invite on twitter but for now, I didn&rsquo;t have a chance to try it yet.
+It seems that it can do many more and as it&rsquo;s based on <em>grunt</em>, among many others, it&rsquo;s probably a good idea to get familiar with that one as soon as possible.</p>
 
 <p><a id="note1"></a>
-<small>[1]: I actually did a lot of bash scripting recently and, believe it or not, I liked it. I wouldn&#8217;t have said that a few years ago. It&#8217;s a powerful programming tool and every developer should be comfortable with it. You&#8217;re not? Learn some basics. ;)</small></p>
+<small>[1]: I actually did a lot of bash scripting recently and, believe it or not, I liked it. I wouldn&rsquo;t have said that a few years ago. It&rsquo;s a powerful programming tool and every developer should be comfortable with it. You&rsquo;re not? Learn some basics. ;)</small></p>
 ]]></content>
   </entry>
   
@@ -692,8 +692,8 @@ It seems that it can do many more and as it&#8217;s based on <em>grunt</em>, amo
     <updated>2012-08-13T15:07:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/08/13/fr-compte-rendu-du-riviera-coding-week-end</id>
     <content type="html"><![CDATA[<p><em>This post is about the Riviera Coding Week-end, a geek event that took place in Nice (France) from 10 to 12 August 2012.
-As this post is closely related to a French event, I think for once, it&#8217;s more appropriate to write in French, even if I usually blog in English.
-If you&#8217;re anyway interested, I&#8217;m sure <a href="http://translate.google.com/translate?hl=en&amp;sl=fr&amp;tl=en&amp;u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F">Google translate</a> or any other translation tool can fit your needs&#8230;</em></p>
+As this post is closely related to a French event, I think for once, it&rsquo;s more appropriate to write in French, even if I usually blog in English.
+If you&rsquo;re anyway interested, I&rsquo;m sure <a href="http://translate.google.com/translate?hl=en&amp;sl=fr&amp;tl=en&amp;u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F">Google translate</a> or any other translation tool can fit your needs&hellip;</em></p>
 
 <p><a href="http://photos.dhar.fr/p/ke/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/5d466e-EB855D13-DD73-423D-ACF1-51A94E35A82A_960x180.jpg"></a>
 Du 10 au 12 Août dernier, j&#8217;ai participé au premier <em>Riviera Coding Week-end</em>, organisé par les membres du <a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">RivieraGUG</a> avec la participation du <a href="http://groups.google.com/group/jssophia">JSSophia</a> dont je fais partie.
@@ -704,7 +704,7 @@ Après ces 48 heures passées à construire, échanger, mais surtout coder, un p
 <!-- more -->
 
 
-<h2>Un Coding Week-End, quelle idée&#8230;</h2>
+<h2>Un Coding Week-End, quelle idée&hellip;</h2>
 
 <p>D&#8217;abord initié par le <em><a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">Groovy &amp; Grails User Group</a></em> , l&#8217;événement avait pour objectif de construire un site dédié pour le groupe.
 Par la suite, alors que certains membres du <em><a href="http://groups.google.com/group/jssophia">Javascript User Group</a></em> ont aussi souhaité participer au week-end, la thématique de l&#8217;événement a un peu changée, pour s&#8217;axer d&#8217;avantage sur la collaboration entre les communautés locales.</p>
@@ -725,7 +725,7 @@ Sans trop savoir ce que va donner cette expérience, on sait déjà qu&#8217;on 
 <p>Le programme du Week-end est assez simple et couvre principalement la soirée du vendredi, après tout, on est pas là pour subir un planning rigoureux.</p>
 
 <p>Le début de soirée est assez calme.
-On fait connaissance, on se raconte nos vacances (pour ceux qui en ont pris&#8230;), on prends l&#8217;apéro en terrasse, on envoie quelques tweets en espérant ramener de nouveaux participants de dernière minute.
+On fait connaissance, on se raconte nos vacances (pour ceux qui en ont pris&hellip;), on prends l&#8217;apéro en terrasse, on envoie quelques tweets en espérant ramener de nouveaux participants de dernière minute.
 Certains configurent le Raspberry Pi qui hébergera un <a href="http://fr.wikipedia.org/wiki/EtherPad">EtherPad</a> pour la durée du week-end.</p>
 
 <h2>Grails Crash Course</h2>
@@ -814,7 +814,7 @@ Une ambiance bien sympa, des locaux au top, et une belle brochette de passionné
 Après tout, l&#8217;initiative est lancée et le code est là, ouvert à tous, disponible sur Github.
 Il ne tiens qu&#8217;à nous de continuer à faire avancer ce projet, en y contribuant nous-même ou en motivant d&#8217;autres personnes à participer. Quelques <em>pull requests</em> de plus et on l&#8217;aura le site communautaire qu&#8217;on a imaginé tous ensemble vendredi dernier.</p>
 
-<p>Y&#8217;a plus qu&#8217;à comme on dit&#8230; ;)</p>
+<p>Y&#8217;a plus qu&#8217;à comme on dit&hellip; ;)</p>
 
 <h2>Remerciements</h2>
 
@@ -848,7 +848,7 @@ Merci aussi à nos deux sponsors, <a href="http://www.avisto.com">Avisto</a> et 
     <link href="http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js/"/>
     <updated>2012-07-23T22:55:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/07/23/some-fun-with-git-hooks-and-grunt-dot-js</id>
-    <content type="html"><![CDATA[<p>Before going further, I&#8217;ll start by saying that I&#8217;m a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I&#8217;ll be happy to hear it..!</p>
+    <content type="html"><![CDATA[<p>Before going further, I&rsquo;ll start by saying that I&rsquo;m a Git and Github noob, so if you have a better solution to achieve the same goal, give me a shout, I&rsquo;ll be happy to hear it..!</p>
 
 <p>A few weeks ago, I implemented a small bookmarklet to apply <a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a> anywhere on the Web.
 I put the source code <a href="https://github.com/dharFr/prettyprint-bookmarklet">on Github</a> and used the (<em>awesome</em>) <a href="https://help.github.com/articles/creating-pages-with-the-automatic-generator">Automatic Page Generator</a> to quickly create a landing page to host my bookmarklet.</p>
@@ -863,7 +863,7 @@ At this point, my concern was the following: How could I include the bookmarklet
 
 <p>In a first try, I could just copy/paste the minified source into an <code>&lt;a href="..."&gt;</code> link in my <code>index.html</code>.
 But what happens if I update the source?
-I&#8217;ll probably have to deal with that kind of work flow:</p>
+I&rsquo;ll probably have to deal with that kind of work flow:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -896,13 +896,13 @@ I&#8217;ll probably have to deal with that kind of work flow:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Rather boring, right? Totally agree! And that&#8217;s why I decided to dig a little further to see how I could automate this.</p>
+<p>Rather boring, right? Totally agree! And that&rsquo;s why I decided to dig a little further to see how I could automate this.</p>
 
 <h2>Automate the whole thing!</h2>
 
 <h3>Avoiding copy / paste</h3>
 
-<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it&#8217;s probably better to use the following:</p>
+<p>Copy/paste a file from a branch to another <em>may</em> be acceptable if you do it only once. From there, it&rsquo;s probably better to use the following:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -957,7 +957,7 @@ I ended up with an HTML source file, with a placeholder for the bookmarklet:</p>
 
 <p>Basically, <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks">Git Hooks</a> allow you to automatically run custom scripts at any step in your workflow.
 Hooks must be defined in the <code>.git/hooks/</code> folder.
-Placeholder files are already created, giving a pretty good idea about what&#8217;s possible or not.</p>
+Placeholder files are already created, giving a pretty good idea about what&rsquo;s possible or not.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1022,16 +1022,16 @@ Placeholder files are already created, giving a pretty good idea about what&#821
 
 
 <p>As both <code>master</code> and <code>gh-pages</code> branches are modified, they both need to be pushed on the remote repository.
-I use <code>git push --all</code>, which is fine if you don&#8217;t have any other updated branch. Otherwise, you&#8217;ll need a specific push for each branch.</p>
+I use <code>git push --all</code>, which is fine if you don&rsquo;t have any other updated branch. Otherwise, you&rsquo;ll need a specific push for each branch.</p>
 
 <h2>Going further</h2>
 
-<p>I&#8217;d like to find a way to stop the script if the commit doesn&#8217;t occur on the <code>master</code> branch, but I&#8217;m not sure how to do it&#8230;</p>
+<p>I&rsquo;d like to find a way to stop the script if the commit doesn&rsquo;t occur on the <code>master</code> branch, but I&rsquo;m not sure how to do it&hellip;</p>
 
-<p>I&#8217;ll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
+<p>I&rsquo;ll probably also add a <code>pre-commit</code> hook to lint/concat/minify the source.
 Grunt.js already simplified this to a one liner, but I often forget to call it before committing changes.</p>
 
-<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I&#8217;d like to have an opportunity to try it on a larger project and see how it goes.</p>
+<p>(Grunt + Git Hooks) appears to be a nice couple with a huge time-saving potential. I&rsquo;d like to have an opportunity to try it on a larger project and see how it goes.</p>
 
 <hr />
 
@@ -1051,13 +1051,13 @@ Grunt.js already simplified this to a one liner, but I often forget to call it b
     <link href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/"/>
     <updated>2012-04-07T17:48:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules</id>
-    <content type="html"><![CDATA[<p>In this post, I&#8217;ll continue to work on the code started in the first article on <a href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&#8217;d better read it before going further.</p>
+    <content type="html"><![CDATA[<p>In this post, I&rsquo;ll continue to work on the code started in the first article on <a href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&rsquo;d better read it before going further.</p>
 
 <p>Last time, we created a Javascript component used to upload a file asynchronously on the server.
-It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&#8217;t support those APIs.</p>
+It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&rsquo;t support those APIs.</p>
 
-<p>This time, I&#8217;ll explain how to handle the thumbnail associated to the file input field.
-It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
+<p>This time, I&rsquo;ll explain how to handle the thumbnail associated to the file input field.
+It&rsquo;s a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
 
 <p>As mentioned in the previous post, you can find the source code on Github: <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a>.</p>
 
@@ -1067,7 +1067,7 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <ul>
 <li>Nicholas Zakas&#8217; talk on <a href="http://www.youtube.com/watch?v=vXjVFPosQHw">Scalable JavaScript Application Architecture</a> [YouTube]</li>
-<li>Addy Osmani&#8217;s <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
+<li>Addy Osmani&rsquo;s <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
 </ul>
 
 
@@ -1078,11 +1078,11 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <ul>
 <li>Split your code into separate modules, obviously.</li>
-<li>Don&#8217;t allow a module to know about each-other.</li>
+<li>Don&rsquo;t allow a module to know about each-other.</li>
 </ul>
 
 
-<p>How could you do that? Let&#8217;s try to illustrate the idea with our file upload form.</p>
+<p>How could you do that? Let&rsquo;s try to illustrate the idea with our file upload form.</p>
 
 <h3>Creating modules</h3>
 
@@ -1095,13 +1095,13 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 </ul>
 
 
-<p>In <a href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won&#8217;t detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let&#8217;s see those two as black boxes that fits with our requirements.</p>
+<p>In <a href="http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won&rsquo;t detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let&rsquo;s see those two as black boxes that fits with our requirements.</p>
 
 <h3>Communication between modules: introducing the observer</h3>
 
 <h4>The Observer Pattern</h4>
 
-<p>As mentioned before, our modules can&#8217;t reference each-other. In other words, in the <code>uploader</code>&#8217;s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
+<p>As mentioned before, our modules can&rsquo;t reference each-other. In other words, in the <code>uploader</code>&rsquo;s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1110,9 +1110,9 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>That&#8217;s why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
+<p>That&rsquo;s why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
 
-<p>There many different implementations of the observer pattern but it&#8217;s basically a component with 3 methods:</p>
+<p>There many different implementations of the observer pattern but it&rsquo;s basically a component with 3 methods:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1140,24 +1140,24 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 
 <ul>
-<li><code>observer.publish('some-topic', message)</code>: send a message on the topic &#8216;some-topic&#8217;</li>
-<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic &#8216;some-topic&#8217;. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
-<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics &#8216;some-topic&#8217;.</li>
+<li><code>observer.publish('some-topic', message)</code>: send a message on the topic &lsquo;some-topic&rsquo;</li>
+<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic &lsquo;some-topic&rsquo;. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
+<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics &lsquo;some-topic&rsquo;.</li>
 </ul>
 
 
 <h4>Using the observer</h4>
 
-<p>Back the the upload form, the implementation doesn&#8217;t change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
+<p>Back the the upload form, the implementation doesn&rsquo;t change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
 
-<figure class='code'><figcaption><span>adding the observer </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>adding the observer</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">obs</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">observer</span> <span class="o">||</span> <span class="p">{</span><span class="nx">publish</span><span class="o">:</span><span class="kd">function</span><span class="p">(){},</span> <span class="nx">subscribe</span><span class="o">:</span><span class="kd">function</span><span class="p">(){}};</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 
 
-<figure class='code'><figcaption><span>notifying the observer </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>notifying the observer</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1180,7 +1180,7 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <p>On the other side, the thumbnail module need to listen to these events and to react to these in an appropriate way. In our case, when receiving a <code>submit</code> event, the thumbnail module should hide an existing image and display a load indicator. When receiving a <code>uploaded</code> event, it have to show the newly uploaded picture.</p>
 
-<figure class='code'><figcaption><span>listening to the observer </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>listening to the observer</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1213,8 +1213,8 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
 
 <ul>
 <li>You mat decide to completely change some module implementation, as long as it sends the same messages to the observer, everything is fine.</li>
-<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That&#8217;s fine, the new module just need to subscribe the appropriate event.</li>
-<li>Last but not least, if some module appears to be broken, or if it doesn&#8217;t starts as expected, other modules won&#8217;t be much affected and your application is still working (even if some features are down).</li>
+<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That&rsquo;s fine, the new module just need to subscribe the appropriate event.</li>
+<li>Last but not least, if some module appears to be broken, or if it doesn&rsquo;t starts as expected, other modules won&rsquo;t be much affected and your application is still working (even if some features are down).</li>
 </ul>
 
 ]]></content>
@@ -1226,14 +1226,14 @@ It&#8217;s a good example to introduce <em>loosely coupled modules</em>, and to 
     <updated>2012-03-31T21:46:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/03/31/queued-ajax-requests-with-jquery-and-coffescript</id>
     <content type="html"><![CDATA[<p>I recently had to queue a few ajax requests. I wrote a little piece of Coffeescript+jQuery to provide a reusable way of doing it.
-Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
+Using jQuery&rsquo;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects and CoffeeScript makes the task really easy.</p>
 
 <!--more-->
 
 
-<p>You probably already know that all jQuery&#8217;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&#8217;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries&#8217; progress.</p>
+<p>You probably already know that all jQuery&rsquo;s ajax methods implement <a href="http://api.jquery.com/Types/#Promise">Promise</a> interface. That&rsquo;s why we can use the <code>pipe()</code> method to queue the queries, as well as <code>done()</code> and <code>fail()</code> methods to track the queries&#8217; progress.</p>
 
-<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&#8217;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
+<p>Another interesting point is how CoffeeScript make the code clearer and easy to read. I particularly enjoyed using <a href="http://jashkenas.github.com/coffee-script/#splats">splats</a> (<code>...</code>) to write the <code>$.when(deferredObjs...)</code> part on line 34. Speaking about code readability, it&rsquo;s such an improvement compared to the <code>$.when.apply($, deferredObjs)</code> Javascript counterpart.</p>
 
 <p>You can find a <a href="http://jsfiddle.net/wA6K8/1/">working sample</a> on jsFiddle.</p>
 
@@ -1280,7 +1280,7 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
 <h3>References</h3>
 
 <ul>
-<li>jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
+<li>jQuery&rsquo;s <a href="http://api.jquery.com/category/deferred-object/">Deferred</a> objects</li>
 <li><a href="https://gist.github.com/2244946">Source code</a> on gist</li>
 <li><a href="http://jsfiddle.net/wA6K8/">Working sample</a> on jsFiddle</li>
 </ul>
@@ -1294,10 +1294,10 @@ Using jQuery&#8217;s <a href="http://api.jquery.com/category/deferred-object/">D
     <updated>2012-03-24T16:55:00+01:00</updated>
     <id>http://www.dhar.fr/blog/2012/03/24/file-upload-form-part-1-feature-detection</id>
     <content type="html"><![CDATA[<p>Last Thursday, I gave a talk at <a href="http://www.twitter.com/jssophia">@JSSophia</a>, the local Javascript User Group I co-founded with <a href="http://www.twitter.com/FredGuillaume">@FredGuillaume</a>.
-The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn&#8217;t come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
+The group is just starting (2nd meeting), so there were only a few people, but as some of them looked quite interested by my talk, and some other couldn&rsquo;t come due to personal or professional duties, I thought I could write a couple of blog posts about the same topic.</p>
 
-<p>I choose <em>File Upload Form</em> example because it&#8217;s standalone, frequently used and it can be improved by many ways with HTML5 APIs.
-It&#8217;s a good example to introduce some very important Javascript concepts:</p>
+<p>I choose <em>File Upload Form</em> example because it&rsquo;s standalone, frequently used and it can be improved by many ways with HTML5 APIs.
+It&rsquo;s a good example to introduce some very important Javascript concepts:</p>
 
 <ol>
 <li>Using <strong>feature detection</strong> for <strong>progressive enhancement</strong></li>
@@ -1307,9 +1307,9 @@ It&#8217;s a good example to introduce some very important Javascript concepts:<
 
 <p>This post focus on the first part of the talk.
 It presents the <em>feature detection</em> technique.
-I&#8217;ll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
+I&rsquo;ll cover the second part, <em>loosely coupled modules</em>, in another article.</p>
 
-<p>If you&#8217;re in a hurry, or simply don&#8217;t want to read the whole post, you&#8217;ll find the slides embedded below and everything else on Github:</p>
+<p>If you&rsquo;re in a hurry, or simply don&rsquo;t want to read the whole post, you&rsquo;ll find the slides embedded below and everything else on Github:</p>
 
 <ul>
 <li>The final <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a> source code.</li>
@@ -1344,11 +1344,11 @@ I&#8217;ll cover the second part, <em>loosely coupled modules</em>, in another a
 <h3>Initial Markup</h3>
 
 <p>The main idea in progressive enhancement is to provide an application that work in any context.
-A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application&#8217;s user experience in modern browsers.</p>
+A good approach is to start development with features that will work (quite) everywhere, and <em>progressively</em> add more specific features to improve your application&rsquo;s user experience in modern browsers.</p>
 
 <p>Talking about <em>file upload form</em>, our starting point is a simple HTML markup.</p>
 
-<figure class='code'><figcaption><span>Initial Markup </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Initial Markup</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1367,27 +1367,27 @@ A good approach is to start development with features that will work (quite) eve
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>It&#8217;s simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
+<p>It&rsquo;s simple, works in every browser and, assuming the server behind do his job, it works without a single line of Javascript.
 On the other hand, it requires a full page reload so the first thing to do to bring some <em>hype</em> in this is to allow uploading the file with an asynchronous request.</p>
 
 <h3>Feature detection</h3>
 
-<p>Uploading a file trough an asynchronous request isn&#8217;t that easy.
-The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it&#8217;s not well supported across all browsers (IE, I&#8217;m looking at you&#8230; See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
+<p>Uploading a file trough an asynchronous request isn&rsquo;t that easy.
+The <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData">FormData</a> API perfectly fits our needs but it&rsquo;s not well supported across all browsers (IE, I&rsquo;m looking at you&hellip; See <a href="https://developer.mozilla.org/en/DOM/XMLHttpRequest/FormData#Browser%20compatibility">Browser_compatibility</a> section).</p>
 
 <p>Remember that our main concern is to provide the best user experience on each browser.
-So how do we upload a file <em>asynchronously</em> in a browser that don&#8217;t support <code>FormData</code> API?
+So how do we upload a file <em>asynchronously</em> in a browser that don&rsquo;t support <code>FormData</code> API?
 Answer is by using an <code>iframe</code>.</p>
 
 <h4>iframe file upload</h4>
 
 <p>Please note that I started by creating a jQuery plugin to make the code more easily reusable.
-I also hid the submit button and the bound event &#8216;onchange&#8217; on the input field to submit the form.
+I also hid the submit button and the bound event &lsquo;onchange&rsquo; on the input field to submit the form.
 The following code snippets come from <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js">step1/upload.js</a> file.</p>
 
 <p>First, we have to listen to the <code>submit</code> event to prepare the form:</p>
 
-<figure class='code'><figcaption><span>form submit event listener </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>form submit event listener</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L26-31'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1402,13 +1402,13 @@ The following code snippets come from <a href="https://github.com/dharFr/uploade
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Next, let&#8217;s append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
-Once done, the form can be submitted as usual, the server&#8217;s answer will be loaded into the <code>iframe</code>.</p>
+<p>Next, let&rsquo;s append an hidden <code>iframe</code> to the form and define the <code>target</code> attribute to match the <code>iframe</code> id.
+Once done, the form can be submitted as usual, the server&rsquo;s answer will be loaded into the <code>iframe</code>.</p>
 
-<p>However, due to security concerns, we won&#8217;t be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
+<p>However, due to security concerns, we won&rsquo;t be able to read the <code>iframe</code> content once loaded, so we also need to create a callback function and to send the function name to the server as a URL parameter.
 This way, the server script will be aware that we are using an <code>iframe</code> and will be able to generate the appropriate response.</p>
 
-<figure class='code'><figcaption><span>iframe upload </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>iframe upload</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step1/upload.js#L47-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1482,7 +1482,7 @@ This way, the server script will be aware that we are using an <code>iframe</cod
 <p>Knowing that the server response will be loaded as <code>iframe</code> content, the server script has to generate this small piece of HTML.
 It includes a <code>script</code> tag, witch calls the <code>callback</code> function on the parent window. The json <code>result</code> is send as a parameter of that function.</p>
 
-<figure class='code'><figcaption><span>server response </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>server response</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/views/upload-iframe.ejs'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
@@ -1493,26 +1493,26 @@ It includes a <code>script</code> tag, witch calls the <code>callback</code> fun
 
 <p>Here we are.
 Our script can send files asynchronously, without reloading the whole page, and it even works with old browsers.
-Of course, we could decide to stop there, but we won&#8217;t because of the following:</p>
+Of course, we could decide to stop there, but we won&rsquo;t because of the following:</p>
 
 <ul>
-<li>No Error handling: if something goes wrong while sending the file, or if the server don&#8217;t render the good response, the callback function will never be called, and we can&#8217;t handle the error.
+<li>No Error handling: if something goes wrong while sending the file, or if the server don&rsquo;t render the good response, the callback function will never be called, and we can&rsquo;t handle the error.
 You probably want to add a timeout to the script above to avoid waiting for an answer that would never come.</li>
-<li>It&#8217;s not AJAX.
+<li>It&rsquo;s not AJAX.
 You probably already notice this point.
 We are faking it.
 The form is still sent as HTML form, we only changed his target.
 The file is uploaded asynchronously, but without any XmlHttpRequest involved.</li>
-<li>It&#8217;s dirty.
-I&#8217;m OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
+<li>It&rsquo;s dirty.
+I&rsquo;m OK as it stays a fall-back solution, but keeping it as the main implementation? Yuck!</li>
 </ul>
 
 
 <h4>FormData file upload</h4>
 
-<p>Time to do things the right way? OK. Let&#8217;s start by editing the submit event listener as following:</p>
+<p>Time to do things the right way? OK. Let&rsquo;s start by editing the submit event listener as following:</p>
 
-<figure class='code'><figcaption><span>updated submit event listener </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>updated submit event listener</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L26-46'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1559,17 +1559,17 @@ I&#8217;m OK as it stays a fall-back solution, but keeping it as the main implem
 
 <p>The <code>this.$upload</code> variable represents a jQuery object containing the <code>input[type=file]</code> DOM node (see the complete <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js">step2/upload.js</a> file for more details).
 Here we have to check if the browser supports both <code>File</code> and <code>FormData</code> APIs.
-If these two conditions are satisfied, we can go with the <em>&#8220;HTML5&#8221;</em> file upload.
-Otherwise, we just fall-back to the <code>iframe</code> hack&#8230; Simple isn&#8217;t it?</p>
+If these two conditions are satisfied, we can go with the <em>&ldquo;HTML5&rdquo;</em> file upload.
+Otherwise, we just fall-back to the <code>iframe</code> hack&hellip; Simple isn&rsquo;t it?</p>
 
-<p>This is <strong>Feature Dectection</strong> and it&#8217;s one of the <strong>key concepts of modern web development</strong>.
-It&#8217;s the only way we have to use the latest HTML5 features without breaking old browser&#8217;s support.</p>
+<p>This is <strong>Feature Dectection</strong> and it&rsquo;s one of the <strong>key concepts of modern web development</strong>.
+It&rsquo;s the only way we have to use the latest HTML5 features without breaking old browser&rsquo;s support.</p>
 
-<p>Now, we&#8217;re sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
-As you can read, it&#8217;s way simpler and less hacky compared to the <code>iframe</code> method.
+<p>Now, we&rsquo;re sure that we can use <code>FormData</code> upload, we just need to implement the method as shown in the following code extract.
+As you can read, it&rsquo;s way simpler and less hacky compared to the <code>iframe</code> method.
 Server response and errors are handled the same way than with any other ajax request.</p>
 
-<figure class='code'><figcaption><span>FormData upload </span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>FormData upload</span><a href='https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step2/upload.js#L61-80'>Source</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1614,11 +1614,11 @@ Server response and errors are handled the same way than with any other ajax req
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>We&#8217;re done for part 1.
+<p>We&rsquo;re done for part 1.
 Our upload form is fully functional for both modern and old browsers, and even with Javascript disabled.
 In the 2nd part, I explain how to handle the thumbnail associated to the file input field.
-It&#8217;s a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
-<a href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form - Part 2: Loosely Coupled Modules</a></p>
+It&rsquo;s a very good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.
+<a href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/">File Upload Form &ndash; Part 2: Loosely Coupled Modules</a></p>
 
 <h3>References:</h3>
 
@@ -1636,17 +1636,17 @@ It&#8217;s a very good example to introduce <em>loosely coupled modules</em>, an
     <link href="http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process/"/>
     <updated>2011-07-26T00:00:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2011/07/26/jquery-plugin-for-ping-url-process</id>
-    <content type="html"><![CDATA[<p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &#8220;ping URL&#8221; process and provides some options.</p>
+    <content type="html"><![CDATA[<p>If your page runs into an iframe hosted by another domain, you may want to keep the session open. The following jQuery plugin automates the &ldquo;ping URL&rdquo; process and provides some options.</p>
 
 <!--more-->
 
 
-<p>The pinger will ask the given URL every &#8216;interval&#8217; minutes if it detects
-some activity by listening to the events listed in &#8216;listen&#8217; parameter.</p>
+<p>The pinger will ask the given URL every &lsquo;interval&rsquo; minutes if it detects
+some activity by listening to the events listed in &lsquo;listen&rsquo; parameter.</p>
 
-<p>Have a look to the &#8216;defaults&#8217; variable below for further details about available parameters and default values.</p>
+<p>Have a look to the &lsquo;defaults&rsquo; variable below for further details about available parameters and default values.</p>
 
-<div><script src='https://gist.github.com/1107059.js?file='></script>
+<div><script src='https://gist.github.com/1107059.js'></script>
 <noscript><pre><code>/**
  * $.pinger
  * 
@@ -1817,9 +1817,9 @@ some activity by listening to the events listed in &#8216;listen&#8217; paramete
     <id>http://www.dhar.fr/blog/2011/07/24/jquery-plugin-pattern-written-in-coffeescript</id>
     <content type="html"><![CDATA[<p>Once your <a href="http://jashkenas.github.com/coffee-script/">CoffeeScript</a> environment is up and running, you may want to write some awesome new jQuery plugin with CoffeeScript.</p>
 
-<p>The code bellow is a starting point, it&#8217;s clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
+<p>The code bellow is a starting point, it&rsquo;s clearly inspired from the <a href="http://docs.jquery.com/Plugins/Authoring">jQuery Doc</a>. Just search/replace <code>pluginName</code> with your plugin name and go ahead with your own code.</p>
 
-<div><script src='https://gist.github.com/1101485.js?file='></script>
+<div><script src='https://gist.github.com/1101485.js'></script>
 <noscript><pre><code>###*
  * jQuery pluginName plugin v0.1
  * ==========================
@@ -1886,9 +1886,9 @@ some activity by listening to the events listed in &#8216;listen&#8217; paramete
     <link href="http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript/"/>
     <updated>2010-09-05T00:00:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2010/09/05/plugin-jquery-aide-contextuelle-javascript</id>
-    <content type="html"><![CDATA[<p>Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&#8230; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt le temps qui manque un peu quand il s&#8217;agit de présenter tout ça de façon correcte.</p>
+    <content type="html"><![CDATA[<p>Voilà déjà pas mal de temps que je n&#8217;ai rien publié ici&hellip; Ce qui ne veux pas dire que j&#8217;ai rien dans les cartons. C&#8217;est plutôt le temps qui manque un peu quand il s&#8217;agit de présenter tout ça de façon correcte.</p>
 
-<p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd&#8217;hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c&#8217;est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d&#8217;un autre. J&#8217;ai appelé ce plugin &#8216;helpBox&#8217; car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
+<p>Pour changer un peu des précédent articles dédiés au développement iPhone, je vais aujourd&#8217;hui présenter un petit outil Javascript, utilisant le Framework jQuery. Rien de révolutionnaire, c&#8217;est simplement un plugin jQuery permettant de dérouler un bandeau HTML au dessous d&#8217;un autre. J&#8217;ai appelé ce plugin &lsquo;helpBox&rsquo; car ce widget est particulièrement adapté pour afficher une aide contextuelle.</p>
 
 <p>Voici le <strong> <a href="https://gist.github.com/1101480">code source</a></strong>.</p>
 
@@ -1896,7 +1896,7 @@ some activity by listening to the events listed in &#8216;listen&#8217; paramete
 
 
 <p>Rien de bien compliqué ici si l&#8217;on connais déjà la structure d&#8217;un plugin jQuery.
-On commence par définir quelques paramètres&#8230;</p>
+On commence par définir quelques paramètres&hellip;</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1913,7 +1913,7 @@ On commence par définir quelques paramètres&#8230;</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Ensuite, le plugin &#8216;helpBox&#8217; se contente de recherche le code HTML du contenu de l&#8217;aide pour l&#8217;ajouter au document avec le bouton associé.</p>
+<p>Ensuite, le plugin &lsquo;helpBox&rsquo; se contente de recherche le code HTML du contenu de l&#8217;aide pour l&#8217;ajouter au document avec le bouton associé.</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1948,7 +1948,7 @@ On commence par définir quelques paramètres&#8230;</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Ensuite, il ajoute deux gestionnaires d’événement au bouton: un &#8216;mouseover&#8217; pour ouvrir le dialogue d&#8217;aide et un &#8216;click&#8217; pour fermer ce dernier.</p>
+<p>Ensuite, il ajoute deux gestionnaires d’événement au bouton: un &lsquo;mouseover&rsquo; pour ouvrir le dialogue d&#8217;aide et un &lsquo;click&rsquo; pour fermer ce dernier.</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -2001,17 +2001,17 @@ On commence par définir quelques paramètres&#8230;</p>
 
 <h3>Pour les autres, voilà un peu plus de détails:</h3>
 
-<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d&#8217;un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés &#8220;magiques&#8221;.<!--more--></p>
+<p>Les <a href="http://en.wikipedia.org/wiki/QR_Code">QR Codes</a> sont de plus en plus répandus dans les applications mobiles. Au détour d&#8217;un projet iPhone, vous pourriez être amenés, tout comme moi, à devoir décoder ces carrés &ldquo;magiques&rdquo;.<!--more--></p>
 
 <p>Si tel est votre cas, sachez que la tâche sera des plus simples grâce à l&#8217;excellent projet <a href="http://zbar.sourceforge.net/">ZBar bar code reader</a>. L&#8217;intégration du wrapper Objective-C de cette librairie m&#8217;a pris en tout en pour tout 10 minutes. De plus, le scan des codes est effectué à la volée (comprenez sans que l&#8217;utilisateur ait besoin de presser le bouton de l&#8217;appareil photo, dès que le code est dans le cadre). La documentation limpide fournie sur le wiki du projet transformera votre application en un lecteur de codes à rendre jaloux le caissier de l&#8217;hyper en bas de chez vous.</p>
 
-<p>La doc est là:<a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a>. Dépêchez-vous, plus que 9&#8217;30&#8230;</p>
+<p>La doc est là:<a href="http://sourceforge.net/apps/mediawiki/zbar/index.php?title=HOWTO:_Add_a_barcode_reader_to_an_iPhone_app">ZBar: How to add a barcode reader to an iPhone app</a>. Dépêchez-vous, plus que 9&#8217;30&hellip;</p>
 
 <h4>Décoder des codes QR:</h4>
 
 <ul>
 <li><a href="http://itunes.apple.com/us/app/zbar-barcode-reader/id344957305?mt=8">L&#8217;application ZBar sur l&#8217;AppStore</a></li>
-<li><a href="http://code.google.com/p/zxing/">ZXing</a> (prononcer &#8220;Zebra_Crossing&#8221;)</li>
+<li><a href="http://code.google.com/p/zxing/">ZXing</a> (prononcer &ldquo;Zebra_Crossing&rdquo;)</li>
 </ul>
 
 
@@ -2046,7 +2046,7 @@ J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la faç
 <!--more-->
 
 
-<p>Si vous souhaitez, comme moi, reproduire l&#8217;interface de l&#8217;application <code>Photos</code> de votre iPhone, vous allez sans doute créer un <code>UIScrollView</code> afin de permettre à l&#8217;utilisateur de naviguer d&#8217;une image à l&#8217;autre. Pour ce faire, le projet &#8221;<a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a>&#8221; fourni en exemple dans la documentation d’Apple constitue un bon point de départ. La logique du scroll est contenue dans  les méthodes <code>viewDidLoad</code> et <code>layoutScrollImages</code> du fichier <code>MyViewController.m</code> mais il vous faudra l’adapter un peu à votre cas d’utilisation.</p>
+<p>Si vous souhaitez, comme moi, reproduire l&#8217;interface de l&#8217;application <code>Photos</code> de votre iPhone, vous allez sans doute créer un <code>UIScrollView</code> afin de permettre à l&#8217;utilisateur de naviguer d&#8217;une image à l&#8217;autre. Pour ce faire, le projet &ldquo;<a href="http://developer.apple.com/iphone/library/samplecode/Scrolling/Listings/MyViewController_m.html#//apple_ref/doc/uid/DTS40008023-MyViewController_m-DontLinkElementID_6">Scrolling</a>&rdquo; fourni en exemple dans la documentation d’Apple constitue un bon point de départ. La logique du scroll est contenue dans  les méthodes <code>viewDidLoad</code> et <code>layoutScrollImages</code> du fichier <code>MyViewController.m</code> mais il vous faudra l’adapter un peu à votre cas d’utilisation.</p>
 
 <p>En revanche, j&#8217;ai constaté que les événements de <code>Touch</code> n&#8217;étaient pas transmis par la <code>UIScrollView</code>. Gênant lorsque l&#8217;on veut ajouter des interactions en plus du scroll.</p>
 
@@ -2144,7 +2144,7 @@ Voilà le code obtenu:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Ok, on approche du but. <code>TapScrollView</code> réponds bien au protocole et la méthode <code>tap</code> sera correctement appelée elle-aussi. En revanche, les méthodes du protocole <code>UIScrollViewDelegate</code> ne sont plus appelés&#8230;
+<p>Ok, on approche du but. <code>TapScrollView</code> réponds bien au protocole et la méthode <code>tap</code> sera correctement appelée elle-aussi. En revanche, les méthodes du protocole <code>UIScrollViewDelegate</code> ne sont plus appelés&hellip;
 On tourne en rond.
 J&#8217;ai mis pas mal de temps à trouver la solution. L&#8217;astuce consiste à surcharger aussi les accès à la propriété <code>delegate</code>, de façon à transmettre les appels dans les deux sens (<code>UIScrollView</code> vers <code>TapScrollView</code> et vice-versa).
 Voilà le code final:</p>

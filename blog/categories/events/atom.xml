@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Events | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/events/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -19,8 +19,8 @@
     <updated>2012-08-13T15:07:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/08/13/fr-compte-rendu-du-riviera-coding-week-end</id>
     <content type="html"><![CDATA[<p><em>This post is about the Riviera Coding Week-end, a geek event that took place in Nice (France) from 10 to 12 August 2012.
-As this post is closely related to a French event, I think for once, it's more appropriate to write in French, even if I usually blog in English.
-If you're anyway interested, I'm sure <a href="http://translate.google.com/translate?hl=en&amp;sl=fr&amp;tl=en&amp;u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F">Google translate</a> or any other translation tool can fit your needs...</em></p>
+As this post is closely related to a French event, I think for once, it&rsquo;s more appropriate to write in French, even if I usually blog in English.
+If you&rsquo;re anyway interested, I&rsquo;m sure <a href="http://translate.google.com/translate?hl=en&amp;sl=fr&amp;tl=en&amp;u=http%3A%2F%2Fwww.dhar.fr%2Fblog%2F2012%2F08%2F13%2Ffr-compte-rendu-du-riviera-coding-week-end%2F">Google translate</a> or any other translation tool can fit your needs&hellip;</em></p>
 
 <p><a href="http://photos.dhar.fr/p/ke/album-2"><img class="right" src="http://dhar.openphoto.me.s3.amazonaws.com/custom/201208/5d466e-EB855D13-DD73-423D-ACF1-51A94E35A82A_960x180.jpg"></a>
 Du 10 au 12 Août dernier, j'ai participé au premier <em>Riviera Coding Week-end</em>, organisé par les membres du <a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">RivieraGUG</a> avec la participation du <a href="http://groups.google.com/group/jssophia">JSSophia</a> dont je fais partie.
@@ -31,7 +31,7 @@ Après ces 48 heures passées à construire, échanger, mais surtout coder, un p
 <!-- more -->
 
 
-<h2>Un Coding Week-End, quelle idée...</h2>
+<h2>Un Coding Week-End, quelle idée&hellip;</h2>
 
 <p>D'abord initié par le <em><a href="http://www.meetup.com/Riviera-Groovy-Grails-User-Group/">Groovy &amp; Grails User Group</a></em> , l'événement avait pour objectif de construire un site dédié pour le groupe.
 Par la suite, alors que certains membres du <em><a href="http://groups.google.com/group/jssophia">Javascript User Group</a></em> ont aussi souhaité participer au week-end, la thématique de l'événement a un peu changée, pour s'axer d'avantage sur la collaboration entre les communautés locales.</p>
@@ -52,7 +52,7 @@ Sans trop savoir ce que va donner cette expérience, on sait déjà qu'on est to
 <p>Le programme du Week-end est assez simple et couvre principalement la soirée du vendredi, après tout, on est pas là pour subir un planning rigoureux.</p>
 
 <p>Le début de soirée est assez calme.
-On fait connaissance, on se raconte nos vacances (pour ceux qui en ont pris...), on prends l'apéro en terrasse, on envoie quelques tweets en espérant ramener de nouveaux participants de dernière minute.
+On fait connaissance, on se raconte nos vacances (pour ceux qui en ont pris&hellip;), on prends l'apéro en terrasse, on envoie quelques tweets en espérant ramener de nouveaux participants de dernière minute.
 Certains configurent le Raspberry Pi qui hébergera un <a href="http://fr.wikipedia.org/wiki/EtherPad">EtherPad</a> pour la durée du week-end.</p>
 
 <h2>Grails Crash Course</h2>
@@ -141,7 +141,7 @@ Une ambiance bien sympa, des locaux au top, et une belle brochette de passionné
 Après tout, l'initiative est lancée et le code est là, ouvert à tous, disponible sur Github.
 Il ne tiens qu'à nous de continuer à faire avancer ce projet, en y contribuant nous-même ou en motivant d'autres personnes à participer. Quelques <em>pull requests</em> de plus et on l'aura le site communautaire qu'on a imaginé tous ensemble vendredi dernier.</p>
 
-<p>Y'a plus qu'à comme on dit... ;)</p>
+<p>Y'a plus qu'à comme on dit&hellip; ;)</p>
 
 <h2>Remerciements</h2>
 

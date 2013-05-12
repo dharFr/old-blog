@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Loosely Coupled Modules | dhar's Blog]]></title>
   <link href="http://www.dhar.fr/blog/categories/loosely-coupled-modules/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-03-23T03:06:27+01:00</updated>
+  <updated>2013-05-12T14:36:03+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -18,13 +18,13 @@
     <link href="http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules/"/>
     <updated>2012-04-07T17:48:00+02:00</updated>
     <id>http://www.dhar.fr/blog/2012/04/07/file-upload-form-part-2-loosely-coupled-modules</id>
-    <content type="html"><![CDATA[<p>In this post, I'll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you'd better read it before going further.</p>
+    <content type="html"><![CDATA[<p>In this post, I&rsquo;ll continue to work on the code started in the first article on <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">Feature Detection and File Upload Forms</a>, so you&rsquo;d better read it before going further.</p>
 
 <p>Last time, we created a Javascript component used to upload a file asynchronously on the server.
-It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don't support those APIs.</p>
+It uses <code>FormData</code> and <code>FileList</code> APIs in modern browsers but also degrades gracefully with browsers that don&rsquo;t support those APIs.</p>
 
-<p>This time, I'll explain how to handle the thumbnail associated to the file input field.
-It's a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
+<p>This time, I&rsquo;ll explain how to handle the thumbnail associated to the file input field.
+It&rsquo;s a good example to introduce <em>loosely coupled modules</em>, and to show some other uses of the <em>feature detection</em> technique.</p>
 
 <p>As mentioned in the previous post, you can find the source code on Github: <a href="https://github.com/dharFr/uploader-thumbnail/">uploader-thumbnail</a>.</p>
 
@@ -34,7 +34,7 @@ It's a good example to introduce <em>loosely coupled modules</em>, and to show s
 
 <ul>
 <li>Nicholas Zakas' talk on <a href="http://www.youtube.com/watch?v=vXjVFPosQHw">Scalable JavaScript Application Architecture</a> [YouTube]</li>
-<li>Addy Osmani's <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
+<li>Addy Osmani&rsquo;s <a href="http://addyosmani.com/largescalejavascript/">Patterns For Large-Scale JavaScript Application Architecture</a></li>
 </ul>
 
 
@@ -45,11 +45,11 @@ It's a good example to introduce <em>loosely coupled modules</em>, and to show s
 
 <ul>
 <li>Split your code into separate modules, obviously.</li>
-<li>Don't allow a module to know about each-other.</li>
+<li>Don&rsquo;t allow a module to know about each-other.</li>
 </ul>
 
 
-<p>How could you do that? Let's try to illustrate the idea with our file upload form.</p>
+<p>How could you do that? Let&rsquo;s try to illustrate the idea with our file upload form.</p>
 
 <h3>Creating modules</h3>
 
@@ -62,13 +62,13 @@ It's a good example to introduce <em>loosely coupled modules</em>, and to show s
 </ul>
 
 
-<p>In <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won't detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let's see those two as black boxes that fits with our requirements.</p>
+<p>In <a href="/blog/2012/03/24/file-upload-form-part-1-feature-detection/">the first part</a> we have already build the first one. As the two other ones are quite easy to implement, I won&rsquo;t detail every piece of code in this post. Feel free to look at the <a href="https://github.com/dharFr/uploader-thumbnail/">complete source</a> if necessary. For now let&rsquo;s see those two as black boxes that fits with our requirements.</p>
 
 <h3>Communication between modules: introducing the observer</h3>
 
 <h4>The Observer Pattern</h4>
 
-<p>As mentioned before, our modules can't reference each-other. In other words, in the <code>uploader</code>'s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
+<p>As mentioned before, our modules can&rsquo;t reference each-other. In other words, in the <code>uploader</code>&rsquo;s code, calling a method from the <code>thumbnail</code> object or referring to it in any other way is forbidden.</p>
 
 <p>``` js</p>
 
@@ -77,9 +77,9 @@ thumbnail.display(picture) // &lt;-- WRONG!
 </code></pre>
 
 <p>```
-That's why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
+That&rsquo;s why we need to introduce the observer component. Its role is to allow communication between modules. In other words, instead of talking directly to each-others, modules in your application will talk and listen to the observer.</p>
 
-<p>There many different implementations of the observer pattern but it's basically a component with 3 methods:
+<p>There many different implementations of the observer pattern but it&rsquo;s basically a component with 3 methods:
 ``` js</p>
 
 <pre><code>var observer = {
@@ -98,24 +98,24 @@ That's why we need to introduce the observer component. Its role is to allow com
 <p>```</p>
 
 <ul>
-<li><code>observer.publish('some-topic', message)</code>: send a message on the topic 'some-topic'</li>
-<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic 'some-topic'. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
-<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics 'some-topic'.</li>
+<li><code>observer.publish('some-topic', message)</code>: send a message on the topic &lsquo;some-topic&rsquo;</li>
+<li><code>observer.subscribe('some-topic', callbackFunc)</code>: starts listening messages on the topic &lsquo;some-topic&rsquo;. <code>callbackFunc</code> will be called every times a message is published on the topic, the <code>message</code> will be passed as a parameter.</li>
+<li><code>observer.publish('some-topic', callbackFunc)</code>: stops listening messages on the topics &lsquo;some-topic&rsquo;.</li>
 </ul>
 
 
 <h4>Using the observer</h4>
 
-<p>Back the the upload form, the implementation doesn't change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
+<p>Back the the upload form, the implementation doesn&rsquo;t change that much. You only need to pass the observer as parameter, and publish some events to notify the application</p>
 
-<p>``` javascript adding the observer https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13 Source</p>
+<p>``` javascript adding the observer <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L13</a> Source</p>
 
 <pre><code>this.obs = options.observer || {publish:function(){}, subscribe:function(){}};
 </code></pre>
 
 <p>```</p>
 
-<p>``` javascript notifying the observer https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144 Source</p>
+<p>``` javascript notifying the observer <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/upload.js#L132-144</a> Source</p>
 
 <pre><code>beforeUpload: function(file) {
   this.obs.publish('submit.uploader', this.fileId, file);
@@ -132,7 +132,7 @@ onUploadDone: function(data) {
 
 <p>On the other side, the thumbnail module need to listen to these events and to react to these in an appropriate way. In our case, when receiving a <code>submit</code> event, the thumbnail module should hide an existing image and display a load indicator. When receiving a <code>uploaded</code> event, it have to show the newly uploaded picture.</p>
 
-<p>``` javascript listening to the observer https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31 Source</p>
+<p>``` javascript listening to the observer <a href="https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31">https://github.com/dharFr/uploader-thumbnail/blob/step-by-step-demo/public/js/step3/thumbnail.js#L19-31</a> Source</p>
 
 <pre><code>Thumbnail.prototype = {
   init: function() {
@@ -155,8 +155,8 @@ As you can see in the above code, both</code>uploader<code>and</code>thumbnail` 
 
 <ul>
 <li>You mat decide to completely change some module implementation, as long as it sends the same messages to the observer, everything is fine.</li>
-<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That's fine, the new module just need to subscribe the appropriate event.</li>
-<li>Last but not least, if some module appears to be broken, or if it doesn't starts as expected, other modules won't be much affected and your application is still working (even if some features are down).</li>
+<li>Every other module in your application can listen to observer. The thumbnail may not be the only piece of application interested in <code>uploader</code> events. That&rsquo;s fine, the new module just need to subscribe the appropriate event.</li>
+<li>Last but not least, if some module appears to be broken, or if it doesn&rsquo;t starts as expected, other modules won&rsquo;t be much affected and your application is still working (even if some features are down).</li>
 </ul>
 
 ]]></content>
