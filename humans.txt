@@ -6,6 +6,6 @@ Location: Nice, France
 
 
 /* SITE */
-Last update: 12 May 2013
+Last update: 16 November 2013
 Software: Octopress, Jekyll - http://octopress.org/
 Theme: Greyshade by Shashank Mehta - http://shashankmehta.in/archive/2012/greyshade.html
