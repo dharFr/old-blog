@@ -4,7 +4,7 @@
   <title><![CDATA[dhar's blog]]></title>
   <link href="http://www.dhar.fr/atom.xml" rel="self"/>
   <link href="http://www.dhar.fr/"/>
-  <updated>2013-11-16T17:42:20+01:00</updated>
+  <updated>2014-07-27T22:20:05+02:00</updated>
   <id>http://www.dhar.fr/</id>
   <author>
     <name><![CDATA[Olivier Audard]]></name>
@@ -2074,14 +2074,14 @@ J&#8217;ai donc décidé de rédiger un billet plus court, qui détaille la faç
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'><span class="k">@end</span>
 </span><span class='line'>
-</span><span class='line'><span class="cp">// TapScrollView.m</span>
+</span><span class='line'><span class="c1">// TapScrollView.m</span>
 </span><span class='line'><span class="cp">#import &quot;TapScrollView.h&quot;</span>
 </span><span class='line'>
-</span><span class='line'><span class="err">@</span><span class="n">implementation</span> <span class="n">TapScrollView</span>
-</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">*</span><span class="p">)</span><span class="n">event</span> <span class="p">{</span>
+</span><span class='line'><span class="k">@implementation</span> <span class="nc">TapScrollView</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="nv">touches</span> <span class="nf">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">*</span><span class="p">)</span><span class="nv">event</span> <span class="p">{</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">touchesBegan</span><span class="o">:</span><span class="n">touches</span> <span class="n">withEvent</span><span class="o">:</span><span class="n">event</span><span class="p">];</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'><span class="k">@end</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -2167,14 +2167,14 @@ Voilà le code final:</p>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="cp">// TapScrollView.m</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// TapScrollView.m</span>
 </span><span class='line'><span class="cp">#import &quot;TapScrollView.h&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">@implementation</span> <span class="nc">TapScrollView</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">touchesBegan:</span><span class="p">(</span><span class="n">NSSet</span> <span class="o">*</span><span class="p">)</span><span class="nv">touches</span> <span class="nf">withEvent:</span><span class="p">(</span><span class="n">UIEvent</span> <span class="o">*</span><span class="p">)</span><span class="nv">event</span> <span class="p">{</span>
 </span><span class='line'>  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">tap</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="nl">touchesBegan:</span><span class="n">touches</span> <span class="nl">withEvent:</span><span class="n">event</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">super</span> <span class="n">touchesBegan</span><span class="o">:</span><span class="n">touches</span> <span class="n">withEvent</span><span class="o">:</span><span class="n">event</span><span class="p">];</span>
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">TapScrollViewDelegate</span><span class="o">&gt;</span><span class="p">)</span> <span class="nf">delegate</span> <span class="p">{</span>
